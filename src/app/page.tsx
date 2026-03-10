@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Container from "@/components/Container";
@@ -8,25 +7,7 @@ import ScorecardMock from "@/components/ScorecardMock";
 import SectionHeading from "@/components/SectionHeading";
 import Stepper from "@/components/Stepper";
 import TrustChips from "@/components/TrustChips";
-
-function LogoMark() {
-  return (
-    <div className="flex items-center gap-2">
-      <div
-        aria-hidden
-        className="h-9 w-9 rounded-xl border border-[var(--border)] bg-white shadow-sm"
-      >
-        <div className="h-full w-full rounded-xl bg-[linear-gradient(135deg,transparent_0%,transparent_40%,var(--accent-soft)_100%)]" />
-      </div>
-      <div className="leading-tight">
-        <div className="text-sm font-semibold tracking-tight text-[color:var(--heading)]">
-          Aqount
-        </div>
-        <div className="text-xs text-zinc-500">Financial Clarity Diagnostic</div>
-      </div>
-    </div>
-  );
-}
+import TopNav from "@/components/TopNav";
 
 function ProductMockupHero() {
   return (
@@ -125,29 +106,7 @@ function ProductMockupHero() {
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* Top nav */}
-      <header className="sticky top-0 z-30 border-b border-[var(--border)] bg-[color:var(--background)]/80 backdrop-blur">
-        <Container>
-          <div className="flex h-16 items-center justify-between">
-            <LogoMark />
-            <div className="flex items-center gap-3">
-              <Link
-                href="#how"
-                className="hidden text-sm font-medium text-zinc-600 hover:text-zinc-900 sm:inline"
-              >
-                How it works
-              </Link>
-              <Link
-                href="#why"
-                className="hidden text-sm font-medium text-zinc-600 hover:text-zinc-900 sm:inline"
-              >
-                Why Aqount
-              </Link>
-              <Button href="/api/xero/connect">Connect Xero</Button>
-            </div>
-          </div>
-        </Container>
-      </header>
+      <TopNav />
 
       {/* Hero */}
       <section className="relative overflow-hidden">
