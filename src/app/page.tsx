@@ -194,11 +194,30 @@ export default function Home() {
       {/* How it works */}
       <section id="how" className="py-14 sm:py-20">
         <Container>
-          <SectionHeading
-            eyebrow="Process"
-            title="How the Diagnostic Works"
-            lead="A simple 3-step flow designed for busy operators. Secure, read-only, and purpose-built for Xero SMEs."
-          />
+          <div className="grid gap-6 lg:grid-cols-2 lg:items-end">
+            <SectionHeading
+              eyebrow="Process"
+              title="How the Diagnostic Works"
+              lead="A simple 3-step flow designed for busy operators. Secure, read-only, and purpose-built for Xero SMEs."
+            />
+
+            <div className="flex flex-wrap gap-2 lg:justify-end">
+              {[
+                "Read-only access",
+                "~1 minute",
+                "Access auto-revoked",
+              ].map((t) => (
+                <div
+                  key={t}
+                  className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-white px-3 py-1 text-xs font-medium text-zinc-600"
+                >
+                  <span className="inline-flex h-2 w-2 rounded-full bg-[color:var(--accent)]" />
+                  <span>{t}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <Stepper />
         </Container>
       </section>
