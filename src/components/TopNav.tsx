@@ -18,13 +18,13 @@ export default function TopNav() {
                 priority
                 className="h-8 w-auto"
               />
-              <span className="hidden pt-1 text-[11px] font-medium text-zinc-500 sm:block">
+              <span className="hidden pt-1 pl-8 text-[11px] font-medium text-zinc-500 sm:block">
                 Financial Clarity Diagnostic
               </span>
             </div>
           </Link>
 
-          <nav className="flex items-center gap-3">
+          <nav className="flex items-center gap-5">
             <Link
               href="#how"
               className="hidden text-sm font-medium text-[color:var(--link)] hover:opacity-90 sm:inline"
