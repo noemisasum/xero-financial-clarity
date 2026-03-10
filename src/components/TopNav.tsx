@@ -9,9 +9,9 @@ export default function TopNav() {
       <Container>
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <div className="inline-flex rounded-lg bg-white/95 p-1 ring-1 ring-[var(--border)]">
+            <div className="inline-flex">
               <Image
-                src="/brand/aqount-lockup.png"
+                src="/brand/aqount-lockup-transparent.png"
                 alt="Aqount Financial Clarity Diagnostic"
                 width={260}
                 height={56}
