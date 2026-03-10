@@ -1,12 +1,13 @@
 import Link from "next/link";
-
-function Container({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-      {children}
-    </div>
-  );
-}
+import Button from "@/components/Button";
+import Card from "@/components/Card";
+import Container from "@/components/Container";
+import Faq from "@/components/Faq";
+import Icon from "@/components/Icon";
+import ScorecardMock from "@/components/ScorecardMock";
+import SectionHeading from "@/components/SectionHeading";
+import Stepper from "@/components/Stepper";
+import TrustChips from "@/components/TrustChips";
 
 function LogoMark() {
   return (
@@ -27,222 +28,13 @@ function LogoMark() {
   );
 }
 
-function Icon({ name }: { name: "spark" | "grid" | "tag" | "chart" | "link" | "scan" | "score" }) {
-  const common =
-    "h-5 w-5 text-[color:var(--accent)] drop-shadow-[0_1px_0_rgba(255,255,255,0.8)]";
-
-  switch (name) {
-    case "spark":
-      return (
-        <svg
-          className={common}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden
-        >
-          <path d="M12 2l1.5 5.5L19 9l-5.5 1.5L12 16l-1.5-5.5L5 9l5.5-1.5L12 2z" />
-          <path d="M19 14l.8 2.6L22 18l-2.2.7L19 21l-.8-2.3L16 18l2.2-.4L19 14z" />
-        </svg>
-      );
-    case "grid":
-      return (
-        <svg
-          className={common}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden
-        >
-          <path d="M4 4h7v7H4V4z" />
-          <path d="M13 4h7v7h-7V4z" />
-          <path d="M4 13h7v7H4v-7z" />
-          <path d="M13 13h7v7h-7v-7z" />
-        </svg>
-      );
-    case "tag":
-      return (
-        <svg
-          className={common}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden
-        >
-          <path d="M20 12l-8 8-10-10V2h8L20 12z" />
-          <path d="M7 7h.01" />
-        </svg>
-      );
-    case "chart":
-      return (
-        <svg
-          className={common}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden
-        >
-          <path d="M3 3v18h18" />
-          <path d="M7 14l3-3 4 4 6-8" />
-        </svg>
-      );
-    case "link":
-      return (
-        <svg
-          className={common}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden
-        >
-          <path d="M10 13a5 5 0 0 1 0-7l1-1a5 5 0 0 1 7 7l-1 1" />
-          <path d="M14 11a5 5 0 0 1 0 7l-1 1a5 5 0 1 1-7-7l1-1" />
-        </svg>
-      );
-    case "scan":
-      return (
-        <svg
-          className={common}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden
-        >
-          <path d="M4 7V6a2 2 0 0 1 2-2h1" />
-          <path d="M17 4h1a2 2 0 0 1 2 2v1" />
-          <path d="M20 17v1a2 2 0 0 1-2 2h-1" />
-          <path d="M7 20H6a2 2 0 0 1-2-2v-1" />
-          <path d="M7 12h10" />
-        </svg>
-      );
-    case "score":
-      return (
-        <svg
-          className={common}
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden
-        >
-          <path d="M12 20a8 8 0 1 0-8-8" />
-          <path d="M12 12l4-2" />
-          <path d="M12 12v-6" />
-        </svg>
-      );
-    default:
-      return null;
-  }
-}
-
-function Button({
-  href,
-  children,
-  variant = "primary",
-}: {
-  href: string;
-  children: React.ReactNode;
-  variant?: "primary" | "secondary";
-}) {
-  const base =
-    "inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]";
-
-  if (variant === "secondary") {
-    return (
-      <Link
-        href={href}
-        className={`${base} border border-[var(--border)] bg-white text-[color:var(--link)] hover:bg-zinc-50`}
-      >
-        {children}
-      </Link>
-    );
-  }
-
-  return (
-    <Link
-      href={href}
-      className={`${base} bg-[color:var(--link)] text-white hover:opacity-90`}
-    >
-      {children}
-    </Link>
-  );
-}
-
-function SectionHeading({
-  eyebrow,
-  title,
-  lead,
-}: {
-  eyebrow?: string;
-  title: string;
-  lead?: string;
-}) {
-  return (
-    <div className="max-w-2xl">
-      {eyebrow ? (
-        <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--accent)]">
-          {eyebrow}
-        </div>
-      ) : null}
-      <h2 className="mt-3 text-2xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-3xl">
-        {title}
-      </h2>
-      {lead ? (
-        <p className="mt-4 text-base leading-7 text-zinc-600">{lead}</p>
-      ) : null}
-    </div>
-  );
-}
-
-function Card({
-  icon,
-  title,
-  description,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-[0_1px_0_rgba(17,24,39,0.02),0_10px_30px_rgba(17,24,39,0.05)]">
-      <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--accent-soft)] ring-1 ring-[color:var(--border)]">
-          {icon}
-        </div>
-        <div className="text-sm font-semibold text-zinc-950">{title}</div>
-      </div>
-      <p className="mt-3 text-sm leading-6 text-zinc-600">{description}</p>
-    </div>
-  );
-}
-
-function ProductMockup() {
+function ProductMockupHero() {
   return (
     <div className="relative">
       <div className="absolute -inset-6 -z-10 rounded-[28px] bg-[radial-gradient(circle_at_20%_20%,var(--accent-soft),transparent_55%),radial-gradient(circle_at_80%_10%,rgba(17,24,39,0.06),transparent_55%)]" />
       <div className="overflow-hidden rounded-3xl border border-[var(--border)] bg-white shadow-[0_1px_0_rgba(17,24,39,0.02),0_25px_70px_rgba(17,24,39,0.12)]">
         <div className="flex items-center justify-between border-b border-[var(--border)] px-5 py-4">
-          <div className="text-sm font-semibold text-zinc-950">
+          <div className="text-sm font-semibold text-[color:var(--heading)]">
             Aqount Financial Clarity Diagnostic
           </div>
           <div className="flex items-center gap-2">
@@ -259,7 +51,7 @@ function ProductMockup() {
               <div className="text-xs text-zinc-500">Sample</div>
             </div>
             <div className="mt-4 flex items-end justify-between">
-              <div className="text-4xl font-semibold tracking-tight text-zinc-950">
+              <div className="text-4xl font-semibold tracking-tight text-[color:var(--heading)]">
                 64
                 <span className="text-lg text-zinc-500">/100</span>
               </div>
@@ -274,8 +66,7 @@ function ProductMockup() {
               />
             </div>
             <p className="mt-4 text-sm leading-6 text-zinc-600">
-              Highlights structural issues that may be affecting reporting,
-              visibility, and decision-making.
+              Fast, structured signals on reporting readiness and cash visibility.
             </p>
           </div>
 
@@ -316,7 +107,7 @@ function ProductMockup() {
         <div className="border-t border-[var(--border)] bg-white px-5 py-4">
           <div className="flex flex-wrap items-center gap-3">
             <div className="rounded-full border border-[var(--border)] bg-white px-3 py-1 text-xs text-zinc-600">
-              Org: Example Trading Pte. Ltd.
+              Scope: Structure + coding patterns
             </div>
             <div className="rounded-full border border-[var(--border)] bg-white px-3 py-1 text-xs text-zinc-600">
               Ledger: Xero
@@ -367,39 +158,43 @@ export default function Home() {
                 <Icon name="spark" />
                 <span>Specialist diagnostic by Aqount</span>
               </div>
+
               <h1 className="mt-5 text-4xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-5xl">
-                What’s Your Financial Clarity Score?
+                Get Your Financial Clarity Score — in minutes
               </h1>
+
               <p className="mt-5 max-w-xl text-base leading-7 text-zinc-600 sm:text-lg">
-                Many SMEs across Southeast Asia use Xero, but still struggle with
-                messy charts of accounts, weak reporting structure, and limited
-                cash flow visibility. Aqount’s Financial Clarity Diagnostic
-                analyzes your accounting structure and highlights issues that
-                may be affecting financial decision-making.
+                Connect your Xero organisation for a secure, read-only diagnostic
+                that evaluates your chart of accounts structure, categorisation
+                consistency, reporting clarity, and cash flow visibility—so you
+                can get decision-ready numbers, faster.
               </p>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Button href="/api/xero/connect">Connect Xero</Button>
-                <Button href="#how" variant="secondary">
-                  See How It Works
+                <Button href="#scorecard" variant="secondary">
+                  Preview the Scorecard
                 </Button>
               </div>
               <div className="mt-3 text-sm text-zinc-500">
-                Secure read-only analysis of your Xero accounting structure.
+                Read-only access. No posting, no changes. You can revoke access
+                anytime.
               </div>
 
-              <div className="mt-10 grid grid-cols-2 gap-4 sm:max-w-lg">
+              <TrustChips />
+
+              <div className="mt-8 grid grid-cols-2 gap-4 sm:max-w-lg">
                 {[
-                  ["Finance-system focused", "Built for structure, not vanity."],
-                  ["Designed for SMEs", "Founder-friendly, decision-ready."],
-                  ["Read-only diagnostic", "No bookkeeping changes required."],
-                  ["Built by Aqount", "Trusted accounting partner."],
+                  ["Score + 5-dimension breakdown", "Clarity in one view."],
+                  ["Flags structural issues", "Find what blocks insight."],
+                  ["Built for SME operators", "Founder-friendly outputs."],
+                  ["Backed by Aqount", "Finance ops + advisory."],
                 ].map(([k, v]) => (
                   <div
                     key={k}
                     className="rounded-2xl border border-[var(--border)] bg-white p-4 shadow-sm"
                   >
-                    <div className="text-sm font-semibold text-zinc-950">
+                    <div className="text-sm font-semibold text-[color:var(--heading)]">
                       {k}
                     </div>
                     <div className="mt-1 text-sm text-zinc-600">{v}</div>
@@ -408,7 +203,7 @@ export default function Home() {
               </div>
             </div>
 
-            <ProductMockup />
+            <ProductMockupHero />
           </div>
         </Container>
       </section>
@@ -418,10 +213,10 @@ export default function Home() {
         <Container>
           <div className="grid gap-4 py-6 text-sm text-zinc-600 sm:grid-cols-4">
             {[
-              "Built by Aqount",
-              "Designed for SMEs using Xero",
-              "Finance-system focused",
-              "Read-only diagnostic",
+              "Built by Aqount (finance ops + advisory)",
+              "Designed for SMEs on Xero (SEA-first)",
+              "Read-only diagnostic (no changes to ledger)",
+              "Actionable scorecard (issues + next steps)",
             ].map((t) => (
               <div key={t} className="flex items-center gap-2">
                 <span className="inline-flex h-2 w-2 rounded-full bg-[color:var(--accent)]" />
@@ -438,16 +233,16 @@ export default function Home() {
           <div className="grid gap-10 lg:grid-cols-2 lg:items-end">
             <SectionHeading
               eyebrow="The reality"
-              title="Accounting Software Doesn’t Automatically Create Financial Clarity"
-              lead="Many businesses already use Xero, but their financial systems are not structured well enough to support real business decisions."
+              title="Xero is powerful — but it doesn’t guarantee financial clarity"
+              lead="Most SMEs adopt accounting software and still struggle to get reliable, decision-ready reporting because the underlying financial structure isn’t designed for management insight. When accounts and categorisation aren’t consistent, reports become hard to trust—and cash decisions get reactive."
             />
             <div className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
-              <div className="text-sm font-semibold text-zinc-950">
-                What we look for
+              <div className="text-sm font-semibold text-[color:var(--heading)]">
+                Why it matters
               </div>
               <p className="mt-2 text-sm leading-6 text-zinc-600">
-                We assess structure, consistency, and reporting readiness—then
-                translate findings into a clear, actionable score.
+                The result is slower decisions, less confidence in margins, and
+                higher risk of cash surprises—especially as the business grows.
               </p>
             </div>
           </div>
@@ -456,22 +251,22 @@ export default function Home() {
             <Card
               icon={<Icon name="grid" />}
               title="Messy chart of accounts"
-              description="Overlapping accounts, unclear groupings, and inconsistent naming reduce reporting reliability."
+              description="Too many overlapping accounts → reporting becomes noisy and hard to interpret."
             />
             <Card
               icon={<Icon name="tag" />}
-              title="Inconsistent expense categorisation"
-              description="Ad-hoc coding makes margins and cost drivers hard to interpret month to month."
+              title="Inconsistent categorisation"
+              description="The same spend lands in different buckets → margins and cost drivers shift unpredictably."
             />
             <Card
               icon={<Icon name="chart" />}
               title="Poor reporting clarity"
-              description="Reports exist, but they don’t tell a coherent story for decision-making."
+              description="You get statements, not insight → decision-making becomes slower and riskier."
             />
             <Card
               icon={<Icon name="score" />}
               title="Limited cash flow visibility"
-              description="Without the right structure, cash flow views and forecasting remain reactive."
+              description="Without structure, cash views stay reactive → runway surprises happen."
             />
           </div>
         </Container>
@@ -483,89 +278,22 @@ export default function Home() {
           <SectionHeading
             eyebrow="Process"
             title="How the Diagnostic Works"
-            lead="A simple, secure flow designed for SMEs—productized, but backed by specialist thinking."
+            lead="A simple 3-step flow designed for busy operators. Secure, read-only, and purpose-built for Xero SMEs."
           />
-
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
-            {[
-              {
-                icon: <Icon name="link" />,
-                title: "Connect your Xero organisation",
-                desc: "Authorize a secure, read-only connection (no changes to your data).",
-              },
-              {
-                icon: <Icon name="scan" />,
-                title: "Automated financial structure analysis",
-                desc: "We evaluate your chart of accounts and reporting readiness across key dimensions.",
-              },
-              {
-                icon: <Icon name="score" />,
-                title: "Receive your Financial Clarity Score",
-                desc: "Get a scorecard and prioritized findings—built for real operator decisions.",
-              },
-            ].map((s, idx) => (
-              <div
-                key={s.title}
-                className="relative rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--accent-soft)] ring-1 ring-[color:var(--border)]">
-                    {s.icon}
-                  </div>
-                  <div className="text-sm font-semibold text-zinc-950">
-                    {idx + 1}. {s.title}
-                  </div>
-                </div>
-                <p className="mt-3 text-sm leading-6 text-zinc-600">{s.desc}</p>
-              </div>
-            ))}
-          </div>
+          <Stepper />
         </Container>
       </section>
 
       {/* Score section */}
-      <section className="py-14 sm:py-20">
+      <section id="scorecard" className="py-14 sm:py-20">
         <Container>
-          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
             <SectionHeading
               eyebrow="Output"
-              title="A clear scorecard you can act on"
-              lead="This diagnostic evaluates how well your accounting system supports reporting, visibility, and decision-making."
+              title="Your scorecard: clarity, broken down"
+              lead="This diagnostic evaluates how well your accounting system supports reporting, visibility, and decision-making—then summarises results in a score you can understand immediately."
             />
-            <div className="rounded-3xl border border-[var(--border)] bg-white p-6 shadow-[0_1px_0_rgba(17,24,39,0.02),0_25px_70px_rgba(17,24,39,0.12)]">
-              <div className="text-sm font-semibold text-zinc-950">
-                Financial Clarity Score
-              </div>
-              <div className="mt-3 flex items-end justify-between">
-                <div className="text-4xl font-semibold tracking-tight text-zinc-950">
-                  64 <span className="text-lg text-zinc-500">/ 100</span>
-                </div>
-                <div className="rounded-full bg-[color:var(--accent-soft)] px-3 py-1 text-xs font-semibold text-zinc-900">
-                  Sample output
-                </div>
-              </div>
-              <div className="mt-5 space-y-3">
-                {[
-                  ["Chart of Accounts Structure", "7 / 10"],
-                  ["Categorisation Consistency", "5 / 10"],
-                  ["Reporting Clarity", "6 / 10"],
-                  ["Cash Flow Visibility", "4 / 10"],
-                  ["Bookkeeping Hygiene", "8 / 10"],
-                ].map(([k, v]) => (
-                  <div
-                    key={k}
-                    className="flex items-center justify-between rounded-xl border border-[var(--border)] bg-zinc-50 px-4 py-3"
-                  >
-                    <div className="text-sm font-medium text-zinc-900">{k}</div>
-                    <div className="text-sm font-semibold text-zinc-950">{v}</div>
-                  </div>
-                ))}
-              </div>
-              <p className="mt-4 text-sm leading-6 text-zinc-600">
-                Built to identify structure issues—not just surface-level
-                bookkeeping noise.
-              </p>
-            </div>
+            <ScorecardMock />
           </div>
         </Container>
       </section>
@@ -583,22 +311,22 @@ export default function Home() {
             <Card
               icon={<Icon name="score" />}
               title="Financial System Health Score"
-              description="A single score that reflects the decision-readiness of your accounting structure."
+              description="A fast indicator of how decision-ready your structure is—plus a breakdown across key dimensions."
             />
             <Card
               icon={<Icon name="scan" />}
-              title="Structural Issue Detection"
-              description="Pinpoints patterns in your chart of accounts and reporting setup that reduce clarity."
+              title="Structural Issues Detected"
+              description="Highlights patterns that reduce reporting reliability and clarity—so you know what to fix first."
             />
             <Card
               icon={<Icon name="chart" />}
-              title="Cash Flow Visibility Analysis"
-              description="Highlights signals that may impact cash visibility and planning confidence."
+              title="Cash Visibility Signals"
+              description="Finds issues that commonly cause reactive cash decisions and weak forecasting foundations."
             />
             <Card
               icon={<Icon name="spark" />}
-              title="Expert Review by Aqount Specialists"
-              description="Optional follow-up: translate scorecard findings into practical finance operations improvements."
+              title="Specialist Review (Optional)"
+              description="Aqount can help translate findings into practical finance operations improvements when you’re ready."
             />
           </div>
         </Container>
@@ -617,22 +345,22 @@ export default function Home() {
             {[
               {
                 title: "SMEs already using Xero",
-                desc: "You have accounting software in place, but aren’t confident your structure supports good reporting.",
+                desc: "You’re compliant, but reporting doesn’t feel decision-ready.",
               },
               {
                 title: "Growing businesses",
-                desc: "Your team is scaling and you need clearer visibility—before finance complexity compounds.",
+                desc: "Complexity is increasing—structure needs to catch up before it becomes painful.",
               },
               {
-                title: "Founders & operators",
-                desc: "You want decision-ready numbers, not just compliance outputs.",
+                title: "Founders & finance leads",
+                desc: "You want numbers you can trust for hiring, spend, and runway decisions.",
               },
             ].map((x) => (
               <div
                 key={x.title}
                 className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm"
               >
-                <div className="text-sm font-semibold text-zinc-950">
+                <div className="text-sm font-semibold text-[color:var(--heading)]">
                   {x.title}
                 </div>
                 <p className="mt-2 text-sm leading-6 text-zinc-600">{x.desc}</p>
@@ -649,7 +377,7 @@ export default function Home() {
             <SectionHeading
               eyebrow="Aqount"
               title="Why Aqount"
-              lead="Aqount is positioned as a trusted accounting and bookkeeping partner. This diagnostic is built from real finance operations work—productized into a fast, credible scorecard."
+              lead="This diagnostic is built from what we see repeatedly in finance operations optimisation, financial modelling, and Virtual CFO work. We’ve productised those checks into a scorecard—so SMEs can get clarity faster, without starting from scratch."
             />
             <div className="space-y-4">
               {[
@@ -674,7 +402,7 @@ export default function Home() {
                   key={p.title}
                   className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm"
                 >
-                  <div className="text-sm font-semibold text-zinc-950">
+                  <div className="text-sm font-semibold text-[color:var(--heading)]">
                     {p.title}
                   </div>
                   <p className="mt-2 text-sm leading-6 text-zinc-600">{p.desc}</p>
@@ -685,24 +413,41 @@ export default function Home() {
         </Container>
       </section>
 
+      {/* Security / hesitation reducers */}
+      <section className="py-14 sm:py-20">
+        <Container>
+          <SectionHeading
+            eyebrow="Security"
+            title="A security-first diagnostic"
+            lead="Designed to reduce hesitation for founders and finance leads. Read-only access, no posting, and no changes to your books."
+          />
+          <Faq />
+        </Container>
+      </section>
+
       {/* CTA */}
       <section className="py-14 sm:py-20">
         <Container>
           <div className="relative overflow-hidden rounded-3xl border border-[var(--border)] bg-white p-8 shadow-[0_1px_0_rgba(17,24,39,0.02),0_25px_70px_rgba(17,24,39,0.12)] sm:p-12">
             <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[color:var(--accent-soft)] blur-2xl" />
             <div className="relative">
-              <h3 className="text-2xl font-semibold tracking-tight text-zinc-950 sm:text-3xl">
+              <h3 className="text-2xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-3xl">
                 Discover Your Financial Clarity Score
               </h3>
               <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-600">
-                A complimentary diagnostic for SMEs across Southeast Asia using
-                Xero.
+                A complimentary, read-only diagnostic for SMEs across Southeast
+                Asia using Xero.
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Button href="/api/xero/connect">Connect Xero</Button>
                 <div className="text-sm text-zinc-500">
-                  No bookkeeping changes. Secure read-only analysis.
+                  Read-only. No bookkeeping changes. Typical completion: 3–5
+                  minutes.
                 </div>
+              </div>
+              <div className="mt-3 text-xs text-zinc-500">
+                After connecting, you’ll select your organisation and receive a
+                scorecard preview.
               </div>
             </div>
           </div>

@@ -13,9 +13,9 @@
   --card: #ffffff;
   --border: rgba(17, 24, 39, 0.10);
 
-  /* Product accent (subtle gold, Aqount-inspired) */
-  --accent: #b08d57;
-  --accent-soft: rgba(176, 141, 87, 0.14);
+  /* Product accent (subtle gold) */
+  --accent: #C9A24A;
+  --accent-soft: rgba(201, 162, 74, 0.16);
 }
 
 @theme inline {
