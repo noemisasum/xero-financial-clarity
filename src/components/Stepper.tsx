@@ -5,17 +5,26 @@ export default function Stepper() {
     {
       icon: "link" as const,
       title: "Connect your Xero organisation",
-      desc: "Secure read-only authorisation. No posting, no changes.",
+      bullets: [
+        "Secure read-only authorisation",
+        "No posting, no changes (auto-revoked after the diagnostic)",
+      ],
     },
     {
       icon: "scan" as const,
       title: "We analyse your financial structure",
-      desc: "Automated checks across accounts, categories, reporting design, and cash visibility signals.",
+      bullets: [
+        "Review chart of accounts + expense coding patterns",
+        "Flag issues that reduce reporting clarity and cash visibility",
+      ],
     },
     {
       icon: "score" as const,
-      title: "Receive your Financial Clarity Scorecard",
-      desc: "Score + breakdown + top structural issues to prioritise.",
+      title: "Receive your Scorecard",
+      bullets: [
+        "Financial Clarity Score + category breakdown",
+        "Top issues detected + recommended next steps",
+      ],
     },
   ];
 
@@ -35,22 +44,24 @@ export default function Stepper() {
                 {idx + 1}. {s.title}
               </div>
             </div>
-            <p className="mt-3 text-sm leading-6 text-zinc-600">{s.desc}</p>
+
+            <ul className="mt-3 space-y-2 text-sm leading-6 text-zinc-600">
+              {s.bullets.map((b) => (
+                <li key={b} className="flex gap-2">
+                  <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
 
             {idx < steps.length - 1 ? (
-              <div
-                aria-hidden
-                className="hidden lg:block"
-              >
+              <div aria-hidden className="hidden lg:block">
                 <div className="absolute right-[-14px] top-1/2 h-[2px] w-7 -translate-y-1/2 bg-[color:var(--border)]" />
                 <div className="absolute right-[-18px] top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-[color:var(--accent)]" />
               </div>
             ) : null}
           </div>
         ))}
-      </div>
-      <div className="mt-4 text-sm text-zinc-500">
-        Typical completion: <span className="font-medium">3–5 minutes</span>.
       </div>
     </div>
   );
