@@ -223,12 +223,15 @@ export default function Home() {
       {/* Score section */}
       <section id="scorecard" className="py-14 sm:py-20">
         <Container>
-          <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
+          <div className="max-w-3xl">
             <SectionHeading
               eyebrow="Output"
               title="Your scorecard: clarity, broken down"
               lead="This diagnostic evaluates how well your accounting system supports reporting, visibility, and decision-making—then summarises results in a score you can understand immediately."
             />
+          </div>
+
+          <div className="mt-10">
             <ScorecardMock />
           </div>
         </Container>
