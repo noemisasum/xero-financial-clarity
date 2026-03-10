@@ -16,6 +16,7 @@ export default function Button({
     return (
       <Link
         href={href}
+        data-button
         className={`${base} border border-[color:var(--link)]/20 bg-white text-[color:var(--link)] hover:bg-[color:var(--link)]/5`}
       >
         {children}
@@ -26,7 +27,9 @@ export default function Button({
   return (
     <Link
       href={href}
-      className={`${base} bg-[color:var(--link)] text-white hover:opacity-90`}
+      data-button
+      className={`${base} bg-[color:var(--link)] !text-white hover:opacity-90`}
+      style={{ color: "#fff" }}
     >
       {children}
     </Link>
