@@ -18,7 +18,7 @@ function LogoMark() {
         <div className="h-full w-full rounded-xl bg-[linear-gradient(135deg,transparent_0%,transparent_40%,var(--accent-soft)_100%)]" />
       </div>
       <div className="leading-tight">
-        <div className="text-sm font-semibold tracking-tight text-zinc-950">
+        <div className="text-sm font-semibold tracking-tight text-[color:var(--heading)]">
           Aqount
         </div>
         <div className="text-xs text-zinc-500">Financial Clarity Diagnostic</div>
@@ -171,7 +171,7 @@ function Button({
     return (
       <Link
         href={href}
-        className={`${base} border border-[var(--border)] bg-white text-zinc-900 hover:bg-zinc-50`}
+        className={`${base} border border-[var(--border)] bg-white text-[color:var(--link)] hover:bg-zinc-50`}
       >
         {children}
       </Link>
@@ -181,7 +181,7 @@ function Button({
   return (
     <Link
       href={href}
-      className={`${base} bg-zinc-950 text-white hover:bg-zinc-800`}
+      className={`${base} bg-[color:var(--link)] text-white hover:opacity-90`}
     >
       {children}
     </Link>
@@ -204,7 +204,7 @@ function SectionHeading({
           {eyebrow}
         </div>
       ) : null}
-      <h2 className="mt-3 text-2xl font-semibold tracking-tight text-zinc-950 sm:text-3xl">
+      <h2 className="mt-3 text-2xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-3xl">
         {title}
       </h2>
       {lead ? (
@@ -367,7 +367,7 @@ export default function Home() {
                 <Icon name="spark" />
                 <span>Specialist diagnostic by Aqount</span>
               </div>
-              <h1 className="mt-5 text-4xl font-semibold tracking-tight text-zinc-950 sm:text-5xl">
+              <h1 className="mt-5 text-4xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-5xl">
                 What’s Your Financial Clarity Score?
               </h1>
               <p className="mt-5 max-w-xl text-base leading-7 text-zinc-600 sm:text-lg">
@@ -714,7 +714,9 @@ export default function Home() {
         <Container>
           <div className="grid gap-8 sm:grid-cols-2 sm:items-start">
             <div>
-              <div className="text-sm font-semibold text-zinc-950">Aqount</div>
+              <div className="text-sm font-semibold text-[color:var(--heading)]">
+                Aqount
+              </div>
               <p className="mt-2 text-sm leading-6 text-zinc-600">
                 Financial clarity specialists for SMEs using Xero across
                 Southeast Asia.
@@ -723,7 +725,7 @@ export default function Home() {
             <div className="flex flex-col gap-2 sm:items-end">
               <a
                 href="https://aqount.tech"
-                className="text-sm font-medium text-zinc-600 hover:text-zinc-900"
+                className="text-sm font-medium text-[color:var(--link)] hover:opacity-90"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -731,13 +733,13 @@ export default function Home() {
               </a>
               <a
                 href="/privacy"
-                className="text-sm font-medium text-zinc-600 hover:text-zinc-900"
+                className="text-sm font-medium text-[color:var(--link)] hover:opacity-90"
               >
                 Privacy Policy
               </a>
               <a
                 href="https://aqount.tech/contact"
-                className="text-sm font-medium text-zinc-600 hover:text-zinc-900"
+                className="text-sm font-medium text-[color:var(--link)] hover:opacity-90"
                 target="_blank"
                 rel="noreferrer"
               >
