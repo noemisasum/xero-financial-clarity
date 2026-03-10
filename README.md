@@ -1,4 +1,12 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Landing page for **Aqount Financial Clarity Diagnostic** (clarity.aqount.tech).
+
+Built with [Next.js](https://nextjs.org) + TailwindCSS, optimized for Vercel deployment.
+
+Key routes:
+- `/` – product landing page
+- `/api/xero/connect` – placeholder endpoint for future Xero OAuth
+- `/privacy` – placeholder privacy page
+
 
 ## Getting Started
 
