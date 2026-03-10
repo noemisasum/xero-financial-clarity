@@ -150,7 +150,6 @@ export default function Home() {
                     <span className="underline decoration-[color:var(--accent)] decoration-2 underline-offset-4">
                       structure
                     </span>
-                    .
                   </>
                 }
                 lead="Most businesses adopt accounting software and still struggle to get reliable, decision-ready reporting because the underlying financial structure is not designed for management insight. When accounts and categorisation are inconsistent, reports become difficult to trust. Cash decisions then become reactive."
@@ -160,7 +159,7 @@ export default function Home() {
                 <span className="font-semibold text-[color:var(--heading)]">
                   Result:
                 </span>{" "}
-                slower decisions, less confidence in margins, and higher risk of
+                Slower decisions, less confidence in margins, and higher risk of
                 cash surprises, especially as the business grows.
               </div>
             </div>
@@ -173,7 +172,7 @@ export default function Home() {
               />
               <Card
                 icon={<Icon name="tag" />}
-                title="Inconsistent Expense Categorisation"
+                title="Inconsistent Expense Coding"
                 description="The same spend lands in different buckets. Margins and cost drivers shift unpredictably."
               />
               <Card
