@@ -4,7 +4,7 @@ export default function SectionHeading({
   lead,
 }: {
   eyebrow?: string;
-  title: string;
+  title: React.ReactNode;
   lead?: string;
 }) {
   return (

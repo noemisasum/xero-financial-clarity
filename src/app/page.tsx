@@ -140,45 +140,53 @@ export default function Home() {
       {/* Problem */}
       <section className="py-14 sm:py-20">
         <Container>
-          <div className="max-w-3xl">
-            <SectionHeading
-              eyebrow="The reality"
-              title="Financial clarity depends on structure."
-              lead="Most businesses adopt accounting software and still struggle to get reliable, decision-ready reporting because the underlying financial structure is not designed for management insight. When accounts and categorisation are inconsistent, reports become difficult to trust. Cash decisions then become reactive."
-            />
-          </div>
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
+            <div>
+              <SectionHeading
+                eyebrow="The reality"
+                title={
+                  <>
+                    Financial clarity depends on{" "}
+                    <span className="underline decoration-[color:var(--accent)] decoration-2 underline-offset-4">
+                      structure
+                    </span>
+                    .
+                  </>
+                }
+                lead="Most businesses adopt accounting software and still struggle to get reliable, decision-ready reporting because the underlying financial structure is not designed for management insight. When accounts and categorisation are inconsistent, reports become difficult to trust. Cash decisions then become reactive."
+              />
 
-          <div className="mt-8 rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
-            <div className="text-sm font-semibold text-[color:var(--heading)]">
-              Why It Matters
+              <div className="mt-6 rounded-2xl border border-[var(--border)] bg-zinc-50 p-5 text-sm leading-6 text-zinc-700">
+                <span className="font-semibold text-[color:var(--heading)]">
+                  Result:
+                </span>{" "}
+                slower decisions, less confidence in margins, and higher risk of
+                cash surprises, especially as the business grows.
+              </div>
             </div>
-            <p className="mt-2 text-sm leading-6 text-zinc-600">
-              The result is slower decisions, less confidence in margins, and
-              higher risk of cash surprises, especially as the business grows.
-            </p>
-          </div>
 
-          <div className="mt-8 grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            <Card
-              icon={<Icon name="grid" />}
-              title="Messy Chart of Accounts"
-              description="Too many overlapping accounts. Reporting becomes noisy and hard to interpret."
-            />
-            <Card
-              icon={<Icon name="tag" />}
-              title="Inconsistent Expense Categorisation"
-              description="The same spend lands in different buckets. Margins and cost drivers shift unpredictably."
-            />
-            <Card
-              icon={<Icon name="chart" />}
-              title="Poor Reporting Clarity"
-              description="You get statements, not insight. Decision-making becomes slower and riskier."
-            />
-            <Card
-              icon={<Icon name="score" />}
-              title="Limited Cash Flow Visibility"
-              description="Without structure, cash views stay reactive. Runway surprises happen."
-            />
+            <div className="grid items-stretch gap-5 sm:grid-cols-2">
+              <Card
+                icon={<Icon name="grid" />}
+                title="Messy Chart of Accounts"
+                description="Too many overlapping accounts. Reporting becomes noisy and hard to interpret."
+              />
+              <Card
+                icon={<Icon name="tag" />}
+                title="Inconsistent Expense Categorisation"
+                description="The same spend lands in different buckets. Margins and cost drivers shift unpredictably."
+              />
+              <Card
+                icon={<Icon name="chart" />}
+                title="Poor Reporting Clarity"
+                description="You get statements, not insight. Decision-making becomes slower and riskier."
+              />
+              <Card
+                icon={<Icon name="score" />}
+                title="Limited Cash Flow Visibility"
+                description="Without structure, cash views stay reactive. Runway surprises happen."
+              />
+            </div>
           </div>
         </Container>
       </section>
