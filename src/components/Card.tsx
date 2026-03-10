@@ -13,8 +13,8 @@ export default function Card({
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--accent-soft)] ring-1 ring-[color:var(--border)]">
           {icon}
         </div>
-        <div className="min-h-[40px] w-full text-center text-sm font-semibold leading-5 text-[color:var(--heading)]">
-          <div className="flex min-h-[40px] items-center justify-center">
+        <div className="min-h-[40px] w-full text-left text-sm font-semibold leading-5 text-[color:var(--heading)]">
+          <div className="flex min-h-[40px] items-center justify-start">
             <span className="line-clamp-2">{title}</span>
           </div>
         </div>

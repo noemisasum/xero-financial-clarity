@@ -1,7 +1,7 @@
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Container from "@/components/Container";
-import Faq from "@/components/Faq";
+import FaqAccordion from "@/components/FaqAccordion";
 import Icon from "@/components/Icon";
 import ScorecardMock from "@/components/ScorecardMock";
 import SectionHeading from "@/components/SectionHeading";
@@ -288,99 +288,92 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Who this is for */}
+      {/* FAQ (Audience + Why Aqount + Security) */}
       <section className="py-14 sm:py-20">
         <Container>
-          <SectionHeading
-            eyebrow="Audience"
-            title="Who this is for"
-            lead="A quick diagnostic that respects your time—and matches the realities of running an SME in Southeast Asia."
-          />
-
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
-            {[
+          <FaqAccordion
+            eyebrow="FAQ"
+            title="Frequently asked questions"
+            lead="Quick answers for founders and finance leads evaluating a read-only diagnostic." 
+            items={[
               {
-                title: "SMEs already using Xero",
-                desc: "You’re compliant, but reporting doesn’t feel decision-ready.",
+                q: "Who is this for?",
+                a: (
+                  <ul className="space-y-2">
+                    <li className="flex gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
+                      <span>
+                        <span className="font-semibold text-zinc-900">SMEs already using Xero:</span> You’re compliant, but reporting doesn’t feel decision-ready.
+                      </span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
+                      <span>
+                        <span className="font-semibold text-zinc-900">Growing businesses:</span> Complexity is increasing—structure needs to catch up before it becomes painful.
+                      </span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
+                      <span>
+                        <span className="font-semibold text-zinc-900">Founders & finance leads:</span> You want numbers you can trust for hiring, spend, and runway decisions.
+                      </span>
+                    </li>
+                  </ul>
+                ),
               },
               {
-                title: "Growing businesses",
-                desc: "Complexity is increasing—structure needs to catch up before it becomes painful.",
+                q: "Why Aqount?",
+                a: (
+                  <ul className="space-y-2">
+                    <li className="flex gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
+                      <span>
+                        <span className="font-semibold text-zinc-900">Finance operations expertise:</span> Grounded in the systems that produce reliable reports—charts of accounts, coding logic, and controls.
+                      </span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
+                      <span>
+                        <span className="font-semibold text-zinc-900">Practical advisory:</span> The output is meant to be acted on—so you can improve reporting and decision-making outcomes.
+                      </span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
+                      <span>
+                        <span className="font-semibold text-zinc-900">Built around real pain points:</span> We focus on clarity, consistency, and usefulness—without jargon.
+                      </span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
+                      <span>
+                        <span className="font-semibold text-zinc-900">Automation + specialist review:</span> A modern diagnostic flow, backed by specialists if you want help implementing fixes.
+                      </span>
+                    </li>
+                  </ul>
+                ),
               },
               {
-                title: "Founders & finance leads",
-                desc: "You want numbers you can trust for hiring, spend, and runway decisions.",
-              },
-            ].map((x) => (
-              <div
-                key={x.title}
-                className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm"
-              >
-                <div className="text-sm font-semibold text-[color:var(--heading)]">
-                  {x.title}
-                </div>
-                <p className="mt-2 text-sm leading-6 text-zinc-600">{x.desc}</p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Why Aqount */}
-      <section id="why" className="py-14 sm:py-20">
-        <Container>
-          <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
-            <SectionHeading
-              eyebrow="Aqount"
-              title="Why Aqount"
-              lead="This diagnostic is built from what we see repeatedly in finance operations optimisation, financial modelling, and Virtual CFO work. We’ve productised those checks into a scorecard—so SMEs can get clarity faster, without starting from scratch."
-            />
-            <div className="space-y-4">
-              {[
-                {
-                  title: "Finance operations expertise",
-                  desc: "Grounded in the systems that produce reliable reports—charts of accounts, coding logic, and controls.",
-                },
-                {
-                  title: "Practical advisory, not generic software",
-                  desc: "The output is meant to be acted on—so you can improve reporting and decision-making outcomes.",
-                },
-                {
-                  title: "Built around real SME pain points",
-                  desc: "Messy structures are common. We focus on clarity, consistency, and usefulness—without jargon.",
-                },
-                {
-                  title: "Automation + specialist review",
-                  desc: "A modern diagnostic flow, backed by specialists who can help implement improvements if needed.",
-                },
-              ].map((p) => (
-                <div
-                  key={p.title}
-                  className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm"
-                >
-                  <div className="text-sm font-semibold text-[color:var(--heading)]">
-                    {p.title}
+                q: "Is this read-only? Will it change my books?",
+                a: (
+                  <div className="space-y-2">
+                    <p>
+                      Yes—this diagnostic is designed for <span className="font-semibold text-zinc-900">secure, read-only analysis</span>.
+                      We do not post, edit, or reclassify transactions.
+                    </p>
+                    <p>
+                      You’ll be asked to authorise access, and the diagnostic is designed to complete quickly.
+                    </p>
                   </div>
-                  <p className="mt-2 text-sm leading-6 text-zinc-600">{p.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Security / hesitation reducers */}
-      <section className="py-14 sm:py-20">
-        <Container>
-          <SectionHeading
-            eyebrow="Security"
-            title="A security-first diagnostic"
-            lead="Designed to reduce hesitation for founders and finance leads. Read-only access, no posting, and no changes to your books."
+                ),
+              },
+              {
+                q: "What do you analyse?",
+                a: "Your chart of accounts and coding patterns that affect reporting clarity and cash visibility signals.",
+              },
+            ]}
           />
-          <Faq />
         </Container>
       </section>
-
       {/* CTA */}
       <section className="py-14 sm:py-20">
         <Container>
