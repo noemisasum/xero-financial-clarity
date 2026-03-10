@@ -516,8 +516,7 @@ export default function Home() {
                 Aqount
               </div>
               <p className="mt-2 max-w-md text-sm leading-6 text-zinc-600">
-                Financial clarity specialists for SMEs using Xero across
-                Southeast Asia.
+                Financial clarity specialists for Xero-powered businesses.
               </p>
               <div className="mt-6 text-xs text-zinc-500">
                 © {new Date().getFullYear()} Aqount. Financial Clarity Diagnostic is a product by Aqount. All rights reserved.
