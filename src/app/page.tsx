@@ -483,17 +483,22 @@ export default function Home() {
           <div className="relative overflow-hidden rounded-3xl border border-[var(--border)] bg-white p-8 shadow-[0_1px_0_rgba(17,24,39,0.02),0_25px_70px_rgba(17,24,39,0.12)] sm:p-12">
             <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[color:var(--accent-soft)] blur-2xl" />
             <div className="relative">
-              <h3 className="text-2xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-3xl">
-                Discover Your Financial Clarity Score
-              </h3>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-600">
-                A complimentary, read-only diagnostic tool for growing business
-                using Xero.
-              </p>
-              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Button href="/api/xero/connect">Get Your Clarity Score</Button>
+              <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+                <div>
+                  <h3 className="text-2xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-3xl">
+                    Discover Your Financial Clarity Score
+                  </h3>
+                  <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-600">
+                    A complimentary, read-only diagnostic tool for growing business
+                    using Xero.
+                  </p>
+                </div>
+                <div className="lg:justify-self-end">
+                  <Button href="/api/xero/connect">Get Your Clarity Score</Button>
+                </div>
               </div>
-              <div className="mt-3 text-xs text-zinc-500">
+
+              <div className="mt-4 text-xs text-zinc-500">
                 After connecting, you’ll select your organisation and receive a
                 scorecard preview.
               </div>
@@ -503,46 +508,104 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-[var(--border)] bg-white py-10">
+      <footer className="border-t border-[var(--border)] bg-white py-12">
         <Container>
-          <div className="grid gap-8 sm:grid-cols-2 sm:items-start">
-            <div>
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="lg:col-span-2">
               <div className="text-sm font-semibold text-[color:var(--heading)]">
                 Aqount
               </div>
-              <p className="mt-2 text-sm leading-6 text-zinc-600">
+              <p className="mt-2 max-w-md text-sm leading-6 text-zinc-600">
                 Financial clarity specialists for SMEs using Xero across
                 Southeast Asia.
               </p>
+              <div className="mt-6 text-xs text-zinc-500">© {new Date().getFullYear()} Aqount</div>
             </div>
-            <div className="flex flex-col gap-2 sm:items-end">
-              <a
-                href="https://aqount.tech"
-                className="text-sm font-medium text-[color:var(--link)] hover:opacity-90"
-                target="_blank"
-                rel="noreferrer"
-              >
-                aqount.tech
-              </a>
-              <a
-                href="/privacy"
-                className="text-sm font-medium text-[color:var(--link)] hover:opacity-90"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="https://aqount.tech/contact"
-                className="text-sm font-medium text-[color:var(--link)] hover:opacity-90"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Contact
-              </a>
+
+            <div>
+              <div className="text-sm font-semibold text-[color:var(--heading)]">
+                Product
+              </div>
+              <ul className="mt-3 space-y-2 text-sm">
+                <li>
+                  <a href="#" className="text-[color:var(--link)] hover:opacity-90">
+                    Financial Clarity Diagnostic
+                  </a>
+                </li>
+                <li>
+                  <a href="#scorecard" className="text-[color:var(--link)] hover:opacity-90">
+                    Sample Scorecard
+                  </a>
+                </li>
+                <li>
+                  <a href="#how" className="text-[color:var(--link)] hover:opacity-90">
+                    How it works
+                  </a>
+                </li>
+                <li>
+                  <a href="#faq" className="text-[color:var(--link)] hover:opacity-90">
+                    FAQ
+                  </a>
+                </li>
+                <li>
+                  <a href="/api/xero/connect" className="text-[color:var(--link)] hover:opacity-90">
+                    Run Diagnostic
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <div className="text-sm font-semibold text-[color:var(--heading)]">
+                Company
+              </div>
+              <ul className="mt-3 space-y-2 text-sm">
+                <li>
+                  <a
+                    href="https://aqount.tech/about/"
+                    className="text-[color:var(--link)] hover:opacity-90"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://aqount.tech/finance-operations-optimization/"
+                    className="text-[color:var(--link)] hover:opacity-90"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Services
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://aqount.tech/contact/"
+                    className="text-[color:var(--link)] hover:opacity-90"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Contact
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://aqount.tech/privacy-policy/"
+                    className="text-[color:var(--link)] hover:opacity-90"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Privacy Policy
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
-          <div className="mt-8 text-xs text-zinc-500">
-            © {new Date().getFullYear()} Aqount. Aqount Financial Clarity
-            Diagnostic is a specialist product experience by Aqount.
+
+          <div className="mt-10 border-t border-[var(--border)] pt-6 text-xs text-zinc-500">
+            Aqount Financial Clarity Diagnostic is a specialist product experience by Aqount.
           </div>
         </Container>
       </footer>
