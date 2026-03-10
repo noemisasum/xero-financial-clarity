@@ -6,15 +6,16 @@ export default function Stepper() {
       icon: "link" as const,
       title: "Connect your Xero organisation",
       bullets: [
-        "Secure read-only authorisation",
-        "No posting, no changes (auto-revoked after the diagnostic)",
+        "Secure, read-only authorisation",
+        "No posting, no changes",
+        "Authorisation auto-revoked after the diagnostic",
       ],
     },
     {
       icon: "scan" as const,
       title: "We analyse your financial structure",
       bullets: [
-        "Review chart of accounts + expense coding patterns",
+        "Review chart of accounts and expense coding patterns",
         "Flag issues that reduce reporting clarity and cash visibility",
       ],
     },
@@ -22,8 +23,9 @@ export default function Stepper() {
       icon: "score" as const,
       title: "Receive your Scorecard",
       bullets: [
-        "Financial Clarity Score + category breakdown",
-        "Top issues detected + recommended next steps",
+        "Financial clarity score and breakdown",
+        "Top issues detected",
+        "Recommended next steps",
       ],
     },
   ];
@@ -37,8 +39,8 @@ export default function Stepper() {
             className="relative rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm"
           >
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--accent-soft)] ring-1 ring-[color:var(--border)]">
-                <Icon name={s.icon} />
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[color:var(--accent-soft)] ring-1 ring-[color:var(--border)]">
+                <Icon name={s.icon} className="h-4 w-4" />
               </div>
               <div className="text-sm font-semibold text-[color:var(--heading)]">
                 {idx + 1}. {s.title}
