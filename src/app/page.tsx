@@ -140,43 +140,44 @@ export default function Home() {
       {/* Problem */}
       <section className="py-14 sm:py-20">
         <Container>
-          <div className="grid gap-10 lg:grid-cols-2 lg:items-end">
+          <div className="max-w-3xl">
             <SectionHeading
               eyebrow="The reality"
-              title="Xero is powerful — but it doesn’t guarantee financial clarity"
-              lead="Most SMEs adopt accounting software and still struggle to get reliable, decision-ready reporting because the underlying financial structure isn’t designed for management insight. When accounts and categorisation aren’t consistent, reports become hard to trust—and cash decisions get reactive."
+              title="Financial clarity depends on structure."
+              lead="Most businesses adopt accounting software and still struggle to get reliable, decision-ready reporting because the underlying financial structure is not designed for management insight. When accounts and categorisation are inconsistent, reports become difficult to trust. Cash decisions then become reactive."
             />
-            <div className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
-              <div className="text-sm font-semibold text-[color:var(--heading)]">
-                Why it matters
-              </div>
-              <p className="mt-2 text-sm leading-6 text-zinc-600">
-                The result is slower decisions, less confidence in margins, and
-                higher risk of cash surprises—especially as the business grows.
-              </p>
-            </div>
           </div>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+            <div className="text-sm font-semibold text-[color:var(--heading)]">
+              Why It Matters
+            </div>
+            <p className="mt-2 text-sm leading-6 text-zinc-600">
+              The result is slower decisions, less confidence in margins, and
+              higher risk of cash surprises, especially as the business grows.
+            </p>
+          </div>
+
+          <div className="mt-8 grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-4">
             <Card
               icon={<Icon name="grid" />}
-              title="Messy chart of accounts"
-              description="Too many overlapping accounts → reporting becomes noisy and hard to interpret."
+              title="Messy Chart of Accounts"
+              description="Too many overlapping accounts. Reporting becomes noisy and hard to interpret."
             />
             <Card
               icon={<Icon name="tag" />}
-              title="Inconsistent categorisation"
-              description="The same spend lands in different buckets → margins and cost drivers shift unpredictably."
+              title="Inconsistent Expense Categorisation"
+              description="The same spend lands in different buckets. Margins and cost drivers shift unpredictably."
             />
             <Card
               icon={<Icon name="chart" />}
-              title="Poor reporting clarity"
-              description="You get statements, not insight → decision-making becomes slower and riskier."
+              title="Poor Reporting Clarity"
+              description="You get statements, not insight. Decision-making becomes slower and riskier."
             />
             <Card
               icon={<Icon name="score" />}
-              title="Limited cash flow visibility"
-              description="Without structure, cash views stay reactive → runway surprises happen."
+              title="Limited Cash Flow Visibility"
+              description="Without structure, cash views stay reactive. Runway surprises happen."
             />
           </div>
         </Container>
