@@ -30,11 +30,8 @@ function ProductMockupHero() {
         </div>
         <div className="grid gap-4 p-5 sm:grid-cols-2">
           <div className="rounded-2xl border border-[var(--border)] bg-zinc-50 p-5">
-            <div className="flex items-baseline justify-between">
-              <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
-                Financial Clarity Score
-              </div>
-              <div className="text-xs text-zinc-500">Sample</div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+              Financial Clarity Score
             </div>
             <div className="mt-4 flex items-end justify-between">
               <div className="text-4xl font-semibold tracking-tight text-[color:var(--heading)]">
@@ -72,9 +69,11 @@ function ProductMockupHero() {
                 const pct = (Number(value) / Number(outOf)) * 100;
                 return (
                   <div key={String(label)}>
-                    <div className="flex items-center justify-between gap-3 text-sm">
+                    <div className="flex items-start justify-between gap-3 text-sm">
                       <div className="min-w-0 text-zinc-900">
-                        <span className="block truncate">{label}</span>
+                        <span className="block whitespace-normal leading-5">
+                          {label}
+                        </span>
                       </div>
                       <div className="shrink-0 whitespace-nowrap font-semibold tabular-nums text-zinc-950">
                         {value} <span className="text-zinc-400">/</span> {outOf}
@@ -109,7 +108,11 @@ export default function Home() {
           <div className="grid items-center gap-10 py-14 sm:py-20 lg:grid-cols-2 lg:gap-16">
             <div>
               <h1 className="mt-5 text-4xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-5xl">
-                Is your Financial Data Actually Decision-Ready?
+                Is your financial data actually{" "}
+                <span className="underline decoration-[color:var(--accent)] decoration-2 underline-offset-4">
+                  decision-ready
+                </span>
+                ?
               </h1>
 
               <p className="mt-5 max-w-xl text-base leading-7 text-zinc-600 sm:text-lg">
