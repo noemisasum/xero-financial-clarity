@@ -196,8 +196,7 @@ export default function Home() {
           <div className="grid gap-6 lg:grid-cols-2 lg:items-end">
             <SectionHeading
               eyebrow="Process"
-              title="How the Diagnostic Works"
-              lead="A simple 3-step flow designed for busy operators. Secure, read-only, and purpose-built for Xero SMEs."
+              title="How the diagnostic works"
             />
 
             <div className="flex flex-wrap gap-2 lg:justify-end">
