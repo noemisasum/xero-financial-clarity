@@ -11,16 +11,13 @@ export default function TopNav() {
           <Link href="/" className="flex items-center gap-3">
             <div className="flex flex-col leading-none">
               <Image
-                src="/brand/aqount-logo.png"
-                alt="Aqount"
-                width={150}
-                height={38}
+                src="/brand/aqount-lockup.png"
+                alt="Aqount Financial Clarity Diagnostic"
+                width={260}
+                height={56}
                 priority
-                className="h-8 w-auto"
+                className="h-9 w-auto"
               />
-              <span className="hidden pt-1 pl-8 text-[11px] font-medium text-zinc-500 sm:block">
-                Financial Clarity Diagnostic
-              </span>
             </div>
           </Link>
 
