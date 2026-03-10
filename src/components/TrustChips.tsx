@@ -3,9 +3,9 @@ import Icon from "@/components/Icon";
 export default function TrustChips() {
   const chips = [
     { icon: "shield" as const, text: "Read-only access" },
-    { icon: "clock" as const, text: "3–5 minutes" },
-    { icon: "scan" as const, text: "No posting / no changes" },
-    { icon: "spark" as const, text: "Built by Aqount specialists" },
+    { icon: "clock" as const, text: "~1 minute" },
+    { icon: "scan" as const, text: "Access auto-revoked" },
+    { icon: "spark" as const, text: "Built by Certified Accounting Professionals" },
   ];
 
   return (
