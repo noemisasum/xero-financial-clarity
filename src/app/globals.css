@@ -1,25 +1,44 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fbfbfb;
-  --foreground: #111827; /* charcoal */
+  --background: #ffffff;
+
+  /* aqount.tech observed colors */
+  --foreground: rgb(51, 65, 85); /* body text */
+  --heading: rgb(54, 91, 109); /* section headings */
+  --link: rgb(4, 107, 210);
+
+  /* UI neutrals */
   --muted: #6b7280;
   --card: #ffffff;
   --border: rgba(17, 24, 39, 0.10);
-  --accent: #b08d57; /* subtle gold */
+
+  /* Product accent (subtle gold, Aqount-inspired) */
+  --accent: #b08d57;
   --accent-soft: rgba(176, 141, 87, 0.14);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-brand-body);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-brand-body), -apple-system, system-ui, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-brand-head), var(--font-brand-body), ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
+    sans-serif;
+}
+
+a {
+  color: var(--link);
 }
 
 ::selection {
