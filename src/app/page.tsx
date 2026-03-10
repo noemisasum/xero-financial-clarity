@@ -124,7 +124,7 @@ export default function Home() {
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Button href="/api/xero/connect">Connect Xero</Button>
+                <Button href="/api/xero/connect">Get Your Clarity Score</Button>
                 <Button href="#scorecard" variant="secondary">
                   Preview the Scorecard
                 </Button>
@@ -248,7 +248,7 @@ export default function Home() {
               <div className="text-lg font-semibold tracking-tight text-[color:var(--heading)]">
                 Ready to see your Financial Clarity Score?
               </div>
-              <Button href="/api/xero/connect">Connect Xero</Button>
+              <Button href="/api/xero/connect">Get Your Clarity Score</Button>
             </div>
           </div>
         </Container>
@@ -388,7 +388,7 @@ export default function Home() {
                 Asia using Xero.
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Button href="/api/xero/connect">Connect Xero</Button>
+                <Button href="/api/xero/connect">Get Your Clarity Score</Button>
                 <div className="text-sm text-zinc-500">
                   Read-only. No bookkeeping changes. Typical completion: 3–5
                   minutes.
