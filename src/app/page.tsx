@@ -511,19 +511,7 @@ export default function Home() {
       <footer className="border-t border-[var(--border)] bg-white py-12">
         <Container>
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="lg:col-span-2">
-              <div className="text-sm font-semibold text-[color:var(--heading)]">
-                Aqount
-              </div>
-              <p className="mt-2 max-w-md text-sm leading-6 text-zinc-600">
-                Financial clarity specialists for Xero-powered businesses.
-              </p>
-              <div className="mt-6 text-xs text-zinc-500">
-                © {new Date().getFullYear()} Aqount. Financial Clarity Diagnostic is a product by Aqount. All rights reserved.
-              </div>
-            </div>
-
-            <div>
+            <div className="order-1 sm:order-none">
               <div className="text-sm font-semibold text-[color:var(--heading)]">
                 Product
               </div>
@@ -556,7 +544,7 @@ export default function Home() {
               </ul>
             </div>
 
-            <div>
+            <div className="order-2 sm:order-none">
               <div className="text-sm font-semibold text-[color:var(--heading)]">
                 Company
               </div>
@@ -602,6 +590,18 @@ export default function Home() {
                   </a>
                 </li>
               </ul>
+            </div>
+
+            <div className="order-3 sm:order-none lg:col-span-2">
+              <div className="text-sm font-semibold text-[color:var(--heading)]">
+                Aqount
+              </div>
+              <p className="mt-2 max-w-md text-sm leading-6 text-zinc-600">
+                Financial clarity specialists for Xero-powered businesses.
+              </p>
+              <div className="mt-6 text-xs text-zinc-500">
+                © {new Date().getFullYear()} Aqount. Financial Clarity Diagnostic is a product by Aqount. All rights reserved.
+              </div>
             </div>
           </div>
 
