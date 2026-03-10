@@ -119,14 +119,15 @@ export default function Home() {
               </div>
 
               <h1 className="mt-5 text-4xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-5xl">
-                Get Your Financial Clarity Score — in minutes
+                What’s Your Financial Clarity Score?
               </h1>
 
               <p className="mt-5 max-w-xl text-base leading-7 text-zinc-600 sm:text-lg">
-                Connect your Xero organisation for a secure, read-only diagnostic
-                that evaluates your chart of accounts structure, categorisation
-                consistency, reporting clarity, and cash flow visibility—so you
-                can get decision-ready numbers, faster.
+                Many SMEs use Xero but still struggle with messy charts of
+                accounts, inconsistent expense categorisation, and weak
+                financial reporting. This diagnostic analyzes your accounting
+                structure and shows whether your financial data is actually
+                decision-ready.
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -135,9 +136,10 @@ export default function Home() {
                   Preview the Scorecard
                 </Button>
               </div>
-              <div className="mt-3 text-sm text-zinc-500">
-                Read-only access. No posting, no changes. You can revoke access
-                anytime.
+              <div className="mt-4 space-y-1 text-sm text-zinc-500">
+                <div>Secure read-only analysis</div>
+                <div>Takes ~1 minute</div>
+                <div>Access automatically revoked after the diagnostic</div>
               </div>
 
               <TrustChips />
