@@ -254,35 +254,35 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* What you receive */}
+      {/* Why this diagnosis works */}
       <section className="py-14 sm:py-20">
         <Container>
           <SectionHeading
-            eyebrow="Deliverables"
-            title="What you receive"
-            lead="A productized diagnostic experience—supported by Aqount specialists when you’re ready to act on findings."
+            eyebrow="Why it works"
+            title="Why this diagnosis works"
+            lead="Because financial clarity isn’t a software problem. It’s a structure problem. This diagnostic checks the underlying design choices that determine whether your Xero data produces decision-ready reporting."
           />
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2">
             <Card
               icon={<Icon name="score" />}
-              title="Financial System Health Score"
-              description="A fast indicator of how decision-ready your structure is—plus a breakdown across key dimensions."
+              title="Looks Beyond “Correct” Bookkeeping"
+              description="Even accurate transactions can produce unclear reporting when accounts and coding logic are inconsistent. We assess structural clarity, not just compliance."
             />
             <Card
               icon={<Icon name="scan" />}
-              title="Structural Issues Detected"
-              description="Highlights patterns that reduce reporting reliability and clarity—so you know what to fix first."
+              title="Built on Repeatable Structure Signals"
+              description="We evaluate patterns in accounts, categories, and reporting setup that consistently predict whether reporting will be decision-ready."
             />
             <Card
               icon={<Icon name="chart" />}
-              title="Cash Visibility Signals"
-              description="Finds issues that commonly cause reactive cash decisions and weak forecasting foundations."
+              title="Converts Findings into Practical Next Steps"
+              description="You don’t just get a score. You get prioritised issues and recommended fixes that improve clarity without overhauling your whole system."
             />
             <Card
               icon={<Icon name="spark" />}
-              title="Specialist Review (Optional)"
-              description="Aqount can help translate findings into practical finance operations improvements when you’re ready."
+              title="Backed by Certified Accounting Professionals"
+              description="This diagnostic reflects what Aqount teams see across finance operations, reporting clean-ups, and advisory work with growing businesses."
             />
           </div>
         </Container>
