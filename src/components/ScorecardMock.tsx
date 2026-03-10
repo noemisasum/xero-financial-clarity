@@ -19,8 +19,8 @@ export default function ScorecardMock() {
             <div className="text-4xl font-semibold tracking-tight text-[color:var(--heading)]">
               64 <span className="text-lg text-zinc-500">/ 100</span>
             </div>
-            <div className="rounded-full border border-[var(--border)] bg-white px-3 py-1 text-xs font-semibold text-zinc-700">
-              Moderate clarity
+            <div className="rounded-full bg-[color:var(--accent-soft)] px-3 py-1 text-xs font-semibold text-zinc-900">
+              Moderate
             </div>
           </div>
           <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-white ring-1 ring-[color:var(--border)]">

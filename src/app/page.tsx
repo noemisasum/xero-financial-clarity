@@ -226,13 +226,30 @@ export default function Home() {
           <div className="max-w-3xl">
             <SectionHeading
               eyebrow="Output"
-              title="Your scorecard: clarity, broken down"
+              title={
+                <>
+                  Your scorecard:{" "}
+                  <span className="underline decoration-[color:var(--accent)] decoration-2 underline-offset-4">
+                    clarity
+                  </span>
+                  , broken down
+                </>
+              }
               lead="This diagnostic evaluates how well your accounting system supports reporting, visibility, and decision-making—then summarises results in a score you can understand immediately."
             />
           </div>
 
           <div className="mt-10">
             <ScorecardMock />
+          </div>
+
+          <div className="mt-10 rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="text-lg font-semibold tracking-tight text-[color:var(--heading)]">
+                Ready to see your Financial Clarity Score?
+              </div>
+              <Button href="/api/xero/connect">Connect Xero</Button>
+            </div>
           </div>
         </Container>
       </section>
