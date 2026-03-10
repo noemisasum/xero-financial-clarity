@@ -136,10 +136,9 @@ export default function Home() {
                   Preview the Scorecard
                 </Button>
               </div>
-              <div className="mt-4 space-y-1 text-sm text-zinc-500">
-                <div>Secure read-only analysis</div>
-                <div>Takes ~1 minute</div>
-                <div>Access automatically revoked after the diagnostic</div>
+              <div className="mt-4 text-sm text-zinc-500">
+                Secure read-only analysis · Takes ~1 minute · Access automatically
+                revoked after the diagnostic
               </div>
 
               <TrustChips />
