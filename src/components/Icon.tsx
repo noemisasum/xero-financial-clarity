@@ -11,7 +11,8 @@ export default function Icon({
     | "scan"
     | "score"
     | "shield"
-    | "clock";
+    | "clock"
+    | "chevron";
   className?: string;
 }) {
   const common =
@@ -94,6 +95,13 @@ export default function Icon({
         <>
           <path d="M12 22a10 10 0 1 0-10-10 10 10 0 0 0 10 10z" />
           <path d="M12 6v6l4 2" />
+        </>
+      );
+      break;
+    case "chevron":
+      paths = (
+        <>
+          <path d="M6 9l6 6 6-6" />
         </>
       );
       break;
