@@ -4,12 +4,9 @@ export default function ScorecardMock() {
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <div className="text-sm font-semibold text-[color:var(--heading)]">
-            Financial Clarity Score
+            Example Trading Pte. Ltd.
           </div>
-          <div className="mt-1 text-xs text-zinc-500">
-            Org: Example Trading Pte. Ltd. • Generated on: 10 Mar 2026 • Access:
-            Read-only
-          </div>
+          <div className="mt-1 text-xs text-zinc-500">Generated on: 10 Mar 2026</div>
         </div>
         <div className="rounded-full bg-[color:var(--accent-soft)] px-3 py-1 text-xs font-semibold text-zinc-900">
           Sample output
@@ -33,18 +30,26 @@ export default function ScorecardMock() {
             />
           </div>
           <p className="mt-4 text-sm leading-6 text-zinc-600">
-            Indicates structural issues that may be affecting reporting quality
-            and cash visibility.
+            Your accounting structure provides partial reporting visibility, but
+            several areas may limit decision-making clarity.
           </p>
 
           <div className="mt-5 rounded-2xl border border-[var(--border)] bg-white p-4">
             <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
-              Recommended next step
+              Recommended Next Steps
             </div>
-            <div className="mt-2 text-sm font-medium text-zinc-900">
-              Consolidate overlapping expense accounts and standardise coding
-              rules.
-            </div>
+            <ul className="mt-3 space-y-2 text-sm leading-6 text-zinc-600">
+              {[
+                "Consolidate overlapping expense accounts and standardise coding rules",
+                "Define consistent reporting categories and monthly review routines",
+                "Introduce basic cash visibility hygiene (AP/AR tracking and forecasting cadence)",
+              ].map((x) => (
+                <li key={x} className="flex gap-2">
+                  <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
+                  <span>{x}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
@@ -72,7 +77,7 @@ export default function ScorecardMock() {
 
           <div className="mt-5 rounded-2xl border border-[var(--border)] bg-white p-4">
             <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
-              Top issues detected (sample)
+              Top issues detected
             </div>
             <ul className="mt-3 space-y-2 text-sm text-zinc-600">
               <li className="flex gap-2">
