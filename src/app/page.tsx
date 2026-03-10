@@ -52,7 +52,8 @@ function ProductMockupHero() {
               />
             </div>
             <p className="mt-4 text-sm leading-6 text-zinc-600">
-              Fast, structured signals on reporting readiness and cash visibility.
+              Your accounting structure provides partial reporting visibility,
+              but several areas may limit decision-making clarity.
             </p>
           </div>
 
@@ -105,11 +106,6 @@ export default function Home() {
         <Container>
           <div className="grid items-center gap-10 py-14 sm:py-20 lg:grid-cols-2 lg:gap-16">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-white px-3 py-1 text-xs font-medium text-zinc-600">
-                <Icon name="spark" />
-                <span>Specialist diagnostic by Aqount</span>
-              </div>
-
               <h1 className="mt-5 text-4xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-5xl">
                 What’s Your Financial Clarity Score?
               </h1>
@@ -128,31 +124,7 @@ export default function Home() {
                   Preview the Scorecard
                 </Button>
               </div>
-              <div className="mt-4 text-sm text-zinc-500">
-                Secure read-only analysis · Takes ~1 minute · Access automatically
-                revoked after the diagnostic
-              </div>
-
               <TrustChips />
-
-              <div className="mt-8 grid grid-cols-2 gap-4 sm:max-w-lg">
-                {[
-                  ["Score + 5-dimension breakdown", "Clarity in one view."],
-                  ["Flags structural issues", "Find what blocks insight."],
-                  ["Built for SME operators", "Founder-friendly outputs."],
-                  ["Backed by Aqount", "Finance ops + advisory."],
-                ].map(([k, v]) => (
-                  <div
-                    key={k}
-                    className="rounded-2xl border border-[var(--border)] bg-white p-4 shadow-sm"
-                  >
-                    <div className="text-sm font-semibold text-[color:var(--heading)]">
-                      {k}
-                    </div>
-                    <div className="mt-1 text-sm text-zinc-600">{v}</div>
-                  </div>
-                ))}
-              </div>
             </div>
 
             <ProductMockupHero />

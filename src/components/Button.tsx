@@ -16,7 +16,7 @@ export default function Button({
     return (
       <Link
         href={href}
-        className={`${base} border border-[var(--border)] bg-white text-[color:var(--link)] hover:bg-zinc-50`}
+        className={`${base} border border-[color:var(--link)]/20 bg-white text-[color:var(--link)] hover:bg-[color:var(--link)]/5`}
       >
         {children}
       </Link>
