@@ -199,7 +199,7 @@ export default function Home() {
               title="How the diagnostic works"
             />
 
-            <div className="flex flex-wrap gap-2 lg:justify-end">
+            <div className="flex flex-wrap gap-3 lg:justify-end">
               {[
                 "Read-only access",
                 "~1 minute",
