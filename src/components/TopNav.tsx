@@ -16,7 +16,7 @@ export default function TopNav() {
                 width={260}
                 height={56}
                 priority
-                className="h-9 w-auto"
+                className="h-8 w-auto sm:h-9"
               />
             </div>
           </Link>
@@ -50,17 +50,16 @@ export default function TopNav() {
               FAQ
             </Link>
 
-            <div className="hidden sm:block">
-              <Button href="/api/xero/connect">Connect Xero</Button>
+            <div>
+              <Button
+                href="/api/xero/connect"
+                className="px-4 py-2 text-xs sm:px-5 sm:py-3 sm:text-sm"
+              >
+                <span className="sm:hidden">Run Diagnostic</span>
+                <span className="hidden sm:inline">Connect Xero</span>
+              </Button>
             </div>
           </nav>
-        </div>
-
-        {/* Mobile actions */}
-        <div className="pb-3 sm:hidden">
-          <div className="flex items-center justify-start">
-            <Button href="/api/xero/connect">Run Diagnostic</Button>
-          </div>
         </div>
       </Container>
     </header>
