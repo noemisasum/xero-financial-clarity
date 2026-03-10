@@ -28,7 +28,7 @@ export default function TopNav() {
               href="https://aqount.tech/about/"
               target="_blank"
               rel="noreferrer"
-              className="hidden text-sm font-medium text-zinc-600 hover:text-zinc-900 sm:inline"
+              className="hidden text-sm font-medium text-[color:var(--link)] hover:opacity-90 sm:inline"
             >
               About
             </Link>
@@ -37,7 +37,7 @@ export default function TopNav() {
               href="https://aqount.tech/#services"
               target="_blank"
               rel="noreferrer"
-              className="hidden text-sm font-medium text-zinc-600 hover:text-zinc-900 sm:inline"
+              className="hidden text-sm font-medium text-[color:var(--link)] hover:opacity-90 sm:inline"
             >
               Services
             </Link>
@@ -46,7 +46,7 @@ export default function TopNav() {
               href="https://aqount.tech/contact/"
               target="_blank"
               rel="noreferrer"
-              className="hidden text-sm font-medium text-zinc-600 hover:text-zinc-900 sm:inline"
+              className="hidden text-sm font-medium text-[color:var(--link)] hover:opacity-90 sm:inline"
             >
               Contact
             </Link>

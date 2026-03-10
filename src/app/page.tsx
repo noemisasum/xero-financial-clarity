@@ -116,11 +116,11 @@ export default function Home() {
               </h1>
 
               <p className="mt-5 max-w-xl text-base leading-7 text-zinc-600 sm:text-lg">
-                Many SMEs use Xero but still struggle with messy charts of
-                accounts, inconsistent expense categorisation, and weak
-                financial reporting. This diagnostic analyzes your accounting
-                structure and shows whether your financial data is actually
-                decision-ready.
+                Many businesses use Xero but still struggle with messy charts of
+                accounts, inconsistent expense categorisation, and unclear
+                financial reporting. This AI-assisted diagnostic analyses your
+                accounting structure and quickly reveals whether your financial
+                data is truly decision-ready.
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -133,25 +133,6 @@ export default function Home() {
             </div>
 
             <ProductMockupHero />
-          </div>
-        </Container>
-      </section>
-
-      {/* Trust strip */}
-      <section className="border-y border-[var(--border)] bg-white">
-        <Container>
-          <div className="grid gap-4 py-6 text-sm text-zinc-600 sm:grid-cols-4">
-            {[
-              "Built by Aqount (finance ops + advisory)",
-              "Designed for SMEs on Xero (SEA-first)",
-              "Read-only diagnostic (no changes to ledger)",
-              "Actionable scorecard (issues + next steps)",
-            ].map((t) => (
-              <div key={t} className="flex items-center gap-2">
-                <span className="inline-flex h-2 w-2 rounded-full bg-[color:var(--accent)]" />
-                <span>{t}</span>
-              </div>
-            ))}
           </div>
         </Container>
       </section>
