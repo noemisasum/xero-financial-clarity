@@ -14,9 +14,14 @@ function ProductMockupHero() {
     <div className="relative">
       <div className="absolute -inset-6 -z-10 rounded-[28px] bg-[radial-gradient(circle_at_20%_20%,var(--accent-soft),transparent_55%),radial-gradient(circle_at_80%_10%,rgba(17,24,39,0.06),transparent_55%)]" />
       <div className="overflow-hidden rounded-3xl border border-[var(--border)] bg-white shadow-[0_1px_0_rgba(17,24,39,0.02),0_25px_70px_rgba(17,24,39,0.12)]">
-        <div className="flex items-center justify-between border-b border-[var(--border)] px-5 py-4">
-          <div className="text-sm font-semibold text-[color:var(--heading)]">
-            Aqount Financial Clarity Diagnostic
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border)] px-5 py-4">
+          <div>
+            <div className="text-sm font-semibold text-[color:var(--heading)]">
+              Example Trading Pte. Ltd.
+            </div>
+            <div className="mt-0.5 text-xs text-zinc-500">
+              Generated on: 10 Mar 2026
+            </div>
           </div>
           <div className="flex items-center gap-2">
             <div className="h-2 w-2 rounded-full bg-emerald-400" />
@@ -85,19 +90,6 @@ function ProductMockupHero() {
           </div>
         </div>
 
-        <div className="border-t border-[var(--border)] bg-white px-5 py-4">
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="rounded-full border border-[var(--border)] bg-white px-3 py-1 text-xs text-zinc-600">
-              Scope: Structure + coding patterns
-            </div>
-            <div className="rounded-full border border-[var(--border)] bg-white px-3 py-1 text-xs text-zinc-600">
-              Ledger: Xero
-            </div>
-            <div className="rounded-full border border-[var(--border)] bg-white px-3 py-1 text-xs text-zinc-600">
-              Region: Southeast Asia
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
