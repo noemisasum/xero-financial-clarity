@@ -57,8 +57,10 @@ export default function TopNav() {
         </div>
 
         {/* Mobile actions */}
-        <div className="pb-4 sm:hidden">
-          <Button href="/api/xero/connect">Connect Xero</Button>
+        <div className="pb-3 sm:hidden">
+          <div className="flex items-center justify-start">
+            <Button href="/api/xero/connect">Run Diagnostic</Button>
+          </div>
         </div>
       </Container>
     </header>
