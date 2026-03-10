@@ -22,8 +22,11 @@ export const metadata: Metadata = {
     "Aqount’s Financial Clarity Diagnostic analyzes your Xero accounting structure and highlights issues affecting reporting, visibility, and decision-making.",
   metadataBase: new URL("https://clarity.aqount.tech"),
   icons: {
-    icon: [{ url: "/favicon.png" }],
-    apple: [{ url: "/apple-touch-icon.png" }],
+    icon: [
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   openGraph: {
     title: "Aqount Financial Clarity Diagnostic",
