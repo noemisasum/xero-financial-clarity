@@ -258,9 +258,9 @@ export default function Home() {
       <section className="py-14 sm:py-20">
         <Container>
           <SectionHeading
-            eyebrow="Why it works"
+            eyebrow="Methodology"
             title="Why this diagnosis works"
-            lead="Because financial clarity isn’t a software problem. It’s a structure problem. This diagnostic checks the underlying design choices that determine whether your Xero data produces decision-ready reporting."
+            lead="Because financial clarity isn’t a software problem. It’s built on structure. Our diagnostic checks the underlying design choices that determine whether your financial data produces decision-ready reporting."
           />
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2">

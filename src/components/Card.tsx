@@ -13,7 +13,7 @@ export default function Card({
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[color:var(--accent-soft)] ring-1 ring-[color:var(--border)]">
           {icon}
         </div>
-        <div className="min-h-[40px] text-sm font-semibold leading-5 text-[color:var(--heading)] line-clamp-2">
+        <div className="min-h-[40px] w-full text-center text-sm font-semibold leading-5 text-[color:var(--heading)] line-clamp-2">
           {title}
         </div>
       </div>
