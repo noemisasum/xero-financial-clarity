@@ -72,9 +72,11 @@ function ProductMockupHero() {
                 const pct = (Number(value) / Number(outOf)) * 100;
                 return (
                   <div key={String(label)}>
-                    <div className="flex items-center justify-between text-sm">
-                      <div className="text-zinc-900">{label}</div>
-                      <div className="font-semibold text-zinc-950">
+                    <div className="flex items-center justify-between gap-3 text-sm">
+                      <div className="min-w-0 text-zinc-900">
+                        <span className="block truncate">{label}</span>
+                      </div>
+                      <div className="shrink-0 whitespace-nowrap font-semibold tabular-nums text-zinc-950">
                         {value} <span className="text-zinc-400">/</span> {outOf}
                       </div>
                     </div>
@@ -107,7 +109,7 @@ export default function Home() {
           <div className="grid items-center gap-10 py-14 sm:py-20 lg:grid-cols-2 lg:gap-16">
             <div>
               <h1 className="mt-5 text-4xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-5xl">
-                What’s Your Financial Clarity Score?
+                Is your Financial Data Actually Decision-Ready?
               </h1>
 
               <p className="mt-5 max-w-xl text-base leading-7 text-zinc-600 sm:text-lg">
