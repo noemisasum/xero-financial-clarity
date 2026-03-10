@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Albert_Sans, Roboto } from "next/font/google";
 import "./globals.css";
 
@@ -21,14 +21,22 @@ export const metadata: Metadata = {
   description:
     "Aqount’s Financial Clarity Diagnostic analyzes your Xero accounting structure and highlights issues affecting reporting, visibility, and decision-making.",
   metadataBase: new URL("https://clarity.aqount.tech"),
+  icons: {
+    icon: [{ url: "/favicon.png" }],
+    apple: [{ url: "/apple-touch-icon.png" }],
+  },
   openGraph: {
     title: "Aqount Financial Clarity Diagnostic",
     description:
-      "What’s your Financial Clarity Score? A complimentary read-only diagnostic for SMEs across Southeast Asia using Xero.",
+      "Get your Financial Clarity Score. A complimentary read-only diagnostic for SMEs across Southeast Asia using Xero.",
     url: "https://clarity.aqount.tech",
     siteName: "Aqount",
     type: "website",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
