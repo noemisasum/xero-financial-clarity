@@ -9,46 +9,48 @@ export default function TopNav() {
       <Container>
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/brand/aqount-logo.png"
-              alt="Aqount"
-              width={150}
-              height={38}
-              priority
-              className="h-8 w-auto"
-            />
-            <span className="hidden text-xs font-medium text-zinc-500 sm:inline">
-              Financial Clarity Diagnostic
-            </span>
+            <div className="flex flex-col leading-none">
+              <Image
+                src="/brand/aqount-logo.png"
+                alt="Aqount"
+                width={150}
+                height={38}
+                priority
+                className="h-8 w-auto"
+              />
+              <span className="hidden pt-1 text-[11px] font-medium text-zinc-500 sm:block">
+                Financial Clarity Diagnostic
+              </span>
+            </div>
           </Link>
 
           <nav className="flex items-center gap-3">
-            {/* Match aqount.tech nav structure */}
             <Link
-              href="https://aqount.tech/about/"
-              target="_blank"
-              rel="noreferrer"
+              href="#how"
               className="hidden text-sm font-medium text-[color:var(--link)] hover:opacity-90 sm:inline"
             >
-              About
+              How it works
             </Link>
 
             <Link
-              href="https://aqount.tech/#services"
-              target="_blank"
-              rel="noreferrer"
+              href="#scorecard"
               className="hidden text-sm font-medium text-[color:var(--link)] hover:opacity-90 sm:inline"
             >
-              Services
+              Sample Scorecard
             </Link>
 
             <Link
-              href="https://aqount.tech/contact/"
-              target="_blank"
-              rel="noreferrer"
+              href="#methodology"
               className="hidden text-sm font-medium text-[color:var(--link)] hover:opacity-90 sm:inline"
             >
-              Contact
+              Methodology
+            </Link>
+
+            <Link
+              href="#faq"
+              className="hidden text-sm font-medium text-[color:var(--link)] hover:opacity-90 sm:inline"
+            >
+              FAQ
             </Link>
 
             <div className="hidden sm:block">

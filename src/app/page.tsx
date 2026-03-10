@@ -255,7 +255,7 @@ export default function Home() {
       </section>
 
       {/* Why this diagnosis works */}
-      <section className="py-14 sm:py-20">
+      <section id="methodology" className="py-14 sm:py-20">
         <Container>
           <SectionHeading
             eyebrow="Methodology"
@@ -289,7 +289,7 @@ export default function Home() {
       </section>
 
       {/* FAQ (Audience + Why Aqount + Security) */}
-      <section className="py-14 sm:py-20">
+      <section id="faq" className="py-14 sm:py-20">
         <Container>
           <FaqAccordion
             eyebrow="FAQ"
