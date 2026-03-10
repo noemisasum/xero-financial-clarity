@@ -128,7 +128,7 @@ Signals (v1):
 
 ### D2) Categorisation Consistency
 
-Focus: whether day-to-day coding is consistent enough to trust trends.
+Focus: whether day-to-day categorisation is consistent enough to trust trends.
 
 Signals (v1):
 
@@ -154,9 +154,9 @@ Signals (v1):
 
 ---
 
-### D3) Reporting Design and Groupings
+### D3) Reporting Clarity
 
-Focus: whether the structure supports management reporting (not just statutory books).
+Focus: whether the structure supports decision-ready management reporting (not just statutory books).
 
 Signals (v1):
 
@@ -176,7 +176,7 @@ Signals (v1):
 
 ---
 
-### D4) Cash Flow Visibility Signals
+### D4) Cash Flow Visibility
 
 Focus: whether the system supports predictable cash visibility.
 
@@ -198,7 +198,7 @@ Signals (v1):
 
 ---
 
-### D5) Bookkeeping Hygiene Indicators
+### D5) Bookkeeping Hygiene
 
 Focus: operational hygiene signals that correlate with reporting clarity.
 
@@ -246,6 +246,11 @@ Signals (v1):
 
 ## Open questions (to resolve before implementation)
 
-1) Confirm the exact 5 dimension names as displayed in the scorecard UI.
+1) Dimension names confirmed (scorecard):
+   - Chart of Accounts Structure
+   - Categorisation Consistency
+   - Reporting Clarity
+   - Cash Flow Visibility
+   - Bookkeeping Hygiene
 2) Confirm which data endpoints are acceptable for v1 (accounts only vs include invoices/bills/journals).
 3) Confirm whether we should run the diagnostic over a time window (e.g. last 90 days) for consistency checks.
