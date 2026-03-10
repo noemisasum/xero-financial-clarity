@@ -6,8 +6,8 @@
   /* aqount.tech observed colors */
   --foreground: rgb(51, 65, 85); /* body text */
   --heading: rgb(54, 91, 109); /* section headings */
-  /* Aqount blue (dark) */
-  --link: #0B5CAB;
+  /* Aqount logo blue */
+  --link: rgb(54, 91, 109);
 
   /* UI neutrals */
   --muted: #6b7280;
