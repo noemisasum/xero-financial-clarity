@@ -15,7 +15,10 @@ export default function ScorecardMock() {
 
       <div className="mt-5 grid gap-5 lg:grid-cols-2">
         <div className="rounded-2xl border border-[var(--border)] bg-zinc-50 p-5">
-          <div className="flex items-end justify-between">
+          <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+            Financial Clarity Score
+          </div>
+          <div className="mt-3 flex items-end justify-between">
             <div className="text-4xl font-semibold tracking-tight text-[color:var(--heading)]">
               64 <span className="text-lg text-zinc-500">/ 100</span>
             </div>
@@ -97,10 +100,6 @@ export default function ScorecardMock() {
         </div>
       </div>
 
-      <p className="mt-5 text-sm leading-6 text-zinc-600">
-        Scope: structure + coding patterns. We do not post, edit, or change your
-        books.
-      </p>
-    </div>
+</div>
   );
 }
