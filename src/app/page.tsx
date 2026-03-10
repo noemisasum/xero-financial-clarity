@@ -299,57 +299,40 @@ export default function Home() {
               {
                 q: "Who is this for?",
                 a: (
-                  <ul className="space-y-2">
-                    <li className="flex gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
-                      <span>
-                        <span className="font-semibold text-zinc-900">SMEs already using Xero:</span> You’re compliant, but reporting doesn’t feel decision-ready.
-                      </span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
-                      <span>
-                        <span className="font-semibold text-zinc-900">Growing businesses:</span> Complexity is increasing—structure needs to catch up before it becomes painful.
-                      </span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
-                      <span>
-                        <span className="font-semibold text-zinc-900">Founders & finance leads:</span> You want numbers you can trust for hiring, spend, and runway decisions.
-                      </span>
-                    </li>
-                  </ul>
+                  <div className="space-y-2">
+                    <p>
+                      This diagnostic is designed for founders, finance leads,
+                      and operators who use Xero but want clearer management
+                      reporting.
+                    </p>
+                    <p>
+                      It is particularly useful for growing businesses where
+                      financial data exists but decision-making still feels
+                      reactive—often due to inconsistent account structures,
+                      categorisation, or reporting design.
+                    </p>
+                  </div>
                 ),
               },
               {
                 q: "Why Aqount?",
                 a: (
-                  <ul className="space-y-2">
-                    <li className="flex gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
-                      <span>
-                        <span className="font-semibold text-zinc-900">Finance operations expertise:</span> Grounded in the systems that produce reliable reports—charts of accounts, coding logic, and controls.
-                      </span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
-                      <span>
-                        <span className="font-semibold text-zinc-900">Practical advisory:</span> The output is meant to be acted on—so you can improve reporting and decision-making outcomes.
-                      </span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
-                      <span>
-                        <span className="font-semibold text-zinc-900">Built around real pain points:</span> We focus on clarity, consistency, and usefulness—without jargon.
-                      </span>
-                    </li>
-                    <li className="flex gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
-                      <span>
-                        <span className="font-semibold text-zinc-900">Automation + specialist review:</span> A modern diagnostic flow, backed by specialists if you want help implementing fixes.
-                      </span>
-                    </li>
-                  </ul>
+                  <div className="space-y-2">
+                    <p>
+                      Aqount specialises in finance operations and reporting
+                      systems for growing companies across Southeast Asia.
+                    </p>
+                    <p>
+                      This diagnostic reflects patterns we see repeatedly when
+                      reviewing accounting systems: messy charts of accounts,
+                      inconsistent expense coding, and reporting structures that
+                      make financial insight difficult.
+                    </p>
+                    <p>
+                      The clarity score provides a quick signal of whether your
+                      current setup supports reliable decision-making.
+                    </p>
+                  </div>
                 ),
               },
               {
@@ -357,20 +340,140 @@ export default function Home() {
                 a: (
                   <div className="space-y-2">
                     <p>
-                      Yes—this diagnostic is designed for <span className="font-semibold text-zinc-900">secure, read-only analysis</span>.
-                      We do not post, edit, or reclassify transactions.
+                      Yes. The diagnostic uses read-only access to your Xero
+                      organisation.
                     </p>
                     <p>
-                      You’ll be asked to authorise access, and the diagnostic is designed to complete quickly.
+                      It does not post transactions, modify data, or change your
+                      accounting structure.
+                    </p>
+                    <p>
+                      Access is automatically revoked after the diagnostic is
+                      completed.
                     </p>
                   </div>
                 ),
               },
               {
-                q: "What do you analyse?",
-                a: "Your chart of accounts and coding patterns that affect reporting clarity and cash visibility signals.",
+                q: "What does the diagnostic analyse?",
+                a: (
+                  <div className="space-y-2">
+                    <p>
+                      The tool reviews structural signals within your accounting
+                      system, including:
+                    </p>
+                    <ul className="mt-3 space-y-2">
+                      {[
+                        "Chart of accounts structure",
+                        "Expense categorisation patterns",
+                        "Reporting groupings",
+                        "Cash flow visibility signals",
+                        "General bookkeeping hygiene indicators",
+                      ].map((x) => (
+                        <li key={x} className="flex gap-2">
+                          <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
+                          <span>{x}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p>
+                      These signals are summarised into a Financial Clarity
+                      Score and a breakdown across key dimensions.
+                    </p>
+                  </div>
+                ),
               },
-            ]}
+              {
+                q: "How long does it take?",
+                a: (
+                  <div className="space-y-2">
+                    <p>
+                      Most diagnostics complete in under one minute once access
+                      is authorised.
+                    </p>
+                    <p>
+                      You will immediately receive a clarity scorecard showing
+                      your overall score, breakdown by dimension, and key
+                      structural issues detected.
+                    </p>
+                  </div>
+                ),
+              },
+              {
+                q: "What do I receive at the end?",
+                a: (
+                  <div className="space-y-2">
+                    <p>You receive a Financial Clarity Scorecard, which includes:</p>
+                    <ul className="mt-3 space-y-2">
+                      {[
+                        "Your overall clarity score",
+                        "A breakdown across five reporting dimensions",
+                        "Key structural issues detected in your accounting setup",
+                        "Recommended next steps to improve reporting clarity",
+                      ].map((x) => (
+                        <li key={x} className="flex gap-2">
+                          <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
+                          <span>{x}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p>
+                      This helps identify where your accounting structure may be
+                      limiting decision-ready reporting.
+                    </p>
+                  </div>
+                ),
+              },
+              {
+                q: "Do I need to be a Xero expert to understand the results?",
+                a: (
+                  <div className="space-y-2">
+                    <p>
+                      No. The scorecard is designed to be understandable for
+                      founders and operators, not just accountants.
+                    </p>
+                    <p>
+                      It highlights structural issues and explains how they
+                      affect financial visibility and decision-making.
+                    </p>
+                  </div>
+                ),
+              },
+              {
+                q: "What happens after the diagnostic?",
+                a: (
+                  <div className="space-y-2">
+                    <p>The diagnostic is designed to give you a clear starting point.</p>
+                    <p>
+                      Some businesses choose to implement improvements
+                      internally. Others engage Aqount to help restructure
+                      reporting, improve categorisation frameworks, or build
+                      management reporting systems.
+                    </p>
+                    <p>
+                      There is no obligation to engage Aqount after running the
+                      diagnostic.
+                    </p>
+                  </div>
+                ),
+              },
+              {
+                q: "Is my financial data secure?",
+                a: (
+                  <div className="space-y-2">
+                    <p>
+                      Yes. The diagnostic only reads structural metadata from
+                      your Xero organisation.
+                    </p>
+                    <p>
+                      No financial data is stored, edited, or shared. Access is
+                      limited to the duration of the diagnostic and
+                      automatically revoked afterward.
+                    </p>
+                  </div>
+                ),
+              },
+]}
           />
         </Container>
       </section>
@@ -384,15 +487,11 @@ export default function Home() {
                 Discover Your Financial Clarity Score
               </h3>
               <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-600">
-                A complimentary, read-only diagnostic for SMEs across Southeast
-                Asia using Xero.
+                A complimentary, read-only diagnostic tool for growing business
+                using Xero.
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Button href="/api/xero/connect">Get Your Clarity Score</Button>
-                <div className="text-sm text-zinc-500">
-                  Read-only. No bookkeeping changes. Typical completion: 3–5
-                  minutes.
-                </div>
               </div>
               <div className="mt-3 text-xs text-zinc-500">
                 After connecting, you’ll select your organisation and receive a
