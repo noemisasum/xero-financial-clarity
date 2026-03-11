@@ -1,4 +1,5 @@
 import Container from "@/components/Container";
+import LoadingForm from "@/components/LoadingForm";
 import Image from "next/image";
 import { prisma } from "@/lib/db";
 import { XERO_CONNECTIONS_URL } from "@/lib/xero";
@@ -86,7 +87,7 @@ export default async function OrgSelectPage({
             </div>
           ) : null}
 
-          <form
+          <LoadingForm
             action="/api/xero/select-tenant"
             method="post"
             className="mt-6 space-y-4"
@@ -145,7 +146,7 @@ export default async function OrgSelectPage({
                 Run Diagnostic
               </button>
             </div>
-          </form>
+          </LoadingForm>
 
           <div className="mt-4 text-xs text-zinc-500">
             You’ll be able to run this once. Access is revoked after the diagnostic.
