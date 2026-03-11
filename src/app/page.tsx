@@ -602,6 +602,13 @@ export default function Home() {
                   alt="Aqount"
                   className="h-8 w-auto"
                 />
+              </div>
+
+              <p className="mt-3 max-w-md text-sm leading-6 text-zinc-600">
+                Financial clarity specialists for Xero-powered businesses.
+              </p>
+
+              <div className="mt-4 flex items-center gap-2">
                 <a
                   href="https://www.linkedin.com/company/97445870"
                   target="_blank"
@@ -621,9 +628,15 @@ export default function Home() {
                 </a>
               </div>
 
-              <p className="mt-3 max-w-md text-sm leading-6 text-zinc-600">
-                Financial clarity specialists for Xero-powered businesses.
-              </p>
+              <div className="mt-6 flex items-center gap-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/brand/xero-silver-partner-badge.png"
+                  alt="Xero Silver Partner"
+                  className="h-10 w-auto"
+                  loading="lazy"
+                />
+              </div>
 
               <div className="mt-6 text-xs text-zinc-500 sm:mt-8">
                 © {new Date().getFullYear()} Aqount. Financial Clarity Diagnostic is a product by Aqount. All rights reserved.
