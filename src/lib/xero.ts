@@ -19,6 +19,17 @@ export const XERO_SCOPES = (
     "accounting.reports.profitandloss.read",
     "accounting.reports.balancesheet.read",
     "accounting.reports.trialbalance.read",
+
+    // Next 4 (v1 essentials)
+    // Cash Flow Visibility
+    "accounting.reports.banksummary.read",
+    "accounting.reports.aged.read",
+
+    // Bookkeeping Hygiene
+    "accounting.manualjournals.read",
+
+    // Categorisation Consistency
+    "accounting.invoices.read",
   ].join(" ")
 ).trim();
 
