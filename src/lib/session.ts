@@ -17,14 +17,18 @@ export async function getOrCreateAnonSessionId(): Promise<string> {
   const jar = await cookies();
   const existing = jar.get(COOKIE_NAME)?.value;
   if (existing) {
-    // Best-effort touch
+    // Best-effort touch / self-heal if DB was reset and cookie remains.
     try {
       await prisma.anonSession.update({
         where: { id: existing },
         data: { lastSeenAt: new Date() },
       });
     } catch {
-      // ignore
+      try {
+        await prisma.anonSession.create({ data: { id: existing } });
+      } catch {
+        // ignore
+      }
     }
     return existing;
   }
