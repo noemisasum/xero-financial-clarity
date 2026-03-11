@@ -57,13 +57,13 @@ export default async function OrgSelectPage({
   const tenants = conn ? await fetchConnections(conn.accessTokenEncrypted) : [];
 
   return (
-    <div className="py-14 sm:py-20">
+    <div className="min-h-[calc(100vh-120px)] py-14 sm:py-20">
       <Container>
         <h1 className="text-2xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-3xl">
           Ready to Run
         </h1>
         <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-600">
-          Select your Xero organisation, then run the diagnostic.
+          Confirm your Xero organisation, then run the diagnostic.
         </p>
 
         {sp.error ? (
@@ -72,10 +72,9 @@ export default async function OrgSelectPage({
           </div>
         ) : null}
 
-        <div className="mt-6 rounded-2xl border border-[var(--border)] bg-white p-6">
-          <div className="text-sm text-zinc-600">Connected via Xero</div>
-          <div className="mt-2 text-sm text-zinc-700">
-            Connection ID: <span className="font-mono">{connectionId}</span>
+        <div className="mx-auto mt-8 max-w-xl rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+          <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+            Confirm Organisation
           </div>
 
           <form
@@ -140,8 +139,7 @@ export default async function OrgSelectPage({
           </form>
 
           <div className="mt-4 text-xs text-zinc-500">
-            Read-only access. One run per connection. Access is revoked after
-            the diagnostic.
+            You’ll be able to run this once. Access is revoked after the diagnostic.
           </div>
         </div>
       </Container>
