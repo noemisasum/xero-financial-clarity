@@ -511,7 +511,9 @@ export default function Home() {
       <footer className="border-t border-[var(--border)] bg-white py-12">
         <Container>
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="order-1 sm:order-none">
+            {/* On mobile: show Product + Company first, then brand/copyright at the end.
+                On desktop: keep brand/copyright block on the left (via ordering). */}
+            <div className="order-2 sm:order-2">
               <div className="text-sm font-semibold text-[color:var(--heading)]">
                 Product
               </div>
@@ -544,7 +546,7 @@ export default function Home() {
               </ul>
             </div>
 
-            <div className="order-2 sm:order-none">
+            <div className="order-3 sm:order-3">
               <div className="text-sm font-semibold text-[color:var(--heading)]">
                 Company
               </div>
@@ -592,14 +594,38 @@ export default function Home() {
               </ul>
             </div>
 
-            <div className="order-3 sm:order-none lg:col-span-2">
-              <div className="text-sm font-semibold text-[color:var(--heading)]">
-                Aqount
+            <div className="order-4 sm:order-1 lg:col-span-2">
+              <div className="flex items-center gap-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/brand/aqount-logo.png"
+                  alt="Aqount"
+                  className="h-8 w-auto"
+                />
+                <a
+                  href="https://www.linkedin.com/company/97445870"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border)] text-[color:var(--link)] hover:bg-zinc-50"
+                  aria-label="Aqount LinkedIn"
+                  title="LinkedIn"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-4 w-4"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.5 23.5h4V7.98h-4V23.5Zm7.5 0h4v-8.54c0-2.04.39-4.02 2.92-4.02 2.5 0 2.53 2.34 2.53 4.15v8.41h4V14.26c0-4.54-.98-8.03-6.3-8.03-2.56 0-4.28 1.4-4.98 2.73h-.07V7.98h-3.8V23.5Z" />
+                  </svg>
+                </a>
               </div>
-              <p className="mt-2 max-w-md text-sm leading-6 text-zinc-600">
+
+              <p className="mt-3 max-w-md text-sm leading-6 text-zinc-600">
                 Financial clarity specialists for Xero-powered businesses.
               </p>
-              <div className="mt-6 text-xs text-zinc-500">
+
+              <div className="mt-6 text-xs text-zinc-500 sm:mt-8">
                 © {new Date().getFullYear()} Aqount. Financial Clarity Diagnostic is a product by Aqount. All rights reserved.
               </div>
             </div>
