@@ -497,11 +497,6 @@ export default function Home() {
                   <Button href="/api/xero/connect">Get Your Clarity Score</Button>
                 </div>
               </div>
-
-              <div className="mt-4 text-xs text-zinc-500">
-                After connecting, you’ll select your organisation and receive a
-                scorecard preview.
-              </div>
             </div>
           </div>
         </Container>
