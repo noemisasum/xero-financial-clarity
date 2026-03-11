@@ -74,27 +74,29 @@ export default async function RunPage({
     );
   }
 
-  // Mark used early to enforce one-run-per-connection.
-  await prisma.xeroConnection.update({
-    where: { id: connectionId },
-    data: { usedAt: new Date() },
-  });
-
-  const run = await prisma.diagnosticRun.create({
-    data: {
-      sessionId: conn.sessionId,
-      tenantId: conn.tenantId,
-      tenantName: conn.tenantName,
-      status: "RUNNING",
-      startedAt: new Date(),
-      diagnosticVersion: "v1",
-    },
-  });
-
   let error: string | null = null;
   let successRunId: string | null = null;
+  let runId: string | null = null;
 
   try {
+    // Mark used early to enforce one-run-per-connection.
+    await prisma.xeroConnection.update({
+      where: { id: connectionId },
+      data: { usedAt: new Date() },
+    });
+
+    const run = await prisma.diagnosticRun.create({
+      data: {
+        sessionId: conn.sessionId,
+        tenantId: conn.tenantId,
+        tenantName: conn.tenantName,
+        status: "RUNNING",
+        startedAt: new Date(),
+        diagnosticVersion: "v1",
+      },
+    });
+    runId = run.id;
+
     // Refresh token to ensure we have valid access
     const tok = await refreshAccessToken(conn.refreshTokenEncrypted);
     const accessToken = tok.access_token;
@@ -136,7 +138,7 @@ export default async function RunPage({
 
     await prisma.diagnosticResult.create({
       data: {
-        runId: run.id,
+        runId: runId!,
         overallScore: v1.overallScore100,
         dimensionsJson: v1.dimensions,
         findingsJson: { topIssues: v1.topIssues },
@@ -144,25 +146,27 @@ export default async function RunPage({
     });
 
     await prisma.diagnosticRun.update({
-      where: { id: run.id },
+      where: { id: runId! },
       data: { status: "COMPLETED", finishedAt: new Date() },
     });
 
     // Auto-revoke promise: delete tokens/connection row
     await revokeAndDeleteConnection(connectionId);
 
-    successRunId = run.id;
+    successRunId = runId!;
   } catch (e: unknown) {
     error = e instanceof Error ? e.message : String(e);
 
-    await prisma.diagnosticRun.update({
-      where: { id: run.id },
-      data: {
-        status: "FAILED",
-        finishedAt: new Date(),
-        error,
-      },
-    });
+    if (runId) {
+      await prisma.diagnosticRun.update({
+        where: { id: runId },
+        data: {
+          status: "FAILED",
+          finishedAt: new Date(),
+          error,
+        },
+      });
+    }
 
     // Best-effort cleanup of tokens
     try {
