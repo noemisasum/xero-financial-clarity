@@ -49,6 +49,16 @@ export default async function ResultsPage({
   const sentNo = sp.sent === "0";
   const wantFull = sp.full === "1";
 
+  const score = run.result.overallScore;
+  const band =
+    score >= 80
+      ? "Strong"
+      : score >= 65
+        ? "Good"
+        : score >= 45
+          ? "Moderate"
+          : "Needs Improvement";
+
   return (
     <div className="py-14 sm:py-20">
       <Container>
@@ -74,9 +84,18 @@ export default async function ResultsPage({
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_360px]">
           <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
-            <div className="text-sm text-zinc-500">Overall</div>
+            <div className="flex items-center justify-between">
+              <div className="text-sm text-zinc-500">Overall</div>
+              <span className="inline-flex items-center rounded-full bg-[color:var(--accent-soft)] px-3 py-1 text-xs font-semibold text-[color:var(--heading)]">
+                {band}
+              </span>
+            </div>
             <div className="mt-2 text-4xl font-semibold text-[color:var(--heading)]">
-              {run.result.overallScore} / 10
+              <span className="mr-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">
+                Financial Clarity Score
+              </span>
+              <span>{run.result.overallScore}</span>
+              <span className="text-zinc-500"> / 100</span>
             </div>
 
             <div className="mt-6">
