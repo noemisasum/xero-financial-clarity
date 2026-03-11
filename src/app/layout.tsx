@@ -23,14 +23,15 @@ export const metadata: Metadata = {
     "Aqount’s Financial Clarity Diagnostic analyzes your Xero accounting structure and highlights issues affecting reporting, visibility, and decision-making.",
   metadataBase: new URL("https://clarity.aqount.tech"),
   icons: {
+    // Cache-bust: Chrome can aggressively cache favicons even in incognito.
+    // Prefer the app-router /icon.png pipeline; keep .ico as a fallback.
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon.png?v=2", sizes: "256x256", type: "image/png" },
+      { url: "/favicon.ico?v=2", sizes: "any" },
+      { url: "/favicon-16.png?v=2", sizes: "16x16", type: "image/png" },
+      { url: "/favicon.png?v=2", sizes: "32x32", type: "image/png" },
     ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
+    apple: [{ url: "/apple-icon.png?v=2", sizes: "180x180", type: "image/png" }],
   },
   openGraph: {
     title: "Aqount Financial Clarity Diagnostic",
