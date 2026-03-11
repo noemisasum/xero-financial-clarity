@@ -45,6 +45,7 @@ export async function xeroFetch<T>(
     method: method || "GET",
     headers: {
       Authorization: `Bearer ${accessToken}`,
+      Accept: "application/json",
       ...(tenantId ? { "xero-tenant-id": tenantId } : {}),
       ...(body ? { "Content-Type": "application/json" } : {}),
       ...(headers || {}),
