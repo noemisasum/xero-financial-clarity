@@ -57,7 +57,8 @@ export async function GET(req: Request) {
   const expiresAt = new Date(Date.now() + expiresIn * 1000);
 
   // Fetch connections/tenants
-  const connections = await fetchJson(XERO_CONNECTIONS_URL, {
+  // Validate token by fetching connections once (we will re-fetch on /org).
+  await fetchJson(XERO_CONNECTIONS_URL, {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
 
@@ -75,12 +76,9 @@ export async function GET(req: Request) {
     },
   });
 
-  // Persist tenants list temporarily in cookie via redirect query? We'll store in DB next.
-  // For now, redirect to /org to select.
+  // Redirect to /org (Ready to Run). Tenant list will be fetched again on that page.
   const url = new URL("/org", req.url);
   url.searchParams.set("connectionId", conn.id);
-  // Store tenant list in DB later; for now include short hint.
-  url.searchParams.set("tenants", String(Array.isArray(connections) ? connections.length : 0));
 
   return NextResponse.redirect(url);
 }
