@@ -39,14 +39,17 @@ export default function LoadingOverlayProvider({
       {children}
 
       {open ? (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-white/85 backdrop-blur-sm">
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-white/90 backdrop-blur-sm"
+          style={{ paddingTop: "env(safe-area-inset-top)", paddingBottom: "env(safe-area-inset-bottom)" }}
+        >
           <div className="flex flex-col items-center">
             <Image
               src="/icon.png"
               alt="Aqount"
-              width={44}
-              height={44}
-              className="h-9 w-9 animate-[spin_1.4s_linear_infinite] opacity-90"
+              width={64}
+              height={64}
+              className="h-10 w-10 sm:h-9 sm:w-9 motion-safe:animate-[spin_1.4s_linear_infinite] opacity-90"
               style={{ objectFit: "contain" }}
               priority
             />
