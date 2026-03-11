@@ -8,6 +8,23 @@ export type XeroToken = {
   scope?: string;
 };
 
+async function parseJsonOrThrow<T>(res: Response, context: string): Promise<T> {
+  const ctype = res.headers.get("content-type") || "";
+  if (!ctype.toLowerCase().includes("application/json")) {
+    const txt = await res.text();
+    throw new Error(
+      `${context}: expected JSON but got '${ctype || "unknown"}'. Body: ${txt.slice(0, 300)}`,
+    );
+  }
+
+  try {
+    return (await res.json()) as T;
+  } catch {
+    const txt = await res.text();
+    throw new Error(`${context}: invalid JSON. Body: ${txt.slice(0, 300)}`);
+  }
+}
+
 export async function xeroFetch<T>(
   url: string,
   {
@@ -38,10 +55,10 @@ export async function xeroFetch<T>(
 
   if (!res.ok) {
     const txt = await res.text();
-    throw new Error(`Xero API HTTP ${res.status}: ${txt}`);
+    throw new Error(`Xero API HTTP ${res.status}: ${txt.slice(0, 300)}`);
   }
 
-  return (await res.json()) as T;
+  return parseJsonOrThrow<T>(res, "Xero API response");
 }
 
 export async function refreshAccessToken(refreshToken: string): Promise<XeroToken> {
@@ -65,8 +82,8 @@ export async function refreshAccessToken(refreshToken: string): Promise<XeroToke
 
   if (!res.ok) {
     const txt = await res.text();
-    throw new Error(`Xero token refresh failed ${res.status}: ${txt}`);
+    throw new Error(`Xero token refresh failed ${res.status}: ${txt.slice(0, 300)}`);
   }
 
-  return (await res.json()) as XeroToken;
+  return parseJsonOrThrow<XeroToken>(res, "Xero token refresh");
 }
