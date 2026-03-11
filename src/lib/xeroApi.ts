@@ -1,4 +1,4 @@
-import { requireEnv, XERO_TOKEN_URL } from "@/lib/xero";
+import { requireEnv, XERO_CONNECTIONS_URL, XERO_TOKEN_URL } from "@/lib/xero";
 
 const XERO_REVOCATION_URL = "https://identity.xero.com/connect/revocation";
 
@@ -89,6 +89,52 @@ export async function refreshAccessToken(refreshToken: string): Promise<XeroToke
   }
 
   return parseJsonOrThrow<XeroToken>(res, "Xero token refresh");
+}
+
+export type XeroConnection = {
+  id: string;
+  tenantId: string;
+  tenantName?: string;
+};
+
+export async function fetchXeroConnections(accessToken: string): Promise<XeroConnection[]> {
+  const res = await fetch(XERO_CONNECTIONS_URL, {
+    headers: { Authorization: `Bearer ${accessToken}`, Accept: "application/json" },
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    const txt = await res.text();
+    throw new Error(`Xero connections list failed ${res.status}: ${txt.slice(0, 300)}`);
+  }
+
+  const json = await res.json();
+  if (!Array.isArray(json)) return [];
+
+  return (json as Array<{ id?: unknown; tenantId?: unknown; tenantName?: unknown }> )
+    .map((x) => ({
+      id: String(x.id || ""),
+      tenantId: String(x.tenantId || ""),
+      tenantName: String(x.tenantName || ""),
+    }))
+    .filter((x) => x.id && x.tenantId);
+}
+
+export async function disconnectXeroConnection(args: {
+  accessToken: string;
+  connectionId: string;
+}): Promise<void> {
+  const res = await fetch(`${XERO_CONNECTIONS_URL}/${encodeURIComponent(args.connectionId)}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${args.accessToken}` },
+    cache: "no-store",
+  });
+
+  // Xero typically returns 204 No Content for successful disconnect.
+  if (!res.ok) {
+    const txt = await res.text();
+    throw new Error(`Xero disconnect failed ${res.status}: ${txt.slice(0, 300)}`);
+  }
 }
 
 export async function revokeRefreshToken(refreshToken: string): Promise<void> {

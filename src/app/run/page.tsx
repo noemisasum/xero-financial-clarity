@@ -1,7 +1,13 @@
 import Container from "@/components/Container";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
-import { refreshAccessToken, revokeRefreshToken, xeroFetch } from "@/lib/xeroApi";
+import {
+  disconnectXeroConnection,
+  fetchXeroConnections,
+  refreshAccessToken,
+  revokeRefreshToken,
+  xeroFetch,
+} from "@/lib/xeroApi";
 import { runDiagnosticV1 } from "@/lib/diagnostic/v1";
 
 type AccountsResponse = {
@@ -19,10 +25,35 @@ type ManualJournalsResponse = {
 async function revokeAndDeleteConnection(args: {
   connectionId: string;
   refreshToken: string;
+  accessToken: string;
+  tenantId: string;
 }) {
-  // Enforce the promise by revoking at Xero (prevents tenant-connection limits) then deleting tokens from DB.
+  // Enforce the promise by disconnecting tenant (frees connected-tenant limits),
+  // revoking the refresh token, then deleting tokens from DB.
+  try {
+    const connections = await fetchXeroConnections(args.accessToken);
+    const match = connections.find((c) => c.tenantId === args.tenantId);
+    if (match) {
+      await disconnectXeroConnection({
+        accessToken: args.accessToken,
+        connectionId: match.id,
+      });
+      console.info("Xero disconnected tenant", {
+        tenantId: args.tenantId,
+        connectionId: match.id,
+      });
+    } else {
+      console.warn("Xero disconnect: no matching connection found", {
+        tenantId: args.tenantId,
+      });
+    }
+  } catch (e) {
+    console.error("Xero disconnect failed", e);
+  }
+
   try {
     await revokeRefreshToken(args.refreshToken);
+    console.info("Xero refresh token revoked");
   } catch (e) {
     // Best-effort: if revocation fails we still delete local tokens.
     console.error("Xero token revocation failed", e);
@@ -164,6 +195,8 @@ export default async function RunPage({
     await revokeAndDeleteConnection({
       connectionId,
       refreshToken: conn.refreshTokenEncrypted,
+      accessToken,
+      tenantId: conn.tenantId,
     });
 
     successRunId = runId!;
@@ -183,10 +216,13 @@ export default async function RunPage({
 
     // Best-effort cleanup of tokens
     try {
-      await revokeAndDeleteConnection({
-        connectionId,
-        refreshToken: conn.refreshTokenEncrypted,
-      });
+      await revokeRefreshToken(conn.refreshTokenEncrypted);
+    } catch {
+      // ignore
+    }
+
+    try {
+      await prisma.xeroConnection.delete({ where: { id: connectionId } });
     } catch {
       // ignore
     }
