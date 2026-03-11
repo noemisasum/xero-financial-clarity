@@ -92,6 +92,7 @@ export default async function RunPage({
   });
 
   let error: string | null = null;
+  let successRunId: string | null = null;
 
   try {
     // Refresh token to ensure we have valid access
@@ -150,7 +151,7 @@ export default async function RunPage({
     // Auto-revoke promise: delete tokens/connection row
     await revokeAndDeleteConnection(connectionId);
 
-    redirect(`/results/${run.id}`);
+    successRunId = run.id;
   } catch (e: unknown) {
     error = e instanceof Error ? e.message : String(e);
 
@@ -169,6 +170,10 @@ export default async function RunPage({
     } catch {
       // ignore
     }
+  }
+
+  if (successRunId) {
+    redirect(`/results/${successRunId}`);
   }
 
   return (
