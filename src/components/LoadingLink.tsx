@@ -21,9 +21,13 @@ export default function LoadingLink({
       href={href}
       prefetch={prefetch}
       className={className}
-      onClick={() => {
-        // Show immediately so the UI never feels "stuck".
+      onClick={(e) => {
+        // Ensure the overlay renders before the browser navigates away.
+        e.preventDefault();
         show();
+        requestAnimationFrame(() => {
+          window.location.href = href;
+        });
       }}
     >
       {children}

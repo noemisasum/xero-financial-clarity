@@ -20,8 +20,15 @@ export default function LoadingForm({
       action={action}
       method={method}
       className={className}
-      onSubmit={() => {
+      onSubmit={(e) => {
+        // Ensure the overlay renders before the browser navigates.
+        e.preventDefault();
         show();
+        const form = e.currentTarget;
+        requestAnimationFrame(() => {
+          // Submit after one paint frame.
+          form.submit();
+        });
       }}
     >
       {children}
