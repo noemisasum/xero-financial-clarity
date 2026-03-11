@@ -99,8 +99,10 @@ export async function POST(req: Request) {
   const company = String(form.get("company") || "").trim();
   const consent = String(form.get("consent") || "").trim() === "on";
 
-  if (!runId || !email || !isEmail(email)) {
-    return NextResponse.redirect(new URL(`/results/${encodeURIComponent(runId)}?sent=0`, req.url));
+  if (!runId || !email || !isEmail(email) || !name || !consent) {
+    return NextResponse.redirect(
+      new URL(`/results/${encodeURIComponent(runId)}?sent=0`, req.url),
+    );
   }
 
   const run = await prisma.diagnosticRun.findUnique({
@@ -129,7 +131,7 @@ export async function POST(req: Request) {
       sessionId: run.sessionId,
       runId: run.id,
       email,
-      name: name || null,
+      name,
       company: company || run.tenantName || null,
       consent,
     },
