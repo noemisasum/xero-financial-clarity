@@ -30,6 +30,9 @@ export const XERO_SCOPES = (
 
     // Categorisation Consistency
     "accounting.invoices.read",
+    "accounting.banktransactions.read",
+    "accounting.payments.read",
+    "accounting.contacts.read",
   ].join(" ")
 ).trim();
 
