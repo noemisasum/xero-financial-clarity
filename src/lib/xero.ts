@@ -7,31 +7,13 @@ export const XERO_CONNECTIONS_URL = "https://api.xero.com/connections";
 export const XERO_SCOPES = (
   process.env.XERO_SCOPES ||
   [
-    // Identity
+    // Minimal, reliable read-only scope set.
+    // We can expand later once the Xero app is confirmed to accept additional granular scopes.
     "openid",
     "profile",
     "email",
-
-    // Refresh token for short-lived, one-run diagnostic (read-only)
     "offline_access",
-
-    // Settings / structure
     "accounting.settings.read",
-    "accounting.contacts.read",
-
-    // Transactional read (future-proof granular scopes)
-    "accounting.invoices.read",
-    "accounting.banktransactions.read",
-    "accounting.payments.read",
-    "accounting.journals.read",
-    "accounting.manualjournals.read",
-
-    // Reports (new granular report scopes)
-    "accounting.reports.profitandloss.read",
-    "accounting.reports.balancesheet.read",
-    "accounting.reports.trialbalance.read",
-    "accounting.reports.aged.read",
-    "accounting.reports.banksummary.read",
   ].join(" ")
 ).trim();
 
