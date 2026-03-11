@@ -39,20 +39,17 @@ export default function LoadingOverlayProvider({
       {children}
 
       {open ? (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-white/65 backdrop-blur-sm">
-          <div className="flex flex-col items-center gap-3">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-white/85 backdrop-blur-sm">
+          <div className="flex flex-col items-center">
             <Image
-              src="/brand/favicon.png"
+              src="/icon.png"
               alt="Aqount"
               width={44}
               height={44}
-              className="h-9 w-9 opacity-90"
+              className="h-9 w-9 animate-[spin_1.4s_linear_infinite] opacity-90"
+              style={{ objectFit: "contain" }}
               priority
             />
-
-            <div className="h-6 w-6 animate-spin rounded-full border-2 border-zinc-200 border-t-[color:var(--link)]" />
-
-            <div className="text-[11px] text-zinc-500">Just a moment…</div>
           </div>
         </div>
       ) : null}
