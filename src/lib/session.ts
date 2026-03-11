@@ -8,6 +8,11 @@ function randomId(len = 24) {
   return crypto.randomBytes(len).toString("hex");
 }
 
+export async function getAnonSessionIdFromCookie(): Promise<string | null> {
+  const jar = await cookies();
+  return jar.get(COOKIE_NAME)?.value || null;
+}
+
 export async function getOrCreateAnonSessionId(): Promise<string> {
   const jar = await cookies();
   const existing = jar.get(COOKIE_NAME)?.value;

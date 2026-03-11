@@ -123,8 +123,8 @@ export async function POST(req: Request) {
       ? ((findings as { topIssues: string[] }).topIssues as string[])
       : [];
 
-  // Capture lead
-  await prisma.lead.create({
+  // Capture lead (one per run+email)
+  const lead = await prisma.lead.create({
     data: {
       sessionId: run.sessionId,
       runId: run.id,
@@ -153,5 +153,15 @@ export async function POST(req: Request) {
     HtmlBody: html,
   });
 
-  return NextResponse.redirect(new URL(`/results/${encodeURIComponent(runId)}?sent=1`, req.url));
+  await prisma.lead.update({
+    where: { id: lead.id },
+    data: {
+      reportSentAt: new Date(),
+      reportSendCount: { increment: 1 },
+    },
+  });
+
+  return NextResponse.redirect(
+    new URL(`/results/${encodeURIComponent(runId)}?sent=1&full=1`, req.url),
+  );
 }
