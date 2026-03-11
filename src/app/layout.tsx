@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Albert_Sans, Roboto } from "next/font/google";
+import LoadingOverlayProvider from "@/components/LoadingOverlayProvider";
 import "./globals.css";
 
 // Match aqount.tech typography (observed):
@@ -53,7 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${albertSans.variable} ${roboto.variable} antialiased`}>
-        {children}
+        <LoadingOverlayProvider>{children}</LoadingOverlayProvider>
       </body>
     </html>
   );

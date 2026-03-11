@@ -1,4 +1,5 @@
 import Container from "@/components/Container";
+import LoadingForm from "@/components/LoadingForm";
 import Image from "next/image";
 import { prisma } from "@/lib/db";
 
@@ -174,7 +175,7 @@ export default async function ResultsPage({
                   Get the full breakdown and recommended next steps.
                 </p>
 
-                <form
+                <LoadingForm
                   action="/api/report/email"
                   method="post"
                   className="mt-5 space-y-3"
@@ -245,7 +246,7 @@ export default async function ResultsPage({
               </button>
 
               {/* Access has already been granted via Xero earlier in the flow. */}
-            </form>
+            </LoadingForm>
               </>
             )}
           </div>

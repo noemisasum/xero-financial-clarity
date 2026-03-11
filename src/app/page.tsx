@@ -3,6 +3,7 @@ import Card from "@/components/Card";
 import Container from "@/components/Container";
 import FaqAccordion from "@/components/FaqAccordion";
 import Icon from "@/components/Icon";
+import LoadingLink from "@/components/LoadingLink";
 import ScorecardMock from "@/components/ScorecardMock";
 import SectionHeading from "@/components/SectionHeading";
 import Stepper from "@/components/Stepper";
@@ -124,7 +125,12 @@ export default function Home() {
               </p>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Button href="/api/xero/connect">Get Your Clarity Score</Button>
+                <LoadingLink
+                  href="/api/xero/connect"
+                  className="inline-flex items-center justify-center rounded-xl bg-[color:var(--link)] px-5 py-3 text-sm font-semibold !text-white transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]"
+                >
+                  Get Your Clarity Score
+                </LoadingLink>
                 <Button href="#scorecard" variant="secondary">
                   Preview the Scorecard
                 </Button>
