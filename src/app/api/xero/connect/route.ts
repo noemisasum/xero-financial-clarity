@@ -1,15 +1,40 @@
 import { NextResponse } from "next/server";
+import { prisma } from "@/lib/db";
+import { getOrCreateAnonSessionId } from "@/lib/session";
+import {
+  XERO_AUTH_URL,
+  XERO_SCOPES,
+  randomString,
+  requireEnv,
+  sha256Base64Url,
+} from "@/lib/xero";
 
-// NOTE:
-// This is a placeholder endpoint so the landing page can ship now.
-// Replace with Xero OAuth initiation (authorize URL + state + PKCE) when ready.
 export async function GET() {
-  return NextResponse.json(
-    {
-      ok: false,
-      message:
-        "Xero connect is not configured yet. This endpoint is a placeholder for future OAuth integration.",
+  const clientId = requireEnv("XERO_CLIENT_ID");
+  const redirectUri = requireEnv("XERO_REDIRECT_URI");
+
+  const sessionId = await getOrCreateAnonSessionId();
+
+  const state = `st_${randomString(16)}`;
+  const codeVerifier = randomString(32);
+  const codeChallenge = sha256Base64Url(codeVerifier);
+
+  await prisma.oAuthState.create({
+    data: {
+      sessionId,
+      state,
+      codeVerifier,
     },
-    { status: 501 },
-  );
+  });
+
+  const url = new URL(XERO_AUTH_URL);
+  url.searchParams.set("response_type", "code");
+  url.searchParams.set("client_id", clientId);
+  url.searchParams.set("redirect_uri", redirectUri);
+  url.searchParams.set("scope", XERO_SCOPES);
+  url.searchParams.set("state", state);
+  url.searchParams.set("code_challenge", codeChallenge);
+  url.searchParams.set("code_challenge_method", "S256");
+
+  return NextResponse.redirect(url.toString());
 }
