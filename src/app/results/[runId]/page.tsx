@@ -6,7 +6,7 @@ export default async function ResultsPage({
   searchParams,
 }: {
   params: Promise<{ runId: string }>;
-  searchParams: Promise<{ sent?: string }>;
+  searchParams: Promise<{ sent?: string; full?: string }>;
 }) {
   const { runId } = await params;
   const sp = await searchParams;
@@ -47,6 +47,7 @@ export default async function ResultsPage({
 
   const sentOk = sp.sent === "1";
   const sentNo = sp.sent === "0";
+  const wantFull = sp.full === "1";
 
   return (
     <div className="py-14 sm:py-20">
@@ -115,18 +116,42 @@ export default async function ResultsPage({
           </div>
 
           <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
-            <div className="text-sm font-semibold text-[color:var(--heading)]">
-              Email Me the Full Report
-            </div>
-            <p className="mt-2 text-sm leading-6 text-zinc-600">
-              Get the full breakdown and recommended next steps.
-            </p>
+            {wantFull ? (
+              <>
+                <div className="text-sm font-semibold text-[color:var(--heading)]">
+                  Full Report
+                </div>
+                <p className="mt-2 text-sm leading-6 text-zinc-600">
+                  You can read the full report here, and we have also emailed a copy.
+                </p>
 
-            <form
-              action="/api/report/email"
-              method="post"
-              className="mt-5 space-y-3"
-            >
+                <form action="/api/report/resend" method="post" className="mt-4">
+                  <input type="hidden" name="runId" value={runId} />
+                  <button
+                    type="submit"
+                    className="inline-flex w-full items-center justify-center rounded-xl border border-[var(--border)] bg-white px-5 py-3 text-sm font-semibold text-[color:var(--link)] hover:bg-zinc-50"
+                  >
+                    Resend Email
+                  </button>
+                  <div className="mt-2 text-xs text-zinc-500">
+                    If the email landed in spam, this will resend (rate-limited).
+                  </div>
+                </form>
+              </>
+            ) : (
+              <>
+                <div className="text-sm font-semibold text-[color:var(--heading)]">
+                  Email Me the Full Report
+                </div>
+                <p className="mt-2 text-sm leading-6 text-zinc-600">
+                  Get the full breakdown and recommended next steps.
+                </p>
+
+                <form
+                  action="/api/report/email"
+                  method="post"
+                  className="mt-5 space-y-3"
+                >
               <input type="hidden" name="runId" value={runId} />
 
               <div>
@@ -194,8 +219,37 @@ export default async function ResultsPage({
                 Read-only access. No bookkeeping changes.
               </div>
             </form>
+              </>
+            )}
           </div>
         </div>
+
+        {wantFull ? (
+          <div className="mt-8 rounded-2xl border border-[var(--border)] bg-white p-6">
+            <div className="text-sm font-semibold text-[color:var(--heading)]">
+              Recommended Next Steps
+            </div>
+            <ul className="mt-3 space-y-2 text-sm text-zinc-700">
+              {[
+                "Tighten chart of accounts rollups for management reporting",
+                "Define and enforce expense coding rules for repeat vendors",
+                "Reduce manual journal dependency with a close checklist",
+              ].map((x) => (
+                <li key={x} className="flex gap-2">
+                  <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
+                  <span>{x}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-8 rounded-xl border border-[var(--border)] bg-zinc-50 p-4 text-sm text-zinc-700">
+              <div className="font-medium text-zinc-900">Want help improving this?</div>
+              <div className="mt-1 text-zinc-600">
+                Reply to the email you received from Aqount Diagnostic and we will suggest the fastest path to improve reporting clarity.
+              </div>
+            </div>
+          </div>
+        ) : null}
       </Container>
     </div>
   );

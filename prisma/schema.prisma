@@ -123,6 +123,9 @@ model Lead {
   company String?
   consent Boolean @default(false)
 
+  reportSentAt    DateTime?
+  reportSendCount Int       @default(0)
+
   // Link lead to run
   run   DiagnosticRun @relation(fields: [runId], references: [id], onDelete: Cascade)
   runId String
