@@ -26,8 +26,8 @@ export default function LoadingForm({
         show();
         const form = e.currentTarget;
         requestAnimationFrame(() => {
-          // Submit after one paint frame.
-          form.submit();
+          // Submit after one paint frame (preserve HTML validation).
+          form.requestSubmit();
         });
       }}
     >
