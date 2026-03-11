@@ -3,10 +3,14 @@ import { prisma } from "@/lib/db";
 
 export default async function ResultsPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ runId: string }>;
+  searchParams: Promise<{ sent?: string }>;
 }) {
   const { runId } = await params;
+  const sp = await searchParams;
+
   const run = await prisma.diagnosticRun.findUnique({
     where: { id: runId },
     include: { result: true },
@@ -31,14 +35,18 @@ export default async function ResultsPage({
   const findings = run.result.findingsJson as unknown;
 
   const dimList = Array.isArray(dims)
-    ? (dims as Array<{ key: string; name: string; score10: number }> )
+    ? (dims as Array<{ key: string; name: string; score10: number }>)
     : [];
+
   const topIssues =
     findings &&
     typeof findings === "object" &&
     Array.isArray((findings as { topIssues?: unknown }).topIssues)
       ? ((findings as { topIssues: string[] }).topIssues as string[])
       : [];
+
+  const sentOk = sp.sent === "1";
+  const sentNo = sp.sent === "0";
 
   return (
     <div className="py-14 sm:py-20">
@@ -47,11 +55,23 @@ export default async function ResultsPage({
           Your Financial Clarity Score
         </h1>
         <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-600">
-          Preview results. Full email report and lead capture will be implemented
-          next.
+          Preview your results below. Enter your email to receive the full
+          diagnostic report.
         </p>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_320px]">
+        {sentOk ? (
+          <div className="mt-6 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800">
+            Report sent. Please check your inbox.
+          </div>
+        ) : null}
+
+        {sentNo ? (
+          <div className="mt-6 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-800">
+            Could not send the report. Please try again.
+          </div>
+        ) : null}
+
+        <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_360px]">
           <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
             <div className="text-sm text-zinc-500">Overall</div>
             <div className="mt-2 text-4xl font-semibold text-[color:var(--heading)]">
@@ -74,24 +94,106 @@ export default async function ResultsPage({
                 ))}
               </div>
             </div>
+
+            <div className="mt-8">
+              <div className="text-sm font-semibold text-[color:var(--heading)]">
+                Top Issues Detected
+              </div>
+              <ul className="mt-3 space-y-2 text-sm text-zinc-700">
+                {topIssues.length ? (
+                  topIssues.map((x) => (
+                    <li key={x} className="flex gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
+                      <span>{x}</span>
+                    </li>
+                  ))
+                ) : (
+                  <li className="text-zinc-500">No major issues detected.</li>
+                )}
+              </ul>
+            </div>
           </div>
 
           <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
             <div className="text-sm font-semibold text-[color:var(--heading)]">
-              Top Issues Detected
+              Email Me the Full Report
             </div>
-            <ul className="mt-3 space-y-2 text-sm text-zinc-700">
-              {topIssues.length ? (
-                topIssues.map((x) => (
-                  <li key={x} className="flex gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
-                    <span>{x}</span>
-                  </li>
-                ))
-              ) : (
-                <li className="text-zinc-500">No major issues detected.</li>
-              )}
-            </ul>
+            <p className="mt-2 text-sm leading-6 text-zinc-600">
+              Get the full breakdown and recommended next steps.
+            </p>
+
+            <form
+              action="/api/report/email"
+              method="post"
+              className="mt-5 space-y-3"
+            >
+              <input type="hidden" name="runId" value={runId} />
+
+              <div>
+                <label className="text-sm font-medium text-zinc-900" htmlFor="email">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  className="mt-2 w-full rounded-xl border border-[var(--border)] bg-white px-3 py-2 text-sm"
+                  placeholder="you@company.com"
+                />
+              </div>
+
+              <div>
+                <label className="text-sm font-medium text-zinc-900" htmlFor="name">
+                  Name (optional)
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  className="mt-2 w-full rounded-xl border border-[var(--border)] bg-white px-3 py-2 text-sm"
+                />
+              </div>
+
+              <div>
+                <label
+                  className="text-sm font-medium text-zinc-900"
+                  htmlFor="company"
+                >
+                  Company (optional)
+                </label>
+                <input
+                  id="company"
+                  name="company"
+                  type="text"
+                  defaultValue={run.tenantName || ""}
+                  className="mt-2 w-full rounded-xl border border-[var(--border)] bg-white px-3 py-2 text-sm"
+                />
+              </div>
+
+              <label className="mt-2 flex items-start gap-2 text-xs text-zinc-600">
+                <input
+                  type="checkbox"
+                  name="consent"
+                  className="mt-0.5 h-4 w-4 rounded border-[var(--border)]"
+                />
+                <span>
+                  I agree to receive this report by email and understand Aqount
+                  may follow up.
+                </span>
+              </label>
+
+              <button
+                type="submit"
+                className="mt-2 inline-flex w-full items-center justify-center rounded-xl bg-[color:var(--link)] px-5 py-3 text-sm font-semibold text-white hover:opacity-90"
+              >
+                Send My Report
+              </button>
+
+              <div className="text-xs text-zinc-500">
+                Read-only access. No bookkeeping changes.
+              </div>
+            </form>
           </div>
         </div>
       </Container>
