@@ -14,6 +14,9 @@ export const XERO_SCOPES = (
     "email",
     "offline_access",
     "accounting.settings.read",
+
+    // Step 1 expansion (Reporting Clarity): Profit & Loss report
+    "accounting.reports.profitandloss.read",
   ].join(" ")
 ).trim();
 
