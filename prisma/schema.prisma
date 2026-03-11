@@ -1,0 +1,136 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+enum DiagnosticRunStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+}
+
+model AnonSession {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  lastSeenAt DateTime @default(now())
+
+  oauthStates     OAuthState[]
+  xeroConnections XeroConnection[]
+  diagnosticRuns  DiagnosticRun[]
+  leads           Lead[]
+
+  @@index([lastSeenAt])
+}
+
+model OAuthState {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  usedAt    DateTime?
+
+  // CSRF protection
+  state String @unique
+
+  // PKCE
+  codeVerifier String
+
+  session   AnonSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  sessionId String
+
+  @@index([sessionId])
+}
+
+model XeroConnection {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  // Selected organisation
+  tenantId   String?
+  tenantName String?
+
+  // OAuth tokens (encrypted at rest in app code)
+  accessTokenEncrypted  String
+  refreshTokenEncrypted String
+  expiresAt             DateTime
+
+  // Enforce one-run-per-connection
+  usedAt    DateTime?
+  revokedAt DateTime?
+
+  session   AnonSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  sessionId String
+
+  @@index([sessionId])
+  @@index([tenantId])
+}
+
+model DiagnosticRun {
+  id         String    @id @default(cuid())
+  createdAt  DateTime  @default(now())
+  startedAt  DateTime?
+  finishedAt DateTime?
+
+  status DiagnosticRunStatus @default(PENDING)
+  error  String?
+
+  diagnosticVersion String @default("v1")
+
+  tenantId   String
+  tenantName String?
+
+  session   AnonSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  sessionId String
+
+  result DiagnosticResult?
+  leads  Lead[]
+
+  @@index([sessionId])
+  @@index([tenantId])
+  @@index([createdAt])
+}
+
+model DiagnosticResult {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  overallScore Int
+
+  // Structured payloads (dimension scores, signals, recommendations)
+  dimensionsJson Json
+  findingsJson   Json
+
+  run   DiagnosticRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+  runId String        @unique
+}
+
+model Lead {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  email   String
+  name    String?
+  company String?
+  consent Boolean @default(false)
+
+  // Link lead to run
+  run   DiagnosticRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+  runId String
+
+  session   AnonSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  sessionId String
+
+  @@index([email])
+  @@index([runId])
+  @@index([sessionId])
+}
