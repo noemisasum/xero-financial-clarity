@@ -608,27 +608,32 @@ export default function Home() {
                 Financial clarity specialists for Xero-powered businesses.
               </p>
 
-              <div className="mt-4 flex items-center gap-2">
+              <div className="mt-4 flex items-center gap-3">
                 <a
                   href="https://www.linkedin.com/company/97445870"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border)] text-[color:var(--link)] hover:bg-zinc-50"
+                  className="inline-flex h-8 w-8 items-center justify-center text-zinc-500 hover:text-zinc-700"
                   aria-label="Aqount LinkedIn"
                   title="LinkedIn"
                 >
+                  {/* Simple LinkedIn mark (no border) */}
                   <svg
                     viewBox="0 0 24 24"
-                    className="h-4 w-4"
+                    className="h-5 w-5"
                     fill="currentColor"
                     aria-hidden="true"
                   >
-                    <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.5 23.5h4V7.98h-4V23.5Zm7.5 0h4v-8.54c0-2.04.39-4.02 2.92-4.02 2.5 0 2.53 2.34 2.53 4.15v8.41h4V14.26c0-4.54-.98-8.03-6.3-8.03-2.56 0-4.28 1.4-4.98 2.73h-.07V7.98h-3.8V23.5Z" />
+                    <path d="M22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.23 0zM7.06 20.45H3.56V9h3.5v11.45zM5.31 7.43c-1.12 0-2.03-.91-2.03-2.03 0-1.12.91-2.03 2.03-2.03s2.03.91 2.03 2.03c0 1.12-.91 2.03-2.03 2.03zM20.45 20.45h-3.5v-5.57c0-1.33-.03-3.05-1.86-3.05-1.86 0-2.14 1.45-2.14 2.95v5.67h-3.5V9h3.36v1.56h.05c.47-.9 1.62-1.86 3.33-1.86 3.56 0 4.22 2.35 4.22 5.4v6.35z" />
                   </svg>
                 </a>
               </div>
 
-              <div className="mt-6 flex items-center gap-3">
+              <div className="mt-6 text-xs text-zinc-500 sm:mt-8">
+                © {new Date().getFullYear()} Aqount. Financial Clarity Diagnostic is a product by Aqount. All rights reserved.
+              </div>
+
+              <div className="mt-6 flex flex-wrap items-center gap-4">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/brand/xero-silver-partner-badge.png"
@@ -636,10 +641,14 @@ export default function Home() {
                   className="h-10 w-auto"
                   loading="lazy"
                 />
-              </div>
-
-              <div className="mt-6 text-xs text-zinc-500 sm:mt-8">
-                © {new Date().getFullYear()} Aqount. Financial Clarity Diagnostic is a product by Aqount. All rights reserved.
+                {/* TODO: Add ACCA badge image at /public/brand/acca-badge.png */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/brand/acca-badge.png"
+                  alt="ACCA"
+                  className="h-10 w-auto"
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>
