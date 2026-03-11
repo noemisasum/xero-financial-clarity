@@ -638,15 +638,14 @@ export default function Home() {
                 <img
                   src="/brand/xero-silver-partner-badge.png"
                   alt="Xero Silver Partner"
-                  className="h-10 w-auto"
+                  className="h-12 w-auto"
                   loading="lazy"
                 />
-                {/* TODO: Add ACCA badge image at /public/brand/acca-badge.png */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/brand/acca-badge.png"
+                  src="/brand/acca-badge.svg"
                   alt="ACCA"
-                  className="h-10 w-auto"
+                  className="h-12 w-auto"
                   loading="lazy"
                 />
               </div>
