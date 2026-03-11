@@ -1,4 +1,5 @@
 import Container from "@/components/Container";
+import OrgRunWizard from "@/components/OrgRunWizard";
 import { prisma } from "@/lib/db";
 import { XERO_CONNECTIONS_URL } from "@/lib/xero";
 
@@ -72,78 +73,14 @@ export default async function OrgSelectPage({
           </div>
         ) : null}
 
-        <div className="mt-6 rounded-2xl border border-[var(--border)] bg-white p-6">
-          <div className="text-sm text-zinc-600">Connected via Xero</div>
-          <div className="mt-2 text-sm text-zinc-700">
-            Connection ID: <span className="font-mono">{connectionId}</span>
-          </div>
-
-          <form
-            action="/api/xero/select-tenant"
-            method="post"
-            className="mt-6 space-y-4"
-          >
-            <input type="hidden" name="connectionId" value={connectionId} />
-
-            {tenants.length <= 1 ? (
-              <>
-                <input
-                  type="hidden"
-                  name="tenantId"
-                  value={tenants[0]?.tenantId || ""}
-                />
-
-                <div className="rounded-xl border border-[var(--border)] bg-zinc-50 p-4">
-                  <div className="text-sm font-medium text-zinc-900">
-                    Organisation
-                  </div>
-                  <div className="mt-1 text-sm text-zinc-700">
-                    {tenants[0]?.tenantName || "(Unknown)"}
-                  </div>
-                </div>
-              </>
-            ) : (
-              <div>
-                <label
-                  htmlFor="tenantId"
-                  className="block text-sm font-medium text-zinc-900"
-                >
-                  Organisation
-                </label>
-                <select
-                  id="tenantId"
-                  name="tenantId"
-                  className="mt-2 block w-full rounded-xl border border-[var(--border)] bg-white px-3 py-2 text-sm"
-                  required
-                  defaultValue=""
-                >
-                  <option value="" disabled>
-                    Select an organisation
-                  </option>
-                  {tenants.map((t) => (
-                    <option key={t.tenantId} value={t.tenantId}>
-                      {t.tenantName || t.tenantId}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-
-            <div className="pt-2">
-              <button
-                type="submit"
-                className="inline-flex items-center justify-center rounded-xl bg-[color:var(--link)] px-5 py-3 text-sm font-semibold text-white transition-colors hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--background)]"
-              >
-                Run Diagnostic
-              </button>
-            </div>
-          </form>
-
-          <div className="mt-4 text-xs text-zinc-500">
-            Read-only access. One run per connection. Access is revoked after
-            the diagnostic.
-          </div>
-        </div>
+        <OrgRunWizard
+          connectionId={connectionId}
+          tenants={tenants.map((t) => ({
+            tenantId: t.tenantId,
+            tenantName: t.tenantName,
+          }))}
+          defaultTenantId={tenants.length === 1 ? tenants[0]?.tenantId : ""}
+        />
       </Container>
     </div>
   );
