@@ -1,0 +1,41 @@
+import crypto from "crypto";
+
+export const XERO_AUTH_URL = "https://login.xero.com/identity/connect/authorize";
+export const XERO_TOKEN_URL = "https://identity.xero.com/connect/token";
+export const XERO_CONNECTIONS_URL = "https://api.xero.com/connections";
+
+export const XERO_SCOPES = (
+  process.env.XERO_SCOPES ||
+  [
+    "openid",
+    "profile",
+    "email",
+    // read-only scopes for accounting data
+    "accounting.settings.read",
+    "accounting.transactions.read",
+    "accounting.reports.read",
+    "offline_access",
+  ].join(" ")
+).trim();
+
+export function base64Url(buf: Buffer) {
+  return buf
+    .toString("base64")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/g, "");
+}
+
+export function sha256Base64Url(input: string) {
+  return base64Url(crypto.createHash("sha256").update(input).digest());
+}
+
+export function randomString(bytes = 32) {
+  return base64Url(crypto.randomBytes(bytes));
+}
+
+export function requireEnv(name: string) {
+  const v = process.env[name];
+  if (!v) throw new Error(`Missing env var: ${name}`);
+  return v;
+}
