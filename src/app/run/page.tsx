@@ -137,7 +137,7 @@ export default async function RunPage({
     await prisma.diagnosticResult.create({
       data: {
         runId: run.id,
-        overallScore: v1.overallScore10,
+        overallScore: v1.overallScore100,
         dimensionsJson: v1.dimensions,
         findingsJson: { topIssues: v1.topIssues },
       },

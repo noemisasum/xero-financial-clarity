@@ -59,7 +59,7 @@ function buildReportHtml(params: {
 
       <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:14px">
         <div style="font-size:12px;color:#334155">Overall score</div>
-        <div style="font-size:28px;font-weight:900;color:#0f172a;margin-top:6px">${overall} / 10</div>
+        <div style="font-size:28px;font-weight:900;color:#0f172a;margin-top:6px">${overall} / 100</div>
       </div>
 
       <div style="height:18px"></div>

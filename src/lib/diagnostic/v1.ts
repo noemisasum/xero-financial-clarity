@@ -13,7 +13,7 @@ export type DimensionResult = {
 };
 
 export type DiagnosticV1Result = {
-  overallScore10: number;
+  overallScore100: number;
   dimensions: DimensionResult[];
   topIssues: string[];
 };
@@ -66,14 +66,15 @@ export function runDiagnosticV1(inputs: {
     },
   ];
 
-  const overallScore10 = Math.round(
-    dimensions.reduce((a, d) => a + d.score10, 0) / dimensions.length,
-  );
+  const overallScore10 =
+    dimensions.reduce((a, d) => a + d.score10, 0) / dimensions.length;
+
+  const overallScore100 = Math.round(overallScore10 * 10);
 
   const topIssues: string[] = [];
   if (inputs.trackingCategoryCount === 0) topIssues.push("Tracking categories not set up");
   if (inputs.accountCount > 200) topIssues.push("Chart of accounts may be overly granular");
   if ((inputs.manualJournalCount ?? 0) > 50) topIssues.push("High manual journal volume");
 
-  return { overallScore10, dimensions, topIssues };
+  return { overallScore100, dimensions, topIssues };
 }
