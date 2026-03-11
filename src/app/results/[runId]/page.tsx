@@ -1,4 +1,5 @@
 import Container from "@/components/Container";
+import Image from "next/image";
 import { prisma } from "@/lib/db";
 
 export default async function ResultsPage({
@@ -62,9 +63,19 @@ export default async function ResultsPage({
   return (
     <div className="py-14 sm:py-20">
       <Container>
-        <h1 className="text-2xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-3xl">
-          Your Financial Clarity Score
-        </h1>
+        <div className="flex items-start justify-between gap-6">
+          <h1 className="text-2xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-3xl">
+            Your Financial Clarity Score
+          </h1>
+          <Image
+            src="/brand/aqount-lockup-transparent.png"
+            alt="Aqount"
+            width={160}
+            height={44}
+            className="mt-1 h-8 w-auto opacity-95"
+            priority
+          />
+        </div>
         <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-600">
           Preview your results below. Enter your email to receive the full
           diagnostic report.
@@ -233,9 +244,7 @@ export default async function ResultsPage({
                 Send My Report
               </button>
 
-              <div className="text-xs text-zinc-500">
-                Read-only access. No bookkeeping changes.
-              </div>
+              {/* Access has already been granted via Xero earlier in the flow. */}
             </form>
               </>
             )}
