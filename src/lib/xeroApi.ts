@@ -1,5 +1,7 @@
 import { requireEnv, XERO_TOKEN_URL } from "@/lib/xero";
 
+const XERO_REVOCATION_URL = "https://identity.xero.com/connect/revocation";
+
 export type XeroToken = {
   access_token: string;
   refresh_token: string;
@@ -87,4 +89,31 @@ export async function refreshAccessToken(refreshToken: string): Promise<XeroToke
   }
 
   return parseJsonOrThrow<XeroToken>(res, "Xero token refresh");
+}
+
+export async function revokeRefreshToken(refreshToken: string): Promise<void> {
+  const clientId = requireEnv("XERO_CLIENT_ID");
+  const clientSecret = requireEnv("XERO_CLIENT_SECRET");
+
+  // Xero revocation uses Basic auth + form-encoded body.
+  const basic = Buffer.from(`${clientId}:${clientSecret}`).toString("base64");
+
+  const body = new URLSearchParams();
+  body.set("token", refreshToken);
+  body.set("token_type_hint", "refresh_token");
+
+  const res = await fetch(XERO_REVOCATION_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Basic ${basic}`,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body,
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    const txt = await res.text();
+    throw new Error(`Xero token revocation failed ${res.status}: ${txt.slice(0, 300)}`);
+  }
 }

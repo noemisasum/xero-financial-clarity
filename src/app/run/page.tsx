@@ -1,7 +1,7 @@
 import Container from "@/components/Container";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
-import { refreshAccessToken, xeroFetch } from "@/lib/xeroApi";
+import { refreshAccessToken, revokeRefreshToken, xeroFetch } from "@/lib/xeroApi";
 import { runDiagnosticV1 } from "@/lib/diagnostic/v1";
 
 type AccountsResponse = {
@@ -16,9 +16,19 @@ type ManualJournalsResponse = {
   ManualJournals?: Array<{ ManualJournalID?: string }>;
 };
 
-async function revokeAndDeleteConnection(connectionId: string) {
-  // v1: enforce the promise by deleting tokens from DB. Token revocation endpoint can be added later.
-  await prisma.xeroConnection.delete({ where: { id: connectionId } });
+async function revokeAndDeleteConnection(args: {
+  connectionId: string;
+  refreshToken: string;
+}) {
+  // Enforce the promise by revoking at Xero (prevents tenant-connection limits) then deleting tokens from DB.
+  try {
+    await revokeRefreshToken(args.refreshToken);
+  } catch (e) {
+    // Best-effort: if revocation fails we still delete local tokens.
+    console.error("Xero token revocation failed", e);
+  }
+
+  await prisma.xeroConnection.delete({ where: { id: args.connectionId } });
 }
 
 export default async function RunPage({
@@ -150,8 +160,11 @@ export default async function RunPage({
       data: { status: "COMPLETED", finishedAt: new Date() },
     });
 
-    // Auto-revoke promise: delete tokens/connection row
-    await revokeAndDeleteConnection(connectionId);
+    // Auto-revoke promise: revoke at Xero + delete tokens/connection row
+    await revokeAndDeleteConnection({
+      connectionId,
+      refreshToken: conn.refreshTokenEncrypted,
+    });
 
     successRunId = runId!;
   } catch (e: unknown) {
@@ -170,7 +183,10 @@ export default async function RunPage({
 
     // Best-effort cleanup of tokens
     try {
-      await revokeAndDeleteConnection(connectionId);
+      await revokeAndDeleteConnection({
+        connectionId,
+        refreshToken: conn.refreshTokenEncrypted,
+      });
     } catch {
       // ignore
     }
