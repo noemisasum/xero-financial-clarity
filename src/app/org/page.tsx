@@ -1,4 +1,5 @@
 import Container from "@/components/Container";
+import Image from "next/image";
 import { prisma } from "@/lib/db";
 import { XERO_CONNECTIONS_URL } from "@/lib/xero";
 
@@ -59,23 +60,31 @@ export default async function OrgSelectPage({
   return (
     <div className="min-h-[calc(100vh-120px)] py-14 sm:py-20">
       <Container>
-        <h1 className="text-2xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-3xl">
-          Ready to Run
-        </h1>
-        <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-600">
-          Confirm your Xero organisation, then run the diagnostic.
-        </p>
-
-        {sp.error ? (
-          <div className="mt-6 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-800">
-            Something is missing. Please select an organisation and try again.
-          </div>
-        ) : null}
-
         <div className="mx-auto mt-8 max-w-xl rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
-          <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
-            Confirm Organisation
+          <div className="flex items-start justify-between gap-6">
+            <div>
+              <h1 className="text-2xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-3xl">
+                Ready to Run
+              </h1>
+              <p className="mt-2 text-sm leading-6 text-zinc-600">
+                Confirm your organisation and run the diagnostic.
+              </p>
+            </div>
+            <Image
+              src="/brand/aqount-lockup-transparent.png"
+              alt="Aqount"
+              width={140}
+              height={40}
+              className="mt-1 h-8 w-auto opacity-95"
+              priority
+            />
           </div>
+
+          {sp.error ? (
+            <div className="mt-4 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-800">
+              Something is missing. Please select an organisation and try again.
+            </div>
+          ) : null}
 
           <form
             action="/api/xero/select-tenant"
