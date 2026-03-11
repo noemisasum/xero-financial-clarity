@@ -85,15 +85,12 @@ export default async function ResultsPage({
         <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_360px]">
           <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
             <div className="flex items-center justify-between">
-              <div className="text-sm text-zinc-500">Overall</div>
+              <div className="text-sm text-zinc-500">Financial Clarity Score</div>
               <span className="inline-flex items-center rounded-full bg-[color:var(--accent-soft)] px-3 py-1 text-xs font-semibold text-[color:var(--heading)]">
                 {band}
               </span>
             </div>
             <div className="mt-2 text-4xl font-semibold text-[color:var(--heading)]">
-              <span className="mr-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">
-                Financial Clarity Score
-              </span>
               <span>{run.result.overallScore}</span>
               <span className="text-zinc-500"> / 100</span>
             </div>
@@ -160,7 +157,7 @@ export default async function ResultsPage({
             ) : (
               <>
                 <div className="text-sm font-semibold text-[color:var(--heading)]">
-                  Email Me the Full Report
+                  Get your full report
                 </div>
                 <p className="mt-2 text-sm leading-6 text-zinc-600">
                   Get the full breakdown and recommended next steps.
@@ -189,12 +186,13 @@ export default async function ResultsPage({
 
               <div>
                 <label className="text-sm font-medium text-zinc-900" htmlFor="name">
-                  Name (optional)
+                  Name
                 </label>
                 <input
                   id="name"
                   name="name"
                   type="text"
+                  required
                   className="mt-2 w-full rounded-xl border border-[var(--border)] bg-white px-3 py-2 text-sm"
                 />
               </div>
@@ -219,6 +217,7 @@ export default async function ResultsPage({
                 <input
                   type="checkbox"
                   name="consent"
+                  required
                   className="mt-0.5 h-4 w-4 rounded border-[var(--border)]"
                 />
                 <span>
