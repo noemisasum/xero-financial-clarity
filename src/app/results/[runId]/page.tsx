@@ -1,7 +1,9 @@
 import Container from "@/components/Container";
 import LoadingForm from "@/components/LoadingForm";
+import FullReportView from "@/components/FullReportView";
 import Image from "next/image";
 import { prisma } from "@/lib/db";
+import type { FullReport } from "@/lib/report/types";
 
 export default async function ResultsPage({
   params,
@@ -46,6 +48,14 @@ export default async function ResultsPage({
     Array.isArray((findings as { topIssues?: unknown }).topIssues)
       ? ((findings as { topIssues: string[] }).topIssues as string[])
       : [];
+
+  const report =
+    findings &&
+    typeof findings === "object" &&
+    (findings as { report?: unknown }).report &&
+    typeof (findings as { report?: unknown }).report === "object"
+      ? ((findings as { report: FullReport }).report as FullReport)
+      : null;
 
   const sentOk = sp.sent === "1";
   const sentNo = sp.sent === "0";
@@ -253,30 +263,13 @@ export default async function ResultsPage({
         </div>
 
         {wantFull ? (
-          <div className="mt-8 rounded-2xl border border-[var(--border)] bg-white p-6">
-            <div className="text-sm font-semibold text-[color:var(--heading)]">
-              Recommended Next Steps
+          report ? (
+            <FullReportView report={report} />
+          ) : (
+            <div className="mt-8 rounded-2xl border border-[var(--border)] bg-white p-6 text-sm text-zinc-600">
+              Full report content is not available for this run.
             </div>
-            <ul className="mt-3 space-y-2 text-sm text-zinc-700">
-              {[
-                "Tighten chart of accounts rollups for management reporting",
-                "Define and enforce expense coding rules for repeat vendors",
-                "Reduce manual journal dependency with a close checklist",
-              ].map((x) => (
-                <li key={x} className="flex gap-2">
-                  <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[color:var(--accent)]" />
-                  <span>{x}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-8 rounded-xl border border-[var(--border)] bg-zinc-50 p-4 text-sm text-zinc-700">
-              <div className="font-medium text-zinc-900">Want help improving this?</div>
-              <div className="mt-1 text-zinc-600">
-                Reply to the email you received from Aqount Diagnostic and we will suggest the fastest path to improve reporting clarity.
-              </div>
-            </div>
-          </div>
+          )
         ) : null}
       </Container>
     </div>
