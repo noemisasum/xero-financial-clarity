@@ -28,13 +28,56 @@ function ensure2to3<T>(items: T[]): T[] {
   return items.slice(0, 3);
 }
 
+function normalizeName(s: string): string {
+  return (s || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function detectDuplicateAccountNames(accounts: Array<{ name: string }>): Array<{ name: string; duplicates: string[] }> {
+  const map = new Map<string, string[]>();
+  for (const a of accounts) {
+    const n = normalizeName(a.name);
+    if (!n) continue;
+    const arr = map.get(n) || [];
+    arr.push(a.name);
+    map.set(n, arr);
+  }
+  return [...map.entries()]
+    .filter(([, v]) => v.length >= 2)
+    .slice(0, 10)
+    .map(([k, v]) => ({ name: k, duplicates: v }));
+}
+
+function detectVagueAccounts(accounts: Array<{ name: string }>): string[] {
+  const rx = /(misc|other|general|sundry|various)/i;
+  return accounts
+    .map((a) => a.name)
+    .filter((n) => rx.test(n))
+    .slice(0, 12);
+}
+
+// (reserved for future: expense-type counts by account type)
+
+function hasCogsStructure(accounts: Array<{ type: string | null; name: string }>): boolean {
+  // Xero uses DIRECTCOSTS for COGS-like accounts in many orgs.
+  const hasDirect = accounts.some((a) => String(a.type || "").toUpperCase() === "DIRECTCOSTS");
+  if (hasDirect) return true;
+
+  // Fallback heuristic: names include cogs/cost of sales
+  const rx = /(cogs|cost of sales|cost of goods)/i;
+  return accounts.some((a) => rx.test(a.name));
+}
+
 function buildDimensionFindings(args: {
   dim: DimensionResult;
   accountCount: number;
   trackingCategoryCount: number;
   manualJournalCount: number;
+  accounts: Array<{ name: string; code: string | null; type: string | null }>;
 }): FullReport["dimensions"][number] {
-  const { dim, accountCount, trackingCategoryCount, manualJournalCount } = args;
+  const { dim, accountCount, trackingCategoryCount, manualJournalCount, accounts } = args;
 
   // Founder-friendly: keep findings short, concrete, and action-led.
   const findings: FullReport["dimensions"][number]["findings"] = [];
@@ -54,16 +97,33 @@ function buildDimensionFindings(args: {
       ],
     });
 
+    const dups = detectDuplicateAccountNames(accounts);
+    const vague = detectVagueAccounts(accounts);
+    const namingStatus = dups.length || vague.length ? "warn" : "pass";
+
     findings.push({
-      title: "Naming conventions may not support easy rollups",
-      status: "warn",
-      severity: "Minor",
-      whatWeSaw: "Many teams don’t use a consistent naming/coding scheme, which makes it harder to scan reports and maintain the chart over time.",
-      whyItMatters: "Clear naming reduces misc-coding and speeds up review conversations with your finance lead or accountant.",
-      evidence: ["(Signal expands in v1.1: duplicates/prefix consistency checks)"],
+      title: "Account names may be inconsistent (duplicates or vague buckets)",
+      status: namingStatus,
+      severity: namingStatus === "pass" ? "Minor" : "Major",
+      whatWeSaw:
+        "We found signs that account names may not be standardised (e.g., duplicate-looking accounts or ‘misc/other’ style buckets).",
+      whyItMatters:
+        "When names aren’t consistent, coding drifts over time and reports become harder to compare month to month.",
+      evidence: [
+        ...(dups.length
+          ? [`Possible duplicate names (examples): ${dups
+              .slice(0, 3)
+              .map((x) => x.duplicates.join(" / "))
+              .join("; ")}`]
+          : []),
+        ...(vague.length
+          ? [`Vague accounts (examples): ${vague.slice(0, 6).join(", ")}`]
+          : []),
+      ],
       recommendedActions: [
-        "Adopt a simple naming rule (e.g., consistent prefixes for expense groups)",
-        "Document 10–15 core categories and what should be coded where",
+        "Consolidate duplicate/overlapping accounts",
+        "Rename ‘misc/other’ accounts into clear categories (or limit their usage)",
+        "Adopt a simple naming standard for new accounts going forward",
       ],
     });
   }
@@ -89,7 +149,7 @@ function buildDimensionFindings(args: {
       severity: "Minor",
       whatWeSaw: "Fast-growing teams often code the same type of spend differently depending on who enters it.",
       whyItMatters: "Inconsistent coding makes month-to-month comparisons unreliable and creates extra clean-up work at month end.",
-      evidence: ["(Signal expands in v1.1: contact-to-account spread checks)"],
+      evidence: [],
       recommendedActions: [
         "Create a short ‘coding guide’ for top 20 repeat vendors",
         "Add monthly review: top 10 categories + ‘other/misc’ checks",
@@ -111,16 +171,24 @@ function buildDimensionFindings(args: {
       ],
     });
 
+    const cogsOk = hasCogsStructure(accounts);
+    const cogsStatus = cogsOk ? "pass" : "warn";
     findings.push({
       title: "Direct costs vs operating costs may not be clearly separated",
-      status: "warn",
-      severity: "Major",
-      whatWeSaw: "Many SMEs mix direct delivery costs into general expenses, which blurs gross margin.",
-      whyItMatters: "Without a clean gross margin view, it’s hard to decide pricing, hiring, and marketing spend.",
-      evidence: ["(Signal expands in v1.1: COGS structure checks)"],
+      status: cogsStatus,
+      severity: cogsStatus === "pass" ? "Minor" : "Major",
+      whatWeSaw:
+        cogsOk
+          ? "We detected a direct-cost / COGS structure in your accounts."
+          : "We did not detect an obvious direct-cost / COGS structure in your accounts.",
+      whyItMatters:
+        "A clear gross margin view helps founders make pricing, hiring, and marketing decisions with confidence.",
+      evidence: [
+        cogsOk ? "Direct cost / COGS accounts detected" : "No clear direct cost / COGS accounts detected",
+      ],
       recommendedActions: [
         "Define what counts as direct cost vs operating expense",
-        "Add a small COGS section if your business has delivery/service costs",
+        "Add a small COGS/direct cost section if your business has delivery/service costs",
       ],
     });
   }
@@ -132,7 +200,7 @@ function buildDimensionFindings(args: {
       severity: "Major",
       whatWeSaw: "Cashflow clarity is usually limited when bank feeds/reconciliation aren’t reviewed on a consistent cadence.",
       whyItMatters: "If the books lag reality, you can’t confidently decide what you can spend or invest this month.",
-      evidence: ["(Signal expands in v1.1: bank accounts + reconciliation indicators)"],
+      evidence: [],
       recommendedActions: [
         "Set a weekly 20-minute reconciliation routine",
         "Aim for month-end close within 5 business days",
@@ -145,7 +213,7 @@ function buildDimensionFindings(args: {
       severity: "Major",
       whatWeSaw: "Overdue invoices and bills (if present) typically drive unexpected cash pressure.",
       whyItMatters: "A clear view of what’s coming in and going out prevents last-minute cash squeezes.",
-      evidence: ["(Signal expands in v1.1: aged receivables/payables checks)"],
+      evidence: [],
       recommendedActions: [
         "Review aged receivables weekly and follow up on overdue items",
         "Schedule payables so you’re not paying late or too early",
@@ -174,7 +242,7 @@ function buildDimensionFindings(args: {
       severity: "Major",
       whatWeSaw: "When suspense accounts aren’t cleared monthly, small issues accumulate into bigger cleanups.",
       whyItMatters: "Uncleared suspense reduces trust in reports and makes cash/expense lines harder to interpret.",
-      evidence: ["(Signal expands in v1.1: suspense account detection)"],
+      evidence: [],
       recommendedActions: [
         "Add a monthly ‘suspense cleared to zero’ checkpoint",
         "Assign one owner for clearing decisions",
@@ -199,8 +267,18 @@ export function buildFullReportV1(args: {
   accountCount: number;
   trackingCategoryCount: number;
   manualJournalCount: number;
+  accounts: Array<{ name: string; code: string | null; type: string | null }>;
 }): FullReport {
-  const { v1, diagnosticVersion, generatedAt, company, accountCount, trackingCategoryCount, manualJournalCount } = args;
+  const {
+    v1,
+    diagnosticVersion,
+    generatedAt,
+    company,
+    accountCount,
+    trackingCategoryCount,
+    manualJournalCount,
+    accounts,
+  } = args;
 
   const band = bandFromScore(v1.overallScore100);
 
@@ -210,6 +288,7 @@ export function buildFullReportV1(args: {
       accountCount,
       trackingCategoryCount,
       manualJournalCount,
+      accounts,
     }),
   );
 
