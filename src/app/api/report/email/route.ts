@@ -112,7 +112,7 @@ export async function POST(req: Request) {
       diagnosticVersion: run.diagnosticVersion || "v1",
     });
 
-  const html = renderReportEmailHtml({ report });
+  const html = renderReportEmailHtml({ report, recipientName: name });
 
   await postmarkSend({
     From: formatFromHeader(),
