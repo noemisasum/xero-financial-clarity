@@ -12,7 +12,12 @@ import { runDiagnosticV1 } from "@/lib/diagnostic/v1";
 import { buildFullReportV1 } from "@/lib/report/buildFullReport";
 
 type AccountsResponse = {
-  Accounts?: Array<{ Status?: string }>;
+  Accounts?: Array<{
+    Status?: string;
+    Name?: string;
+    Code?: string;
+    Type?: string;
+  }>;
 };
 
 type TrackingResponse = {
@@ -165,9 +170,11 @@ export default async function RunPage({
       manualJournalCount = 0;
     }
 
-    const accountCount = (accounts.Accounts || []).filter(
+    const activeAccounts = (accounts.Accounts || []).filter(
       (a) => (a.Status || "").toUpperCase() === "ACTIVE",
-    ).length;
+    );
+
+    const accountCount = activeAccounts.length;
     const trackingCategoryCount = (tracking.TrackingCategories || []).filter(
       (t) => (t.Status || "").toUpperCase() !== "DELETED",
     ).length;
@@ -186,6 +193,11 @@ export default async function RunPage({
       accountCount,
       trackingCategoryCount,
       manualJournalCount,
+      accounts: activeAccounts.map((a) => ({
+        name: String(a.Name || "").trim(),
+        code: a.Code ? String(a.Code).trim() : null,
+        type: a.Type ? String(a.Type).trim() : null,
+      })),
     });
 
     await prisma.diagnosticResult.create({

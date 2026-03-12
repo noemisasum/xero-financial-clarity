@@ -14,9 +14,10 @@ function pill(text: string) {
 
 export function renderReportEmailHtml(args: {
   report: FullReport;
+  recipientName?: string;
   brandTitle?: string;
 }): string {
-  const { report } = args;
+  const { report, recipientName } = args;
 
   const title = report.company
     ? `Financial Clarity Diagnostic Report — ${report.company}`
@@ -118,7 +119,7 @@ export function renderReportEmailHtml(args: {
 
     <div style="background:#ffffff;border:1px solid #e5e7eb;border-top:0;border-radius:0 0 12px 12px;padding:20px">
       <div style="font-size:14px;line-height:1.7;color:#334155">
-        Hi,<br>
+        Hi${recipientName ? ` ${escapeHtml(recipientName)}` : ""},<br>
         Here is your Financial Clarity Diagnostic report.
       </div>
 
@@ -138,6 +139,27 @@ export function renderReportEmailHtml(args: {
           report.overall.meaning,
         )}</div>
       </div>
+
+      <div style="height:18px"></div>
+
+      <div style="font-size:16px;font-weight:900;color:#0f172a">Score breakdown</div>
+      <table width="100%" cellspacing="0" cellpadding="0" style="margin-top:10px;border-collapse:collapse;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden">
+        <tbody>
+          ${report.dimensions
+            .map(
+              (d) => `
+<tr>
+  <td style="padding:10px 12px;border-top:1px solid #e5e7eb;color:#0f172a;font-weight:700">${escapeHtml(
+    d.name,
+  )}</td>
+  <td align="right" style="padding:10px 12px;border-top:1px solid #e5e7eb;color:#0f172a;font-weight:900">${
+    d.score10
+  } / 10</td>
+</tr>`,
+            )
+            .join("")}
+        </tbody>
+      </table>
 
       <div style="height:18px"></div>
 
