@@ -9,6 +9,7 @@ import {
   xeroFetch,
 } from "@/lib/xeroApi";
 import { runDiagnosticV1 } from "@/lib/diagnostic/v1";
+import { buildFullReportV1 } from "@/lib/report/buildFullReport";
 
 type AccountsResponse = {
   Accounts?: Array<{ Status?: string }>;
@@ -177,12 +178,22 @@ export default async function RunPage({
       manualJournalCount,
     });
 
+    const report = buildFullReportV1({
+      v1,
+      diagnosticVersion: "v1",
+      generatedAt: new Date(),
+      company: conn.tenantName || null,
+      accountCount,
+      trackingCategoryCount,
+      manualJournalCount,
+    });
+
     await prisma.diagnosticResult.create({
       data: {
         runId: runId!,
         overallScore: v1.overallScore100,
         dimensionsJson: v1.dimensions,
-        findingsJson: { topIssues: v1.topIssues },
+        findingsJson: { topIssues: v1.topIssues, report },
       },
     });
 

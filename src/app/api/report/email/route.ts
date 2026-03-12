@@ -1,94 +1,47 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { formatFromHeader, postmarkSend } from "@/lib/postmark";
+import type { FullReport } from "@/lib/report/types";
+import { renderReportEmailHtml } from "@/lib/report/renderEmailHtml";
 
 function isEmail(s: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
 }
 
-function escapeHtml(s: string) {
-  return (s || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;");
+function bandFromScore(score100: number): FullReport["overall"]["band"] {
+  if (score100 >= 80) return "Strong";
+  if (score100 >= 65) return "Good";
+  if (score100 >= 45) return "Moderate";
+  return "Needs Improvement";
 }
 
-function buildReportHtml(params: {
-  overall: number;
+function fallbackReport(args: {
+  overallScore: number;
+  company?: string | null;
   dimensions: Array<{ name: string; score10: number; summary?: string }>;
   topIssues: string[];
-  company?: string | null;
-}) {
-  const { overall, dimensions, topIssues, company } = params;
-  const title = company
-    ? `Financial Clarity Diagnostic Report — ${company}`
-    : "Financial Clarity Diagnostic Report";
-
-  const dimRows = dimensions
-    .map(
-      (d) => `
-<tr>
-  <td style="padding:10px 12px;border-top:1px solid #e5e7eb">${escapeHtml(d.name)}</td>
-  <td align="right" style="padding:10px 12px;border-top:1px solid #e5e7eb;font-weight:700">${d.score10} / 10</td>
-</tr>`,
-    )
-    .join("");
-
-  const issues = (topIssues || [])
-    .map((x) => `<li style="margin:6px 0">${escapeHtml(x)}</li>`)
-    .join("");
-
-  return `
-<div style="margin:0;padding:0;background:#f5f7fb;font-family:Arial,Helvetica,sans-serif;color:#0f172a">
-  <div style="max-width:720px;margin:0 auto;padding:24px">
-    <div style="background:#365b6d;border-radius:12px 12px 0 0;padding:18px 20px">
-      <div style="font-size:22px;font-weight:800;color:#ffffff;line-height:1.2">${escapeHtml(
-        title,
-      )}</div>
-      <div style="margin-top:8px;font-size:14px;color:#dbeafe">Aqount Diagnostic</div>
-    </div>
-
-    <div style="background:#ffffff;border:1px solid #e5e7eb;border-top:0;border-radius:0 0 12px 12px;padding:20px">
-      <div style="font-size:14px;line-height:1.6">
-        Hi,<br>
-        Here is your Financial Clarity Diagnostic report.
-      </div>
-
-      <div style="height:16px"></div>
-
-      <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:14px">
-        <div style="font-size:12px;color:#334155">Overall score</div>
-        <div style="font-size:28px;font-weight:900;color:#0f172a;margin-top:6px">${overall} / 100</div>
-      </div>
-
-      <div style="height:18px"></div>
-
-      <div style="font-size:16px;font-weight:800;color:#0f172a;margin-bottom:10px">Breakdown</div>
-      <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden">
-        <tbody>
-          ${dimRows}
-        </tbody>
-      </table>
-
-      <div style="height:18px"></div>
-
-      <div style="font-size:16px;font-weight:800;color:#0f172a">Top issues detected</div>
-      <ul style="padding-left:18px;margin:10px 0 0 0;font-size:14px;color:#334155;line-height:1.6">
-        ${issues || "<li>No major issues detected.</li>"}
-      </ul>
-
-      <div style="height:18px"></div>
-      <div style="font-size:12px;color:#64748b;line-height:1.6">
-        This report is generated from read-only signals in your Xero organisation. It does not change your books.
-      </div>
-
-      <div style="margin-top:16px;font-size:12px;color:#64748b;line-height:1.6">
-        © ${new Date().getFullYear()} Aqount. Financial Clarity Diagnostic is a product by Aqount. All rights reserved.
-      </div>
-    </div>
-  </div>
-</div>`;
+  diagnosticVersion: string;
+}): FullReport {
+  return {
+    diagnosticVersion: args.diagnosticVersion,
+    generatedAtISO: new Date().toISOString(),
+    company: args.company || null,
+    overall: {
+      score100: args.overallScore,
+      band: bandFromScore(args.overallScore),
+      meaning: "Here is your diagnostic summary. For a deeper breakdown, rerun the diagnostic on the latest version.",
+    },
+    topIssues: (args.topIssues || []).map((t) => ({ title: t, severity: "Major", evidence: [] })),
+    dimensions: (args.dimensions || []).map((d) => ({
+      key: d.name.toLowerCase().replace(/\s+/g, "_"),
+      name: d.name,
+      score10: d.score10,
+      summary: d.summary || "",
+      findings: [],
+    })),
+    nextSteps: [],
+    notes: ["This diagnostic uses read-only signals from your Xero organisation."],
+  };
 }
 
 export async function POST(req: Request) {
@@ -141,12 +94,25 @@ export async function POST(req: Request) {
     ? `Your Financial Clarity Diagnostic Report — ${run.tenantName}`
     : "Your Financial Clarity Diagnostic Report";
 
-  const html = buildReportHtml({
-    overall: run.result.overallScore,
-    dimensions: dims,
-    topIssues,
-    company: company || run.tenantName || null,
-  });
+  const reportFromDb =
+    findings &&
+    typeof findings === "object" &&
+    (findings as { report?: unknown }).report &&
+    typeof (findings as { report?: unknown }).report === "object"
+      ? ((findings as { report: FullReport }).report as FullReport)
+      : null;
+
+  const report: FullReport =
+    reportFromDb ||
+    fallbackReport({
+      overallScore: run.result.overallScore,
+      company: company || run.tenantName || null,
+      dimensions: dims,
+      topIssues,
+      diagnosticVersion: run.diagnosticVersion || "v1",
+    });
+
+  const html = renderReportEmailHtml({ report });
 
   await postmarkSend({
     From: formatFromHeader(),
