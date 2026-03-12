@@ -38,20 +38,30 @@ async function revokeAndDeleteConnection(args: {
   // revoking the refresh token, then deleting tokens from DB.
   try {
     const connections = await fetchXeroConnections(args.accessToken);
-    const match = connections.find((c) => c.tenantId === args.tenantId);
-    if (match) {
-      await disconnectXeroConnection({
-        accessToken: args.accessToken,
-        connectionId: match.id,
-      });
-      console.info("Xero disconnected tenant", {
-        tenantId: args.tenantId,
-        connectionId: match.id,
-      });
-    } else {
-      console.warn("Xero disconnect: no matching connection found", {
-        tenantId: args.tenantId,
-      });
+
+    if (!connections.length) {
+      console.warn("Xero disconnect: no connections found");
+    }
+
+    // Disconnect ALL connections created under this access token/grant.
+    // This helps ensure we release Xero's connected-tenant limits (commonly 5).
+    for (const c of connections) {
+      try {
+        await disconnectXeroConnection({
+          accessToken: args.accessToken,
+          connectionId: c.id,
+        });
+        console.info("Xero disconnected tenant", {
+          tenantId: c.tenantId,
+          connectionId: c.id,
+        });
+      } catch (e) {
+        console.error("Xero disconnect failed for connection", {
+          tenantId: c.tenantId,
+          connectionId: c.id,
+          error: e instanceof Error ? e.message : String(e),
+        });
+      }
     }
   } catch (e) {
     console.error("Xero disconnect failed", e);
