@@ -17,7 +17,7 @@ async function fetchJson(url: string, init?: RequestInit) {
 }
 
 export async function GET(req: Request) {
-  return withObs(req, { route: "/api/xero/callback", method: "GET" }, async () => {
+  return withObs({ route: "/api/xero/callback", method: "GET" }, async () => {
     const { searchParams } = new URL(req.url);
     const code = searchParams.get("code");
     const state = searchParams.get("state");

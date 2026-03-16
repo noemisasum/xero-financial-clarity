@@ -46,7 +46,7 @@ function fallbackReport(args: {
 }
 
 export async function POST(req: Request) {
-  return withObs(req, { route: "/api/report/email", method: "POST" }, async () => {
+  return withObs({ route: "/api/report/email", method: "POST" }, async () => {
     const form = await req.formData();
     const runId = String(form.get("runId") || "").trim();
     const email = String(form.get("email") || "").trim();
