@@ -8,7 +8,7 @@ function buildMinimalText(runId: string) {
 }
 
 export async function POST(req: Request) {
-  return withObs({ route: "/api/report/resend", method: "POST" }, async () => {
+  return withObs(req, { route: "/api/report/resend", method: "POST" }, async () => {
     const form = await req.formData();
     const runId = String(form.get("runId") || "").trim();
     obs("info", "report.resend.requested", { route: "/api/report/resend", method: "POST", runId });
