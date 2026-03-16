@@ -3,6 +3,7 @@ import { prisma } from "@/lib/db";
 import { formatFromHeader, postmarkSend } from "@/lib/postmark";
 import type { FullReport } from "@/lib/report/types";
 import { renderReportEmailHtml } from "@/lib/report/renderEmailHtml";
+import { withObs, obs } from "@/lib/obs";
 
 function isEmail(s: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
@@ -45,12 +46,15 @@ function fallbackReport(args: {
 }
 
 export async function POST(req: Request) {
-  const form = await req.formData();
-  const runId = String(form.get("runId") || "").trim();
-  const email = String(form.get("email") || "").trim();
-  const name = String(form.get("name") || "").trim();
-  const company = String(form.get("company") || "").trim();
-  const consent = String(form.get("consent") || "").trim() === "on";
+  return withObs({ route: "/api/report/email", method: "POST" }, async () => {
+    const form = await req.formData();
+    const runId = String(form.get("runId") || "").trim();
+    const email = String(form.get("email") || "").trim();
+    const name = String(form.get("name") || "").trim();
+    const company = String(form.get("company") || "").trim();
+    const consent = String(form.get("consent") || "").trim() === "on";
+
+    obs("info", "report.email.requested", { route: "/api/report/email", method: "POST", runId });
 
   if (!runId || !email || !isEmail(email) || !name || !consent) {
     return NextResponse.redirect(
@@ -132,4 +136,5 @@ export async function POST(req: Request) {
   return NextResponse.redirect(
     new URL(`/results/${encodeURIComponent(runId)}?sent=1&full=1`, req.url),
   );
+  });
 }

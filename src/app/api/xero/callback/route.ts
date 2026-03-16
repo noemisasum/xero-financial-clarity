@@ -5,6 +5,7 @@ import {
   XERO_CONNECTIONS_URL,
   XERO_TOKEN_URL,
 } from "@/lib/xero";
+import { withObs, obs } from "@/lib/obs";
 
 async function fetchJson(url: string, init?: RequestInit) {
   const res = await fetch(url, init);
@@ -16,9 +17,11 @@ async function fetchJson(url: string, init?: RequestInit) {
 }
 
 export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const code = searchParams.get("code");
-  const state = searchParams.get("state");
+  return withObs({ route: "/api/xero/callback", method: "GET" }, async () => {
+    const { searchParams } = new URL(req.url);
+    const code = searchParams.get("code");
+    const state = searchParams.get("state");
+    obs("info", "xero.callback.received", { route: "/api/xero/callback", method: "GET", hasCode: Boolean(code), hasState: Boolean(state) });
 
   if (!code || !state) {
     return NextResponse.redirect(new URL("/?xero=missing_params", req.url));
@@ -80,5 +83,7 @@ export async function GET(req: Request) {
   const url = new URL("/org", req.url);
   url.searchParams.set("connectionId", conn.id);
 
+  obs("info", "xero.callback.ok", { route: "/api/xero/callback", method: "GET", connectionId: conn.id, sessionId: oauthState.sessionId });
   return NextResponse.redirect(url);
+  });
 }
