@@ -1,14 +1,17 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { formatFromHeader, postmarkSend } from "@/lib/postmark";
+import { withObs, obs } from "@/lib/obs";
 
 function buildMinimalText(runId: string) {
   return `Your report is also available on this page:\nhttps://clarity.aqount.tech/results/${runId}?full=1`;
 }
 
 export async function POST(req: Request) {
-  const form = await req.formData();
-  const runId = String(form.get("runId") || "").trim();
+  return withObs({ route: "/api/report/resend", method: "POST" }, async () => {
+    const form = await req.formData();
+    const runId = String(form.get("runId") || "").trim();
+    obs("info", "report.resend.requested", { route: "/api/report/resend", method: "POST", runId });
 
   if (!runId) {
     return NextResponse.redirect(new URL(`/results/${encodeURIComponent(runId)}?sent=0`, req.url));
@@ -70,4 +73,5 @@ export async function POST(req: Request) {
   return NextResponse.redirect(
     new URL(`/results/${encodeURIComponent(runId)}?sent=1&full=1`, req.url),
   );
+  });
 }
