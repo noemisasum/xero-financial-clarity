@@ -12,6 +12,16 @@ function pill(text: string) {
   return `<span style="display:inline-flex;align-items:center;border-radius:999px;background:#e5f3ff;color:#0f172a;padding:4px 10px;font-size:12px;font-weight:700">${escapeHtml(text)}</span>`;
 }
 
+function scoreBar(score100: number) {
+  const clamped = Math.max(0, Math.min(100, Number(score100) || 0));
+  return `
+<div style="margin-top:10px">
+  <div style="height:10px;width:100%;border-radius:999px;border:1px solid #e5e7eb;background:#ffffff">
+    <div style="height:100%;width:${clamped}%;border-radius:999px;background:#b88b2e"></div>
+  </div>
+</div>`;
+}
+
 export function renderReportEmailHtml(args: {
   report: FullReport;
   recipientName?: string;
@@ -132,6 +142,7 @@ export function renderReportEmailHtml(args: {
             <div style="font-size:28px;font-weight:900;color:#0f172a;margin-top:6px">${
               report.overall.score100
             } / 100</div>
+            ${scoreBar(report.overall.score100)}
           </div>
           <div>${pill(report.overall.band)}</div>
         </div>

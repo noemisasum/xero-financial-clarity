@@ -1,6 +1,7 @@
 import Container from "@/components/Container";
 import LoadingForm from "@/components/LoadingForm";
 import FullReportView from "@/components/FullReportView";
+import ScoreBar from "@/components/ScoreBar";
 import Image from "next/image";
 import { prisma } from "@/lib/db";
 import type { FullReport } from "@/lib/report/types";
@@ -115,6 +116,10 @@ export default async function ResultsPage({
             <div className="mt-2 text-4xl font-semibold text-[color:var(--heading)]">
               <span>{run.result.overallScore}</span>
               <span className="text-zinc-500"> / 100</span>
+            </div>
+
+            <div className="mt-4">
+              <ScoreBar score100={run.result.overallScore} />
             </div>
 
             <div className="mt-6">
