@@ -108,7 +108,9 @@ export default async function ResultsPage({
         <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_360px]">
           <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
             <div className="flex items-center justify-between">
-              <div className="text-sm text-zinc-500">Financial Clarity Score</div>
+              <div className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                Financial Clarity Score
+              </div>
               <span className="inline-flex items-center rounded-full bg-[color:var(--accent-soft)] px-3 py-1 text-xs font-semibold text-[color:var(--heading)]">
                 {band}
               </span>
