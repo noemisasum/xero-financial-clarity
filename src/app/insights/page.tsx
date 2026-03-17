@@ -1,5 +1,6 @@
 import Link from "next/link";
 import TopNav from "@/components/TopNav";
+import Footer from "@/components/Footer";
 import { listInsightPosts } from "@/lib/insights";
 
 export const metadata = {
@@ -56,6 +57,7 @@ export default function InsightsIndexPage() {
           ) : null}
         </div>
       </main>
+      <Footer includeHomepageAnchors />
     </>
   );
 }

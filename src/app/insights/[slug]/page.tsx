@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { compileMDX } from "next-mdx-remote/rsc";
 
 import TopNav from "@/components/TopNav";
+import Footer from "@/components/Footer";
 import { getInsightPost, listInsightSlugs } from "@/lib/insights";
 
 type Params = { slug: string };
@@ -60,21 +61,22 @@ export default async function InsightPostPage({
     <>
       <TopNav />
       <main className="mx-auto max-w-3xl px-6 py-12">
-      <div className="text-sm text-slate-500">{post.frontmatter.date}</div>
-      <h1 className="mt-2 text-3xl font-semibold tracking-tight">
-        {post.frontmatter.title}
-      </h1>
-      {post.frontmatter.description ? (
-        <p className="mt-3 text-slate-600">{post.frontmatter.description}</p>
-      ) : null}
+        <div className="text-sm text-slate-500">{post.frontmatter.date}</div>
+        <h1 className="mt-2 text-3xl font-semibold tracking-tight">
+          {post.frontmatter.title}
+        </h1>
+        {post.frontmatter.description ? (
+          <p className="mt-3 text-slate-600">{post.frontmatter.description}</p>
+        ) : null}
 
-      <article className="insights-content mt-10">{content}</article>
+        <article className="insights-content mt-10">{content}</article>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-    </main>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </main>
+      <Footer includeHomepageAnchors />
     </>
   );
 }
