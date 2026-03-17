@@ -1,3 +1,4 @@
+import ScoreBar from "@/components/ScoreBar";
 import type { FullReport } from "@/lib/report/types";
 
 function Pill({ children }: { children: React.ReactNode }) {
@@ -19,6 +20,11 @@ export default function FullReportView({ report }: { report: FullReport }) {
               {report.overall.score100}
               <span className="text-zinc-500"> / 100</span>
             </div>
+
+            <div className="mt-4 max-w-xl">
+              <ScoreBar score100={report.overall.score100} />
+            </div>
+
             <div className="mt-3 max-w-2xl text-sm leading-6 text-zinc-700">
               {report.overall.meaning}
             </div>
