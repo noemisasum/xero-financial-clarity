@@ -15,8 +15,8 @@ function pill(text: string) {
 function scoreBar(score100: number) {
   const clamped = Math.max(0, Math.min(100, Number(score100) || 0));
   return `
-<div style="margin-top:10px">
-  <div style="height:10px;width:100%;border-radius:999px;border:1px solid #e5e7eb;background:#ffffff">
+<div style="margin-top:10px;width:100%">
+  <div style="height:10px;width:100%;min-width:360px;border-radius:999px;border:1px solid #e5e7eb;background:#ffffff">
     <div style="height:100%;width:${clamped}%;border-radius:999px;background:#b88b2e"></div>
   </div>
 </div>`;
@@ -29,9 +29,8 @@ export function renderReportEmailHtml(args: {
 }): string {
   const { report, recipientName } = args;
 
-  const title = report.company
-    ? `Financial Clarity Diagnostic Report — ${report.company}`
-    : "Financial Clarity Diagnostic Report";
+  const eyebrow = "Financial Clarity Diagnostic";
+  const titleLine2 = report.company ? report.company : "";
 
   const topIssues = report.topIssues.length
     ? report.topIssues
@@ -121,10 +120,11 @@ export function renderReportEmailHtml(args: {
 <div style="margin:0;padding:0;background:#f5f7fb;font-family:Arial,Helvetica,sans-serif;color:#0f172a">
   <div style="max-width:760px;margin:0 auto;padding:24px">
     <div style="background:#365b6d;border-radius:12px 12px 0 0;padding:18px 20px">
-      <div style="font-size:22px;font-weight:900;color:#ffffff;line-height:1.2">${escapeHtml(
-        title,
+      <div style="font-size:14px;font-weight:700;color:#dbeafe;letter-spacing:0.06em;text-transform:uppercase">${escapeHtml(
+        eyebrow,
       )}</div>
-      <div style="margin-top:8px;font-size:14px;color:#dbeafe">Aqount Diagnostic</div>
+      ${titleLine2 ? `<div style="margin-top:6px;font-size:22px;font-weight:900;color:#ffffff;line-height:1.2">${escapeHtml(titleLine2)}</div>` : ""}
+      <div style="margin-top:10px;font-size:14px;color:#dbeafe">Aqount</div>
     </div>
 
     <div style="background:#ffffff;border:1px solid #e5e7eb;border-top:0;border-radius:0 0 12px 12px;padding:20px">
@@ -137,15 +137,17 @@ export function renderReportEmailHtml(args: {
 
       <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:14px">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
-          <div>
+          <div style="flex:1">
             <div style="font-size:12px;color:#334155">Overall score</div>
             <div style="font-size:28px;font-weight:900;color:#0f172a;margin-top:6px">${
               report.overall.score100
             } / 100</div>
-            ${scoreBar(report.overall.score100)}
           </div>
-          <div>${pill(report.overall.band)}</div>
+          <div style="flex:none">${pill(report.overall.band)}</div>
         </div>
+
+        ${scoreBar(report.overall.score100)}
+
         <div style="margin-top:10px;font-size:13px;line-height:1.7;color:#475569">${escapeHtml(
           report.overall.meaning,
         )}</div>
