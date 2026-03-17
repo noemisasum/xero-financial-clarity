@@ -38,7 +38,7 @@ export type FullReport = {
     title: string;
     detail: string;
     effort: "Low" | "Med" | "High";
-    timeframe: "7–14 days" | "30 days" | "90 days";
+    timeframe: "Now" | "Next" | "Later";
   }>;
 
   notes: string[];
