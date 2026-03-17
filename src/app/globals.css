@@ -45,3 +45,40 @@ a:not([data-button]) {
 ::selection {
   background: var(--accent-soft);
 }
+
+/* Insights (MDX) content defaults.
+   Tailwind preflight often removes list markers/margins; restore readable article formatting. */
+.insights-content h1,
+.insights-content h2,
+.insights-content h3 {
+  color: var(--heading);
+}
+
+.insights-content p {
+  margin: 0.85rem 0;
+  line-height: 1.75;
+}
+
+.insights-content ul,
+.insights-content ol {
+  margin: 0.75rem 0 0.75rem 1.25rem;
+  padding-left: 1.25rem;
+}
+
+.insights-content ul {
+  list-style: disc;
+}
+
+.insights-content ol {
+  list-style: decimal;
+}
+
+.insights-content li {
+  margin: 0.35rem 0;
+}
+
+.insights-content hr {
+  margin: 2rem 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}

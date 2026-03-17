@@ -65,7 +65,7 @@ export default async function InsightPostPage({
         <p className="mt-3 text-slate-600">{post.frontmatter.description}</p>
       ) : null}
 
-      <article className="prose prose-slate mt-10 max-w-none">{content}</article>
+      <article className="insights-content mt-10">{content}</article>
 
       <script
         type="application/ld+json"
