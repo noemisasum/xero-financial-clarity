@@ -35,13 +35,7 @@ export default async function ResultsPage({
       </div>
     );
   }
-
-  const dims = run.result.dimensionsJson as unknown;
   const findings = run.result.findingsJson as unknown;
-
-  const dimList = Array.isArray(dims)
-    ? (dims as Array<{ key: string; name: string; score10: number }>)
-    : [];
 
   const topIssues =
     findings &&
@@ -122,23 +116,6 @@ export default async function ResultsPage({
 
             <div className="mt-4">
               <ScoreBar score100={run.result.overallScore} />
-            </div>
-
-            <div className="mt-6">
-              <div className="text-sm font-semibold text-[color:var(--heading)]">
-                Breakdown
-              </div>
-              <div className="mt-3 space-y-2">
-                {dimList.map((d) => (
-                  <div
-                    key={d.key}
-                    className="flex items-center justify-between rounded-xl border border-[var(--border)] bg-zinc-50 px-4 py-3 text-sm"
-                  >
-                    <span className="font-medium text-zinc-900">{d.name}</span>
-                    <span className="text-zinc-600">{d.score10} / 10</span>
-                  </div>
-                ))}
-              </div>
             </div>
 
             <div className="mt-8">
