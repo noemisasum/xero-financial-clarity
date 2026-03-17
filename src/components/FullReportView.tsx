@@ -112,7 +112,13 @@ export default function FullReportView({ report }: { report: FullReport }) {
                     <div className="flex items-start justify-between gap-3">
                       <div className="font-medium text-zinc-900">{f.title}</div>
                       <div className="flex gap-2">
-                        <Pill>{f.status.toUpperCase()}</Pill>
+                        <Pill>
+                          {f.status === "pass"
+                            ? "Pass"
+                            : f.status === "warn"
+                              ? "Warn"
+                              : "Fail"}
+                        </Pill>
                         <Pill>{f.severity}</Pill>
                       </div>
                     </div>
