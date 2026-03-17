@@ -23,21 +23,21 @@ export default function TopNav() {
 
           <nav className="flex items-center gap-5">
             <Link
-              href="#how"
+              href="/#how"
               className="hidden text-sm font-medium text-[color:var(--link)] hover:opacity-90 sm:inline"
             >
               How it works
             </Link>
 
             <Link
-              href="#scorecard"
+              href="/#scorecard"
               className="hidden text-sm font-medium text-[color:var(--link)] hover:opacity-90 sm:inline"
             >
               Sample Scorecard
             </Link>
 
             <Link
-              href="#methodology"
+              href="/#methodology"
               className="hidden text-sm font-medium text-[color:var(--link)] hover:opacity-90 sm:inline"
             >
               Methodology
