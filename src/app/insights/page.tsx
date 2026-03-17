@@ -3,9 +3,10 @@ import TopNav from "@/components/TopNav";
 import { listInsightPosts } from "@/lib/insights";
 
 export const metadata = {
-  title: "Insights | Aqount",
+  title:
+    "Financial Clarity Guides for SMEs on Xero: Reporting & Cash Flow Visibility",
   description:
-    "Articles on financial clarity, Xero reporting structure, and decision-ready finance for SMEs.",
+    "Actionable insights on improving financial reporting, cash flow visibility, and decision-making for SMEs using Xero.",
 };
 
 export default function InsightsIndexPage() {
@@ -15,13 +16,20 @@ export default function InsightsIndexPage() {
     <>
       <TopNav />
       <main className="mx-auto max-w-3xl px-6 py-12">
-        <h1 className="text-3xl font-semibold tracking-tight">Insights</h1>
-      <p className="mt-3 text-slate-600">
-        Practical notes on financial clarity, reporting structure, and cash visibility
-        for SMEs using Xero.
-      </p>
+        <h1 className="text-3xl font-semibold tracking-tight">
+          Financial Clarity Guides for SMEs on Xero: Reporting &amp; Cash Flow Visibility
+        </h1>
 
-      <div className="mt-10 space-y-6">
+        <p className="mt-3 text-slate-600">
+          Actionable insights on improving financial reporting, cash flow visibility, and
+          decision-making for SMEs using Xero.
+        </p>
+
+        <p className="mt-3 italic text-slate-600">
+          If your reports don’t drive decisions, they’re not doing their job.
+        </p>
+
+        <div className="mt-10 space-y-6">
         {posts.map((p) => (
           <article key={p.slug} className="rounded-xl border border-slate-200 p-5">
             <div className="text-sm text-slate-500">{p.frontmatter.date}</div>
@@ -41,7 +49,7 @@ export default function InsightsIndexPage() {
             No insights yet.
           </div>
         ) : null}
-      </div>
+        </div>
       </main>
     </>
   );
