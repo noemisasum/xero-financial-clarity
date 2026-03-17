@@ -304,31 +304,31 @@ export function buildFullReportV1(args: {
       title: "Simplify your chart of accounts for faster reporting",
       detail: "Consolidate overly-detailed expense accounts into clear rollups so your P&L tells a story at a glance.",
       effort: "Med",
-      timeframe: "30 days",
+      timeframe: "Next",
     },
     {
       title: "Create a simple coding guide for repeat vendors",
       detail: "Decide where the top 20 vendors should be coded and review ‘other/misc’ monthly.",
       effort: "Low",
-      timeframe: "7–14 days",
+      timeframe: "Now",
     },
     {
       title: "Set up one tracking category (only if you need reporting splits)",
       detail: "Use tracking for department/project/channel reporting instead of creating lots of new accounts.",
       effort: "Low",
-      timeframe: "30 days",
+      timeframe: "Next",
     },
     {
       title: "Adopt a weekly reconciliation routine",
       detail: "A consistent reconciliation cadence improves cash visibility and reduces month-end surprises.",
       effort: "Low",
-      timeframe: "7–14 days",
+      timeframe: "Now",
     },
     {
       title: "Use a month-end close checklist",
       detail: "Reduce manual journals and ensure suspense/clearing is resolved every month.",
       effort: "Low",
-      timeframe: "30 days",
+      timeframe: "Next",
     },
   ];
 

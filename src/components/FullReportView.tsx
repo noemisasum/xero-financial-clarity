@@ -1,9 +1,19 @@
 import ScoreBar from "@/components/ScoreBar";
 import type { FullReport } from "@/lib/report/types";
 
-function Pill({ children }: { children: React.ReactNode }) {
+function Pill({
+  children,
+  fixed,
+}: {
+  children: React.ReactNode;
+  fixed?: boolean;
+}) {
   return (
-    <span className="inline-flex items-center rounded-full bg-[color:var(--accent-soft)] px-3 py-1 text-xs font-semibold text-[color:var(--heading)]">
+    <span
+      className={`inline-flex items-center justify-center rounded-full bg-[color:var(--accent-soft)] px-3 py-1 text-xs font-semibold text-[color:var(--heading)]${
+        fixed ? " min-w-[92px]" : ""
+      }`}
+    >
       {children}
     </span>
   );
@@ -70,8 +80,8 @@ export default function FullReportView({ report }: { report: FullReport }) {
               <div className="flex items-start justify-between gap-3">
                 <div className="font-medium text-zinc-900">{s.title}</div>
                 <div className="flex gap-2">
-                  <Pill>{s.effort}</Pill>
-                  <Pill>{s.timeframe}</Pill>
+                  <Pill fixed>{s.effort}</Pill>
+                  <Pill fixed>{s.timeframe}</Pill>
                 </div>
               </div>
               <div className="mt-2 text-sm leading-6 text-zinc-700">{s.detail}</div>
