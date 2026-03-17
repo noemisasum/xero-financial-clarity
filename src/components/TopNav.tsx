@@ -44,10 +44,10 @@ export default function TopNav() {
             </Link>
 
             <Link
-              href="#faq"
+              href="/insights"
               className="hidden text-sm font-medium text-[color:var(--link)] hover:opacity-90 sm:inline"
             >
-              FAQ
+              Insights
             </Link>
 
             <div>

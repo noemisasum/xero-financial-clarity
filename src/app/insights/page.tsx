@@ -1,4 +1,5 @@
 import Link from "next/link";
+import TopNav from "@/components/TopNav";
 import { listInsightPosts } from "@/lib/insights";
 
 export const metadata = {
@@ -11,8 +12,10 @@ export default function InsightsIndexPage() {
   const posts = listInsightPosts();
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-12">
-      <h1 className="text-3xl font-semibold tracking-tight">Insights</h1>
+    <>
+      <TopNav />
+      <main className="mx-auto max-w-3xl px-6 py-12">
+        <h1 className="text-3xl font-semibold tracking-tight">Insights</h1>
       <p className="mt-3 text-slate-600">
         Practical notes on financial clarity, reporting structure, and cash visibility
         for SMEs using Xero.
@@ -39,6 +42,7 @@ export default function InsightsIndexPage() {
           </div>
         ) : null}
       </div>
-    </main>
+      </main>
+    </>
   );
 }

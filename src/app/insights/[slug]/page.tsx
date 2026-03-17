@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { compileMDX } from "next-mdx-remote/rsc";
 
+import TopNav from "@/components/TopNav";
 import { getInsightPost, listInsightSlugs } from "@/lib/insights";
 
 type Params = { slug: string };
@@ -56,7 +57,9 @@ export default async function InsightPostPage({
   };
 
   return (
-    <main className="mx-auto max-w-3xl px-6 py-12">
+    <>
+      <TopNav />
+      <main className="mx-auto max-w-3xl px-6 py-12">
       <div className="text-sm text-slate-500">{post.frontmatter.date}</div>
       <h1 className="mt-2 text-3xl font-semibold tracking-tight">
         {post.frontmatter.title}
@@ -69,9 +72,9 @@ export default async function InsightPostPage({
 
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
     </main>
+    </>
   );
 }
