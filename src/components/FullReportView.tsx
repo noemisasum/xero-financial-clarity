@@ -19,29 +19,37 @@ function Pill({
   );
 }
 
-export default function FullReportView({ report }: { report: FullReport }) {
+export default function FullReportView({
+  report,
+  showOverall = true,
+}: {
+  report: FullReport;
+  showOverall?: boolean;
+}) {
   return (
     <div className="mt-8 space-y-6">
-      <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <div className="text-sm text-zinc-500">Overall</div>
-            <div className="mt-1 text-3xl font-semibold text-[color:var(--heading)]">
-              {report.overall.score100}
-              <span className="text-zinc-500"> / 100</span>
-            </div>
+      {showOverall ? (
+        <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <div className="text-sm text-zinc-500">Overall</div>
+              <div className="mt-1 text-3xl font-semibold text-[color:var(--heading)]">
+                {report.overall.score100}
+                <span className="text-zinc-500"> / 100</span>
+              </div>
 
-            <div className="mt-3 max-w-2xl text-sm leading-6 text-zinc-700">
-              {report.overall.meaning}
-            </div>
+              <div className="mt-3 max-w-2xl text-sm leading-6 text-zinc-700">
+                {report.overall.meaning}
+              </div>
 
-            <div className="mt-4 max-w-xl">
-              <ScoreBar score100={report.overall.score100} />
+              <div className="mt-4 max-w-xl">
+                <ScoreBar score100={report.overall.score100} />
+              </div>
             </div>
+            <Pill>{report.overall.band}</Pill>
           </div>
-          <Pill>{report.overall.band}</Pill>
         </div>
-      </div>
+      ) : null}
 
       <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
         <div className="text-sm font-semibold text-[color:var(--heading)]">
