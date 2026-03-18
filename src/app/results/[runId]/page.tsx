@@ -156,7 +156,7 @@ export default async function ResultsPage({
                     Resend Email
                   </button>
                   <div className="mt-2 text-xs text-zinc-500">
-                    Need another copy? This will resend (rate-limited).
+                    Need another copy? Click here to resend. (rate-limited)
                   </div>
                 </form>
               </>
