@@ -1,6 +1,5 @@
 import Container from "@/components/Container";
 import LoadingForm from "@/components/LoadingForm";
-import FullReportView from "@/components/FullReportView";
 import ScoreBar from "@/components/ScoreBar";
 import Image from "next/image";
 import { prisma } from "@/lib/db";
@@ -117,6 +116,12 @@ export default async function ResultsPage({
             <div className="mt-4">
               <ScoreBar score100={run.result.overallScore} />
             </div>
+
+            {report?.overall?.meaning ? (
+              <p className="mt-4 max-w-2xl text-sm leading-6 text-zinc-700">
+                {report.overall.meaning}
+              </p>
+            ) : null}
 
             <div className="mt-8">
               <div className="text-sm font-semibold text-[color:var(--heading)]">
@@ -246,15 +251,7 @@ export default async function ResultsPage({
           </div>
         </div>
 
-        {wantFull ? (
-          report ? (
-            <FullReportView report={report} />
-          ) : (
-            <div className="mt-8 rounded-2xl border border-[var(--border)] bg-white p-6 text-sm text-zinc-600">
-              Full report content is not available for this run.
-            </div>
-          )
-        ) : null}
+        {/* Full report content is delivered via email; keep this page as a preview summary. */}
       </Container>
     </div>
   );
