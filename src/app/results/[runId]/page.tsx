@@ -156,7 +156,7 @@ export default async function ResultsPage({
                     Resend Email
                   </button>
                   <div className="mt-2 text-xs text-zinc-500">
-                    If the email landed in spam, this will resend (rate-limited).
+                    Need another copy? Click here to resend.
                   </div>
                 </form>
               </>
