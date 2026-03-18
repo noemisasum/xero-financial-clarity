@@ -31,12 +31,12 @@ export default function FullReportView({ report }: { report: FullReport }) {
               <span className="text-zinc-500"> / 100</span>
             </div>
 
-            <div className="mt-4 max-w-xl">
-              <ScoreBar score100={report.overall.score100} />
-            </div>
-
             <div className="mt-3 max-w-2xl text-sm leading-6 text-zinc-700">
               {report.overall.meaning}
+            </div>
+
+            <div className="mt-4 max-w-xl">
+              <ScoreBar score100={report.overall.score100} />
             </div>
           </div>
           <Pill>{report.overall.band}</Pill>
@@ -45,38 +45,14 @@ export default function FullReportView({ report }: { report: FullReport }) {
 
       <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
         <div className="text-sm font-semibold text-[color:var(--heading)]">
-          Top issues detected
-        </div>
-        <ul className="mt-3 space-y-3 text-sm text-zinc-700">
-          {report.topIssues?.length ? (
-            report.topIssues.map((x) => (
-              <li key={x.title} className="rounded-xl border border-[var(--border)] bg-zinc-50 p-4">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="font-medium text-zinc-900">{x.title}</div>
-                  <Pill>{x.severity}</Pill>
-                </div>
-                {x.evidence?.length ? (
-                  <ul className="mt-2 space-y-1 text-xs text-zinc-600">
-                    {x.evidence.map((e) => (
-                      <li key={e}>• {e}</li>
-                    ))}
-                  </ul>
-                ) : null}
-              </li>
-            ))
-          ) : (
-            <li className="text-zinc-500">No major issues detected.</li>
-          )}
-        </ul>
-      </div>
-
-      <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
-        <div className="text-sm font-semibold text-[color:var(--heading)]">
           Your next steps
         </div>
         <ul className="mt-3 space-y-3 text-sm text-zinc-700">
           {(report.nextSteps || []).map((s) => (
-            <li key={s.title} className="rounded-xl border border-[var(--border)] bg-zinc-50 p-4">
+            <li
+              key={s.title}
+              className="rounded-xl border border-[var(--border)] bg-zinc-50 p-4"
+            >
               <div className="flex items-start justify-between gap-3">
                 <div className="font-medium text-zinc-900">{s.title}</div>
                 <div className="flex gap-2">
@@ -97,7 +73,10 @@ export default function FullReportView({ report }: { report: FullReport }) {
 
         <div className="mt-4 space-y-6">
           {(report.dimensions || []).map((d) => (
-            <div key={d.key} className="rounded-2xl border border-[var(--border)] bg-white p-5">
+            <div
+              key={d.key}
+              className="rounded-2xl border border-[var(--border)] bg-white p-5"
+            >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <div className="font-semibold text-zinc-900">{d.name}</div>
@@ -108,7 +87,10 @@ export default function FullReportView({ report }: { report: FullReport }) {
 
               <div className="mt-4 space-y-4">
                 {(d.findings || []).map((f) => (
-                  <div key={f.title} className="rounded-xl border border-[var(--border)] bg-zinc-50 p-4">
+                  <div
+                    key={f.title}
+                    className="rounded-xl border border-[var(--border)] bg-zinc-50 p-4"
+                  >
                     <div className="flex items-start justify-between gap-3">
                       <div className="font-medium text-zinc-900">{f.title}</div>
                       <div className="flex gap-2">
@@ -125,11 +107,11 @@ export default function FullReportView({ report }: { report: FullReport }) {
 
                     <div className="mt-2 space-y-2 text-sm leading-6 text-zinc-700">
                       <div>
-                        <span className="font-semibold text-zinc-900">What we saw:</span> {" "}
+                        <span className="font-semibold text-zinc-900">What we saw:</span>{" "}
                         {f.whatWeSaw}
                       </div>
                       <div>
-                        <span className="font-semibold text-zinc-900">Why it matters:</span> {" "}
+                        <span className="font-semibold text-zinc-900">Why it matters:</span>{" "}
                         {f.whyItMatters}
                       </div>
                     </div>
