@@ -4,7 +4,11 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import Button from "@/components/Button";
 import TopNav from "@/components/TopNav";
 import Footer from "@/components/Footer";
-import { getInsightPost, listInsightSlugs } from "@/lib/insights";
+import {
+  getInsightCtaVariant,
+  getInsightPost,
+  listInsightSlugs,
+} from "@/lib/insights";
 
 type Params = { slug: string };
 
@@ -48,6 +52,8 @@ export default async function InsightPostPage({
 
   const { content } = await compileMDX({ source: post.content });
 
+  const cta = getInsightCtaVariant(post.frontmatter.tags);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -80,10 +86,10 @@ export default async function InsightPostPage({
               <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-center">
                 <div>
                   <h3 className="text-xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-2xl">
-                    Discover Your Financial Clarity Score
+                    {cta.headline}
                   </h3>
                   <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-600 sm:text-base sm:leading-7">
-                    A complimentary, read-only diagnostic tool for growing businesses using Xero.
+                    {cta.sentence}
                   </p>
                 </div>
                 <div className="lg:justify-self-end">
