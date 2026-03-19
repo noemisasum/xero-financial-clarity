@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { compileMDX } from "next-mdx-remote/rsc";
 
-import Button from "@/components/Button";
 import TopNav from "@/components/TopNav";
 import Footer from "@/components/Footer";
 import { getInsightPost, listInsightSlugs } from "@/lib/insights";
@@ -72,26 +71,20 @@ export default async function InsightPostPage({
 
         <article className="insights-content mt-10">{content}</article>
 
-        {/* CTA (match homepage style, but more compact for article pages) */}
-        <section className="mt-10">
-          <div className="relative overflow-hidden rounded-3xl border border-[var(--border)] bg-white p-6 shadow-[0_1px_0_rgba(17,24,39,0.02),0_20px_55px_rgba(17,24,39,0.10)] sm:p-8">
-            <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[color:var(--accent-soft)] blur-2xl" />
-            <div className="relative">
-              <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-center">
-                <div>
-                  <h3 className="text-xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-2xl">
-                    Discover Your Financial Clarity Score
-                  </h3>
-                  <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-600 sm:text-base sm:leading-7">
-                    A complimentary, read-only diagnostic tool for growing businesses using Xero.
-                  </p>
-                </div>
-                <div className="lg:justify-self-end">
-                  <Button href="/api/xero/connect">Get Your Clarity Score</Button>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* CTA (text-only, consistent across Insights posts) */}
+        <section className="mt-10 border-t border-slate-200 pt-8">
+          <h3 className="text-base font-semibold text-[color:var(--heading)]">
+            Aqount Financial Clarity Diagnostic
+          </h3>
+          <p className="mt-2 text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">
+            Want a fast, read-only view of where your Xero reporting is unclear (and what to fix
+            first)? Run the Aqount Financial Clarity Diagnostic.
+          </p>
+          <p className="mt-3 text-sm sm:text-base">
+            <a href="/api/xero/connect" className="font-medium text-[color:var(--link)]">
+              Run the diagnostic
+            </a>
+          </p>
         </section>
 
         <script
