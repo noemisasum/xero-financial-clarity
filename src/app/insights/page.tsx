@@ -17,7 +17,7 @@ export default function InsightsIndexPage() {
     <>
       <TopNav />
       <main className="mx-auto max-w-3xl px-6 py-12">
-        <h1 className="text-4xl font-bold tracking-tight text-slate-950">
+        <h1 className="text-4xl font-bold tracking-tight text-[color:var(--heading)]">
           <span className="block text-[0.65em] font-medium leading-tight text-slate-500">
             Financial Clarity Guides for SMEs
           </span>
