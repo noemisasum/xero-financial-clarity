@@ -90,7 +90,7 @@ export default function FullReportView({
                   <div className="font-semibold text-zinc-900">{d.name}</div>
                   <div className="mt-1 text-sm text-zinc-600">{d.summary}</div>
                 </div>
-                <div className="whitespace-nowrap text-sm font-semibold text-zinc-900">
+                <div className="whitespace-nowrap text-base font-semibold text-zinc-900">
                   {d.score10} / 10
                 </div>
               </div>
