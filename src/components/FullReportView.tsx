@@ -90,7 +90,9 @@ export default function FullReportView({
                   <div className="font-semibold text-zinc-900">{d.name}</div>
                   <div className="mt-1 text-sm text-zinc-600">{d.summary}</div>
                 </div>
-                <div className="text-sm font-semibold text-zinc-900">{d.score10} / 10</div>
+                <div className="whitespace-nowrap text-base font-semibold text-zinc-900">
+                  {d.score10} / 10
+                </div>
               </div>
 
               <div className="mt-4 space-y-4">
@@ -101,7 +103,7 @@ export default function FullReportView({
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="font-medium text-zinc-900">{f.title}</div>
-                      <div className="flex gap-2">
+                      <div className="ml-auto flex flex-none items-center justify-end gap-2">
                         <Pill>
                           {f.status === "pass"
                             ? "Pass"
