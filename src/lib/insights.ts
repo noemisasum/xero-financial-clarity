@@ -9,6 +9,63 @@ export type InsightFrontmatter = {
   tags?: string[];
 };
 
+export type InsightCtaVariant = {
+  headline: string;
+  sentence: string;
+};
+
+export function getInsightCtaVariant(
+  tags: string[] | undefined,
+): InsightCtaVariant {
+  const t = new Set((tags ?? []).map((s) => s.toLowerCase()));
+
+  // Cash flow / runway / forecasting
+  if (
+    t.has("cashflow") ||
+    t.has("cash-flow") ||
+    t.has("cash") ||
+    t.has("runway") ||
+    t.has("forecast") ||
+    t.has("forecasting")
+  ) {
+    return {
+      headline: "Get cash visibility you can actually use",
+      sentence:
+        "Run the diagnostic for a read-only clarity score and the fastest fixes to improve cash visibility.",
+    };
+  }
+
+  // Month-end close / reconciliation / bookkeeping hygiene
+  if (t.has("close") || t.has("month-end") || t.has("reconciliation") || t.has("bookkeeping")) {
+    return {
+      headline: "Close faster, trust your numbers sooner",
+      sentence:
+        "Get a read-only clarity score and a focused set of next steps to make reporting decision-ready.",
+    };
+  }
+
+  // Tracking categories / segmentation / reporting structure
+  if (
+    t.has("tracking") ||
+    t.has("tracking-categories") ||
+    t.has("segmentation") ||
+    t.has("categories")
+  ) {
+    return {
+      headline: "See what’s missing in your reporting setup",
+      sentence:
+        "Run the diagnostic to identify gaps in structure, coding consistency, and reporting clarity.",
+    };
+  }
+
+  // Default: COA / reporting clarity
+  return {
+    headline: "Make your reports decision-ready",
+    sentence:
+      "Get a read-only clarity score and see what to fix first in your Xero setup.",
+  };
+}
+
 export type InsightPost = {
   slug: string;
   frontmatter: InsightFrontmatter;
