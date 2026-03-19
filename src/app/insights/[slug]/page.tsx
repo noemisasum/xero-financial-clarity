@@ -72,18 +72,18 @@ export default async function InsightPostPage({
 
         <article className="insights-content mt-10">{content}</article>
 
-        {/* CTA (match homepage style) */}
-        <section className="mt-14">
-          <div className="relative overflow-hidden rounded-3xl border border-[var(--border)] bg-white p-8 shadow-[0_1px_0_rgba(17,24,39,0.02),0_25px_70px_rgba(17,24,39,0.12)] sm:p-12">
-            <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[color:var(--accent-soft)] blur-2xl" />
+        {/* CTA (match homepage style, but more compact for article pages) */}
+        <section className="mt-10">
+          <div className="relative overflow-hidden rounded-3xl border border-[var(--border)] bg-white p-6 shadow-[0_1px_0_rgba(17,24,39,0.02),0_20px_55px_rgba(17,24,39,0.10)] sm:p-8">
+            <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[color:var(--accent-soft)] blur-2xl" />
             <div className="relative">
-              <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+              <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-center">
                 <div>
-                  <h3 className="text-2xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-3xl">
+                  <h3 className="text-xl font-semibold tracking-tight text-[color:var(--heading)] sm:text-2xl">
                     Discover Your Financial Clarity Score
                   </h3>
-                  <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-600">
-                    A complimentary, read-only diagnostic tool for growing business using Xero.
+                  <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-600 sm:text-base sm:leading-7">
+                    A complimentary, read-only diagnostic tool for growing businesses using Xero.
                   </p>
                 </div>
                 <div className="lg:justify-self-end">
