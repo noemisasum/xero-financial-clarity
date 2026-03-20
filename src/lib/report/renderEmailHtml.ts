@@ -9,7 +9,15 @@ function escapeHtml(s: string) {
 }
 
 function pill(text: string) {
-  return `<span style="display:inline-flex;align-items:center;border-radius:999px;background:#e5f3ff;color:#0f172a;padding:4px 10px;font-size:12px;font-weight:700">${escapeHtml(text)}</span>`;
+  return `<span style="display:inline-flex;align-items:center;border-radius:999px;background:#e5f3ff;color:#0f172a;padding:4px 10px;font-size:12px;font-weight:800">${escapeHtml(text)}</span>`;
+}
+
+function statusLabel(status: string) {
+  const s = String(status || "").trim().toLowerCase();
+  if (s === "pass") return "Pass";
+  if (s === "warn") return "Warn";
+  if (s === "fail") return "Fail";
+  return s ? s.charAt(0).toUpperCase() + s.slice(1) : "";
 }
 
 function scoreBar(score100: number) {
@@ -81,7 +89,10 @@ export function renderReportEmailHtml(args: {
           return `<div style="border-top:1px solid #e5e7eb;padding-top:12px;margin-top:12px">
   <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
     <div style="font-weight:800;color:#0f172a">${escapeHtml(f.title)}</div>
-    <div style="flex:none">${pill(`${f.status.toUpperCase()} • ${f.severity}`)}</div>
+    <div style="ml:auto;display:flex;flex:none;align-items:center;justify-content:flex-end;gap:8px">
+      ${pill(statusLabel(f.status))}
+      ${pill(f.severity)}
+    </div>
   </div>
   <div style="margin-top:6px;color:#334155;font-size:13px;line-height:1.6">
     <div><span style="font-weight:800;color:#0f172a">What we saw:</span> ${escapeHtml(
@@ -98,11 +109,11 @@ export function renderReportEmailHtml(args: {
         .join("");
 
       return `<div style="margin-top:18px">
-  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
     <div style="font-size:16px;font-weight:900;color:#0f172a">${escapeHtml(
       d.name,
     )}</div>
-    <div style="font-size:14px;font-weight:900;color:#0f172a">${d.score10} / 10</div>
+    <div style="flex:none;white-space:nowrap;text-align:right;font-size:16px;font-weight:700;color:#0f172a">${d.score10} / 10</div>
   </div>
   <div style="margin-top:6px;color:#475569;font-size:13px;line-height:1.6">${escapeHtml(
     d.summary,
