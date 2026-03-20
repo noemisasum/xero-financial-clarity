@@ -211,7 +211,7 @@ function buildDimensionFindings(args: {
       title: "AR/AP hygiene impacts short-term cash surprises",
       status: "warn",
       severity: "Major",
-      whatWeSaw: "Overdue invoices and bills (if present) typically drive unexpected cash pressure.",
+      whatWeSaw: "When invoices or bills become overdue, they can create unexpected cash pressure.",
       whyItMatters: "A clear view of what’s coming in and going out prevents last-minute cash squeezes.",
       evidence: [],
       recommendedActions: [
