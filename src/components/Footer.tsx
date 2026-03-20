@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Container from "@/components/Container";
 
 export default function Footer({
@@ -78,6 +79,14 @@ export default function Footer({
                 >
                   Services
                 </a>
+              </li>
+              <li>
+                <Link
+                  href="/insights"
+                  className="text-[color:var(--link)] hover:opacity-90"
+                >
+                  Insights
+                </Link>
               </li>
               <li>
                 <a
