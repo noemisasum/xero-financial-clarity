@@ -1,6 +1,8 @@
 import ScoreBar from "@/components/ScoreBar";
 import type { FullReport } from "@/lib/report/types";
 
+const BOOK_CALL_URL = process.env.NEXT_PUBLIC_BOOK_CALL_URL || "";
+
 function Pill({
   children,
   fixed,
@@ -45,6 +47,22 @@ export default function FullReportView({
               <div className="mt-4 max-w-xl">
                 <ScoreBar score100={report.overall.score100} />
               </div>
+
+              {BOOK_CALL_URL ? (
+                <div className="mt-5 flex flex-wrap items-center gap-3">
+                  <div className="text-sm text-zinc-600">
+                    Optional: book a 15‑min walkthrough.
+                  </div>
+                  <a
+                    href={BOOK_CALL_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-xl border border-[var(--border)] bg-white px-4 py-2 text-sm font-semibold text-[color:var(--heading)] hover:bg-zinc-50"
+                  >
+                    Book a call
+                  </a>
+                </div>
+              ) : null}
             </div>
             <Pill>{report.overall.band}</Pill>
           </div>
@@ -72,6 +90,24 @@ export default function FullReportView({
             </li>
           ))}
         </ul>
+
+        {BOOK_CALL_URL ? (
+          <div className="mt-5 rounded-xl border border-[var(--border)] bg-zinc-50 p-4">
+            <div className="text-sm text-zinc-700">
+              Want help prioritising these into a 30‑day plan?
+            </div>
+            <div className="mt-3">
+              <a
+                href={BOOK_CALL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-xl border border-[var(--border)] bg-white px-4 py-2 text-sm font-semibold text-[color:var(--heading)] hover:bg-zinc-50"
+              >
+                Book a call
+              </a>
+            </div>
+          </div>
+        ) : null}
       </div>
 
       <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
