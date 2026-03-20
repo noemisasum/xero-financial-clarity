@@ -37,6 +37,11 @@ export function renderReportEmailHtml(args: {
 }): string {
   const { report, recipientName } = args;
 
+  const bookCallUrl = process.env.NEXT_PUBLIC_BOOK_CALL_URL || "";
+  const bookCallButton = bookCallUrl
+    ? `<a href="${escapeHtml(bookCallUrl)}" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#ffffff;border:1px solid #e5e7eb;color:#0f172a;text-decoration:none;padding:10px 14px;border-radius:12px;font-weight:800;font-size:14px">Book a call</a>`
+    : "";
+
   const eyebrow = "Financial Clarity Diagnostic";
   const titleLine2 = report.company ? report.company : "";
 
@@ -162,6 +167,15 @@ export function renderReportEmailHtml(args: {
         <div style="margin-top:10px;font-size:13px;line-height:1.7;color:#475569">${escapeHtml(
           report.overall.meaning,
         )}</div>
+
+        ${
+          bookCallButton
+            ? `<div style="margin-top:14px">
+              <div style="font-size:13px;color:#475569;line-height:1.6">Optional: book a 15‑min walkthrough.</div>
+              <div style="margin-top:10px">${bookCallButton}</div>
+            </div>`
+            : ""
+        }
       </div>
 
       <div style="height:18px"></div>
@@ -198,6 +212,15 @@ export function renderReportEmailHtml(args: {
       <ul style="padding-left:18px;margin:10px 0 0 0;font-size:14px;color:#334155;line-height:1.6">
         ${nextSteps}
       </ul>
+
+      ${
+        bookCallButton
+          ? `<div style="margin-top:14px;background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:12px">
+              <div style="font-size:13px;color:#475569;line-height:1.6">Want help prioritising these into a 30‑day plan?</div>
+              <div style="margin-top:10px">${bookCallButton}</div>
+            </div>`
+          : ""
+      }
 
       <div style="height:18px"></div>
 
