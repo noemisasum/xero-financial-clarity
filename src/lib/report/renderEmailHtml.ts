@@ -171,8 +171,8 @@ export function renderReportEmailHtml(args: {
         ${
           bookCallButton
             ? `<div style="margin-top:14px">
-              <div style="font-size:13px;color:#475569;line-height:1.6">Optional: book a 15‑min walkthrough.</div>
-              <div style="margin-top:10px">${bookCallButton}</div>
+              <div style="font-size:13px;font-weight:800;color:#0f172a;line-height:1.6">Optional: book a 15‑min walkthrough.</div>
+              <div style="margin-top:10px;text-align:right">${bookCallButton}</div>
             </div>`
             : ""
         }
@@ -216,8 +216,8 @@ export function renderReportEmailHtml(args: {
       ${
         bookCallButton
           ? `<div style="margin-top:14px;background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:12px">
-              <div style="font-size:13px;color:#475569;line-height:1.6">Want help prioritising these into a 30‑day plan?</div>
-              <div style="margin-top:10px">${bookCallButton}</div>
+              <div style="font-size:13px;font-weight:800;color:#0f172a;line-height:1.6">Want help prioritising these into a 30‑day plan?</div>
+              <div style="margin-top:10px;text-align:right">${bookCallButton}</div>
             </div>`
           : ""
       }
