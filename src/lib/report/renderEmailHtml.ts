@@ -216,8 +216,12 @@ export function renderReportEmailHtml(args: {
       ${
         bookCallButton
           ? `<div style="margin-top:14px;background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:12px">
-              <div style="font-size:13px;font-weight:800;color:#0f172a;line-height:1.6">Want help prioritising these into a 30‑day plan?</div>
-              <div style="margin-top:10px;text-align:right">${bookCallButton}</div>
+              <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+                <tr>
+                  <td style="font-size:13px;font-weight:800;color:#0f172a;line-height:1.6;padding-right:10px">Want help prioritising these into a 30‑day plan?</td>
+                  <td align="right" style="white-space:nowrap">${bookCallButton}</td>
+                </tr>
+              </table>
             </div>`
           : ""
       }

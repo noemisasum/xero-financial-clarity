@@ -57,7 +57,7 @@ export default function FullReportView({
                     href={BOOK_CALL_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-xl bg-[color:var(--link)] px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
+                    className="inline-flex items-center justify-center rounded-xl bg-[color:var(--link)] px-4 py-2 text-sm font-semibold !text-white shadow-sm hover:opacity-90"
                   >
                     Book a call
                   </a>
@@ -93,15 +93,15 @@ export default function FullReportView({
 
         {BOOK_CALL_URL ? (
           <div className="mt-5 rounded-xl border border-[var(--border)] bg-zinc-50 p-4">
-            <div className="text-sm font-semibold text-zinc-900">
-              Want help prioritising these into a 30‑day plan?
-            </div>
-            <div className="mt-3 flex justify-end">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="text-sm font-semibold text-zinc-900">
+                Want help prioritising these into a 30‑day plan?
+              </div>
               <a
                 href={BOOK_CALL_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-xl bg-[color:var(--link)] px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
+                className="inline-flex flex-none items-center justify-center rounded-xl bg-[color:var(--link)] px-4 py-2 text-sm font-semibold !text-white shadow-sm hover:opacity-90"
               >
                 Book a call
               </a>
