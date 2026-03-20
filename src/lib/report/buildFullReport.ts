@@ -85,11 +85,18 @@ function buildDimensionFindings(args: {
   if (dim.key === "chart_of_accounts_structure") {
     const granularStatus = accountCount > 300 ? "fail" : accountCount > 180 ? "warn" : "pass";
     findings.push({
-      title: "Chart of accounts may be too detailed",
+      title:
+        granularStatus === "pass"
+          ? "Chart of accounts detail looks manageable"
+          : "Chart of accounts is likely too detailed",
       status: granularStatus,
       severity: granularStatus === "pass" ? "Minor" : "Major",
-      whatWeSaw: "Your organisation has a high number of active accounts, which can make P&L reports long and harder to read.",
-      whyItMatters: "When categories are too granular, trends get hidden and coding becomes inconsistent across the team.",
+      whatWeSaw:
+        granularStatus === "pass"
+          ? "Your organisation’s active account count looks reasonable for clean reporting."
+          : "Your organisation has a high number of active accounts, which can make P&L reports long and harder to read.",
+      whyItMatters:
+        "Overly granular categories hide trends and make coding harder to keep consistent across the team.",
       evidence: [`Active accounts: ${accountCount}`],
       recommendedActions: [
         "Group similar expense accounts into reporting-friendly rollups",
@@ -158,11 +165,18 @@ function buildDimensionFindings(args: {
   }
 
   if (dim.key === "reporting_clarity") {
+    const pnlStatus = accountCount > 180 ? "warn" : "pass";
     findings.push({
-      title: "P&L may be harder to read than it needs to be",
-      status: accountCount > 180 ? "warn" : "pass",
-      severity: accountCount > 180 ? "Major" : "Minor",
-      whatWeSaw: "A high number of expense accounts tends to create long reports with too many small lines.",
+      title:
+        pnlStatus === "pass"
+          ? "P&L structure looks readable"
+          : "P&L may be harder to scan than it needs to be",
+      status: pnlStatus,
+      severity: pnlStatus === "warn" ? "Major" : "Minor",
+      whatWeSaw:
+        pnlStatus === "pass"
+          ? "Your current account structure should support a clean, readable P&L."
+          : "A high number of expense accounts can create long reports with too many small lines.",
       whyItMatters: "Founders need quick answers: what changed, why, and what to do. Long P&Ls slow that down.",
       evidence: [`Active accounts: ${accountCount}`],
       recommendedActions: [
@@ -198,7 +212,7 @@ function buildDimensionFindings(args: {
       title: "Cash visibility depends on reconciliation discipline",
       status: "warn",
       severity: "Major",
-      whatWeSaw: "Cashflow clarity is usually limited when bank feeds/reconciliation aren’t reviewed on a consistent cadence.",
+      whatWeSaw: "Cashflow clarity drops when bank feeds and reconciliations aren’t reviewed on a consistent cadence.",
       whyItMatters: "If the books lag reality, you can’t confidently decide what you can spend or invest this month.",
       evidence: [],
       recommendedActions: [
@@ -211,7 +225,7 @@ function buildDimensionFindings(args: {
       title: "AR/AP hygiene impacts short-term cash surprises",
       status: "warn",
       severity: "Major",
-      whatWeSaw: "Overdue invoices and bills (if present) typically drive unexpected cash pressure.",
+      whatWeSaw: "When invoices or bills become overdue, they can create unexpected cash pressure.",
       whyItMatters: "A clear view of what’s coming in and going out prevents last-minute cash squeezes.",
       evidence: [],
       recommendedActions: [
@@ -224,11 +238,17 @@ function buildDimensionFindings(args: {
   if (dim.key === "bookkeeping_hygiene") {
     const mjStatus = manualJournalCount > 50 ? "warn" : "pass";
     findings.push({
-      title: "Manual journals may be doing too much work",
+      title:
+        mjStatus === "pass"
+          ? "Manual journal usage looks manageable"
+          : "Manual journals may be doing too much work",
       status: mjStatus,
       severity: mjStatus === "pass" ? "Minor" : "Major",
-      whatWeSaw: "A high volume of manual journals often means month-end fixes are happening outside normal workflows.",
-      whyItMatters: "More manual journals usually means more risk of mistakes and slower closes.",
+      whatWeSaw:
+        mjStatus === "pass"
+          ? "Your manual journal volume looks reasonable."
+          : "A high volume of manual journals often indicates month-end fixes are happening outside normal workflows.",
+      whyItMatters: "Heavy manual journals increase mistake risk and slow down closing.",
       evidence: [`Manual journals (count): ${manualJournalCount}`],
       recommendedActions: [
         "Turn repeat journals into recurring templates/automations",
