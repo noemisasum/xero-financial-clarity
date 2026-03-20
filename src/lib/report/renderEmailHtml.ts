@@ -39,7 +39,7 @@ export function renderReportEmailHtml(args: {
 
   const bookCallUrl = process.env.NEXT_PUBLIC_BOOK_CALL_URL || "";
   const bookCallButton = bookCallUrl
-    ? `<a href="${escapeHtml(bookCallUrl)}" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#2b6cb0;border:1px solid #2b6cb0;color:#ffffff;text-decoration:none;padding:10px 14px;border-radius:12px;font-weight:800;font-size:14px">Book a call</a>`
+    ? `<a href="${escapeHtml(bookCallUrl)}" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#365b6d;border:1px solid #365b6d;color:#ffffff !important;text-decoration:none;padding:8px 12px;border-radius:12px;font-weight:800;font-size:13px">Book a call</a>`
     : "";
 
   const eyebrow = "Financial Clarity Diagnostic";
@@ -92,13 +92,14 @@ export function renderReportEmailHtml(args: {
             : "";
 
           return `<div style="border-top:1px solid #e5e7eb;padding-top:12px;margin-top:12px">
-  <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
-    <div style="font-weight:800;color:#0f172a">${escapeHtml(f.title)}</div>
-    <div style="ml:auto;display:flex;flex:none;align-items:center;justify-content:flex-end;gap:8px">
-      ${pill(statusLabel(f.status))}
-      ${pill(f.severity)}
-    </div>
-  </div>
+  <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+    <tr>
+      <td style="font-weight:800;color:#0f172a;padding-right:10px">${escapeHtml(f.title)}</td>
+      <td align="right" style="white-space:nowrap">
+        ${pill(statusLabel(f.status))}&nbsp;${pill(f.severity)}
+      </td>
+    </tr>
+  </table>
   <div style="margin-top:6px;color:#334155;font-size:13px;line-height:1.6">
     <div><span style="font-weight:800;color:#0f172a">What we saw:</span> ${escapeHtml(
       f.whatWeSaw,
@@ -114,12 +115,14 @@ export function renderReportEmailHtml(args: {
         .join("");
 
       return `<div style="margin-top:18px">
-  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
-    <div style="font-size:16px;font-weight:900;color:#0f172a">${escapeHtml(
-      d.name,
-    )}</div>
-    <div style="flex:none;white-space:nowrap;text-align:right;font-size:16px;font-weight:700;color:#0f172a">${d.score10} / 10</div>
-  </div>
+  <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+    <tr>
+      <td style="font-size:16px;font-weight:900;color:#0f172a;padding-right:10px">${escapeHtml(
+        d.name,
+      )}</td>
+      <td align="right" style="font-size:16px;font-weight:700;color:#0f172a;white-space:nowrap">${d.score10} / 10</td>
+    </tr>
+  </table>
   <div style="margin-top:6px;color:#475569;font-size:13px;line-height:1.6">${escapeHtml(
     d.summary,
   )}</div>
@@ -129,7 +132,14 @@ export function renderReportEmailHtml(args: {
     .join("");
 
   const notes = (report.notes || []).length
-    ? report.notes.map((n) => `• ${escapeHtml(n)}`).join("<br>")
+    ? report.notes
+        .filter((n) => {
+          const t = String(n || "").trim();
+          // Email already has a copyright footer line.
+          return !/^copyright\s+©/i.test(t);
+        })
+        .map((n) => `• ${escapeHtml(n)}`)
+        .join("<br>")
     : "";
 
   return `
@@ -152,15 +162,19 @@ export function renderReportEmailHtml(args: {
       <div style="height:14px"></div>
 
       <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:14px">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
-          <div style="flex:1">
-            <div style="font-size:12px;color:#334155">Overall score</div>
-            <div style="font-size:28px;font-weight:900;color:#0f172a;margin-top:6px">${
-              report.overall.score100
-            } / 100</div>
-          </div>
-          <div style="flex:none">${pill(report.overall.band)}</div>
-        </div>
+        <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+          <tr>
+            <td style="padding-right:10px">
+              <div style="font-size:12px;color:#334155">Overall score</div>
+              <div style="font-size:28px;font-weight:900;color:#0f172a;margin-top:6px">${
+                report.overall.score100
+              } / 100</div>
+            </td>
+            <td align="right" style="vertical-align:top;white-space:nowrap">${pill(
+              report.overall.band,
+            )}</td>
+          </tr>
+        </table>
 
         ${scoreBar(report.overall.score100)}
 
