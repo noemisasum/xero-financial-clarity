@@ -10,8 +10,11 @@ export const metadata = {
     "Actionable insights on improving financial reporting, cash flow visibility, and decision-making for SMEs using Xero.",
 };
 
+const INDEX_LIMIT = 8;
+
 export default function InsightsIndexPage() {
-  const posts = listInsightPosts();
+  const allPosts = listInsightPosts();
+  const posts = allPosts.slice(0, INDEX_LIMIT);
 
   return (
     <>
@@ -50,7 +53,21 @@ export default function InsightsIndexPage() {
             </article>
           ))}
 
-          {posts.length === 0 ? (
+          {allPosts.length > INDEX_LIMIT ? (
+            <div className="pt-2">
+              <Link
+                href="/insights/all"
+                className="text-sm font-semibold text-[color:var(--link)] hover:opacity-90"
+              >
+                View all insights →
+              </Link>
+              <div className="mt-2 text-xs text-slate-500">
+                Showing latest {INDEX_LIMIT} of {allPosts.length} posts.
+              </div>
+            </div>
+          ) : null}
+
+          {allPosts.length === 0 ? (
             <div className="rounded-xl border border-dashed border-slate-300 p-6 text-slate-600">
               No insights yet.
             </div>
