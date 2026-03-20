@@ -162,15 +162,19 @@ export function renderReportEmailHtml(args: {
       <div style="height:14px"></div>
 
       <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:14px">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
-          <div style="flex:1">
-            <div style="font-size:12px;color:#334155">Overall score</div>
-            <div style="font-size:28px;font-weight:900;color:#0f172a;margin-top:6px">${
-              report.overall.score100
-            } / 100</div>
-          </div>
-          <div style="flex:none">${pill(report.overall.band)}</div>
-        </div>
+        <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+          <tr>
+            <td style="padding-right:10px">
+              <div style="font-size:12px;color:#334155">Overall score</div>
+              <div style="font-size:28px;font-weight:900;color:#0f172a;margin-top:6px">${
+                report.overall.score100
+              } / 100</div>
+            </td>
+            <td align="right" style="vertical-align:top;white-space:nowrap">${pill(
+              report.overall.band,
+            )}</td>
+          </tr>
+        </table>
 
         ${scoreBar(report.overall.score100)}
 
