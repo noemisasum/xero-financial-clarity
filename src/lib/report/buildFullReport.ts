@@ -369,9 +369,9 @@ export function buildFullReportV1(args: {
     dimensions,
     nextSteps: filteredNextSteps,
     notes: [
-      "This diagnostic uses read-only signals from your Xero organisation.",
+      `This diagnostic (${diagnosticVersion}) uses read-only signals from your Xero organisation.`,
       "We prioritise structure and consistency checks (not transaction amounts) to keep your data private.",
-      `Diagnostic version: ${diagnosticVersion}.`,
+      `Copyright © ${generatedAt.getFullYear()} Aqount Tech | All Rights Reserved.`,
     ],
   };
 }
