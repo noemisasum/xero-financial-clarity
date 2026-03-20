@@ -126,21 +126,6 @@ export default async function ResultsPage({
               </p>
             ) : null}
 
-            {BOOK_CALL_URL ? (
-              <div className="mt-5 flex flex-wrap items-center gap-3">
-                <div className="text-sm font-semibold text-zinc-900">
-                  Want a quick walkthrough of your results?
-                </div>
-                <a
-                  href={BOOK_CALL_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-xl bg-[color:var(--link)] px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
-                >
-                  Book a call
-                </a>
-              </div>
-            ) : null}
 
             <div className="mt-8">
               <div className="text-sm font-semibold text-[color:var(--heading)]">
@@ -159,6 +144,23 @@ export default async function ResultsPage({
                 )}
               </ul>
             </div>
+
+
+            {BOOK_CALL_URL ? (
+              <div className="mt-5 flex items-center justify-between gap-3">
+                <div className="text-sm font-semibold text-zinc-900">
+                  Want a quick walkthrough of your results?
+                </div>
+                <a
+                  href={BOOK_CALL_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex flex-none items-center justify-center rounded-xl bg-[color:var(--link)] px-4 py-2 text-sm font-semibold !text-white shadow-sm hover:opacity-90"
+                >
+                  Book a call
+                </a>
+              </div>
+            ) : null}
           </div>
 
           <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
