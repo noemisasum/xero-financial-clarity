@@ -6,6 +6,8 @@ import Image from "next/image";
 import { prisma } from "@/lib/db";
 import type { FullReport } from "@/lib/report/types";
 
+const BOOK_CALL_URL = process.env.NEXT_PUBLIC_BOOK_CALL_URL || "";
+
 export default async function ResultsPage({
   params,
   searchParams,
@@ -122,6 +124,22 @@ export default async function ResultsPage({
               <p className="mt-4 max-w-2xl text-sm leading-6 text-zinc-700">
                 {report.overall.meaning}
               </p>
+            ) : null}
+
+            {BOOK_CALL_URL ? (
+              <div className="mt-5 flex flex-wrap items-center gap-3">
+                <div className="text-sm font-semibold text-zinc-900">
+                  Want a quick walkthrough of your results?
+                </div>
+                <a
+                  href={BOOK_CALL_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-xl bg-[color:var(--link)] px-4 py-2 text-sm font-semibold text-white hover:opacity-90"
+                >
+                  Book a call
+                </a>
+              </div>
             ) : null}
 
             <div className="mt-8">
