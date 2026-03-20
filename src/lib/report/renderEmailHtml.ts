@@ -39,7 +39,7 @@ export function renderReportEmailHtml(args: {
 
   const bookCallUrl = process.env.NEXT_PUBLIC_BOOK_CALL_URL || "";
   const bookCallButton = bookCallUrl
-    ? `<a href="${escapeHtml(bookCallUrl)}" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#ffffff;border:1px solid #e5e7eb;color:#0f172a;text-decoration:none;padding:10px 14px;border-radius:12px;font-weight:800;font-size:14px">Book a call</a>`
+    ? `<a href="${escapeHtml(bookCallUrl)}" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#2b6cb0;border:1px solid #2b6cb0;color:#ffffff;text-decoration:none;padding:10px 14px;border-radius:12px;font-weight:800;font-size:14px">Book a call</a>`
     : "";
 
   const eyebrow = "Financial Clarity Diagnostic";
@@ -171,8 +171,8 @@ export function renderReportEmailHtml(args: {
         ${
           bookCallButton
             ? `<div style="margin-top:14px">
-              <div style="font-size:13px;color:#475569;line-height:1.6">Optional: book a 15‑min walkthrough.</div>
-              <div style="margin-top:10px">${bookCallButton}</div>
+              <div style="font-size:13px;font-weight:800;color:#0f172a;line-height:1.6">Want a quick walkthrough of your results?</div>
+              <div style="margin-top:10px;text-align:right">${bookCallButton}</div>
             </div>`
             : ""
         }
@@ -216,8 +216,8 @@ export function renderReportEmailHtml(args: {
       ${
         bookCallButton
           ? `<div style="margin-top:14px;background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:12px">
-              <div style="font-size:13px;color:#475569;line-height:1.6">Want help prioritising these into a 30‑day plan?</div>
-              <div style="margin-top:10px">${bookCallButton}</div>
+              <div style="font-size:13px;font-weight:800;color:#0f172a;line-height:1.6">Want help prioritising these into a 30‑day plan?</div>
+              <div style="margin-top:10px;text-align:right">${bookCallButton}</div>
             </div>`
           : ""
       }
