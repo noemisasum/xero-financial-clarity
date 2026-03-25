@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Albert_Sans, Roboto } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import LoadingOverlayProvider from "@/components/LoadingOverlayProvider";
 import "./globals.css";
 
@@ -77,6 +78,7 @@ export default function RootLayout({
           }}
         />
         <LoadingOverlayProvider>{children}</LoadingOverlayProvider>
+        <Analytics />
       </body>
     </html>
   );
