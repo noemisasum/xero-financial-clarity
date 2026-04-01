@@ -45,6 +45,13 @@ export async function POST(req: Request) {
     },
   });
 
+  // Fix A (auditability): log selected tenant so Vercel logs can be searched.
+  console.info("xero.tenant.selected", {
+    connectionId,
+    tenantId,
+    tenantName,
+  });
+
   return NextResponse.redirect(
     new URL(`/run?connectionId=${encodeURIComponent(connectionId)}`, req.url),
   );
