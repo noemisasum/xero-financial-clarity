@@ -100,6 +100,15 @@ export default async function RunPage({
   }
 
   const conn = await prisma.xeroConnection.findUnique({ where: { id: connectionId } });
+
+  // Fix A (auditability): log run start + tenant so Vercel logs can be searched.
+  console.info("xero.diagnostic.run.start", {
+    connectionId,
+    sessionId: conn?.sessionId,
+    tenantId: conn?.tenantId,
+    tenantName: conn?.tenantName,
+  });
+
   if (!conn || !conn.tenantId) {
     return (
       <div className="py-14 sm:py-20">
