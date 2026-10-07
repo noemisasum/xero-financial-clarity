@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Container from "@/components/Container";
@@ -10,6 +11,15 @@ import Stepper from "@/components/Stepper";
 import TrustChips from "@/components/TrustChips";
 import TopNav from "@/components/TopNav";
 import Footer from "@/components/Footer";
+
+export const metadata: Metadata = {
+  title: "Free Xero Health Check: Financial Clarity Diagnostic for SMEs | Aqount",
+  description:
+    "Is your Xero data actually decision-ready? Run Aqount's free read-only Financial Clarity Diagnostic and get your clarity score in about a minute.",
+  alternates: {
+    canonical: "https://clarity.aqount.tech",
+  },
+};
 
 function ProductMockupHero() {
   return (

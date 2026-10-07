@@ -26,6 +26,9 @@ export const metadata: Metadata = {
   description:
     "Aqount’s Financial Clarity Diagnostic analyzes your Xero accounting structure and highlights issues affecting reporting, visibility, and decision-making.",
   metadataBase: new URL("https://clarity.aqount.tech"),
+  alternates: {
+    canonical: "https://clarity.aqount.tech",
+  },
   icons: {
     // Cache-bust: Chrome can aggressively cache favicons even in incognito.
     // Prefer the app-router /icon.png pipeline; keep .ico as a fallback.
@@ -44,6 +47,21 @@ export const metadata: Metadata = {
     url: "https://clarity.aqount.tech",
     siteName: "Aqount",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Aqount Financial Clarity Diagnostic — is your financial data actually decision-ready?",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aqount Financial Clarity Diagnostic",
+    description:
+      "Get your Financial Clarity Score. A complimentary read-only diagnostic for SMEs across Southeast Asia using Xero.",
+    images: ["/og-image.png"],
   },
 };
 
